@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Impostor">
-    <title>Impostor - Party Game</title>
+    <meta name="apple-mobile-web-app-title" content="Party Games">
+    <title>Party Games - Impostor</title>
+    
+    <!-- PWA Icons -->
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" href="icon.png">
     <meta name="theme-color" content="#f85032">
-   
+    
     <style>
         * {
             margin: 0;
@@ -42,7 +44,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 20px;
             transition: opacity 0.3s ease;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
@@ -55,7 +57,7 @@
         
         /* Background Gradients */
         .home-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         }
         
         .impostor-bg {
@@ -64,45 +66,349 @@
         
         /* Typography */
         .title {
-            font-size: clamp(28px, 8vw, 48px);
+            font-size: clamp(32px, 8vw, 48px);
             font-weight: bold;
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
             line-height: 1.2;
         }
         
-        .subtitle {
-            font-size: clamp(14px, 4vw, 18px);
-            color: rgba(255,255,255,0.8);
+        .big-emoji {
+            font-size: clamp(80px, 20vw, 120px);
             margin-bottom: 30px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+        
+        /* Header Container */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            height: clamp(80px, 18vh, 120px);
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+        
+        /* Typography */
+        .title {
+            font-size: clamp(42px, 12vw, 72px);
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.4);
+            line-height: 1;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* Controller Emoji specific styling */
+        .controller-emoji {
+            font-size: clamp(40px, 11vw, 70px);
+            position: absolute;
+            left: clamp(-5px, 2vw, 15px);
+            top: clamp(-25px, -5vw, -15px);
+            transform: rotate(-15deg);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            opacity: 0.85;
+            z-index: 3;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: rotate(-15deg) translateY(0px); 
+            }
+            50% { 
+                transform: rotate(-15deg) translateY(-8px); 
+            }
+        }
+        
+        /* Game Cards Container */
+        .games-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .game-card {
+            min-width: clamp(280px, 80vw, 350px);
+            height: clamp(400px, 60vh, 500px);
+            border-radius: 25px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            scroll-snap-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .game-card:active {
+            transform: scale(0.95);
+        }
+        
+        .impostor-card {
+            background: linear-gradient(135deg, #f85032 0%, #e73827 100%);
+            color: white;
+        }
+        
+        .impostor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+        
+        .coming-soon-card {
+            background: linear-gradient(135deg, #666 0%, #999 100%);
+            color: white;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .game-card-emoji {
+            font-size: clamp(60px, 15vw, 80px);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .game-card-title {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .game-card-desc {
+            font-size: clamp(14px, 3.5vw, 18px);
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .game-card-players {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: clamp(12px, 3vw, 14px);
+            font-weight: 500;
+        }
+        
+        /* Credits */
+        .credits {
+            position: fixed;
+            bottom: clamp(15px, 4vw, 25px);
+            left: 0;
+            right: 0;
+            font-size: clamp(11px, 2.8vw, 13px);
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: clamp(20px, 5vw, 30px);
+            left: clamp(20px, 5vw, 30px);
+            background: rgba(0,0,0,0.3);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: clamp(18px, 4.5vw, 22px);
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Settings Container */
+        .settings-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            padding: clamp(25px, 6vw, 35px);
+            margin: 20px 0;
+            width: 100%;
+            max-width: min(420px, 90vw);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: clamp(18px, 4.5vw, 25px) 0;
+            color: white;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .setting-label {
+            font-size: clamp(15px, 3.8vw, 17px);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .setting-icon {
+            font-size: clamp(20px, 5vw, 24px);
+            margin-right: 15px;
+            width: 30px;
             text-align: center;
         }
         
-        .big-emoji {
-            font-size: clamp(60px, 15vw, 80px);
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
+        /* Counter Controls */
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: clamp(12px, 3vw, 18px);
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        .counter-btn {
+            width: clamp(35px, 8vw, 40px);
+            height: clamp(35px, 8vw, 40px);
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: clamp(18px, 4.5vw, 22px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        /* Buttons - FULL reliable hitbox */
+        .counter-btn:active {
+            transform: scale(0.9);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .counter-value {
+            font-size: clamp(17px, 4.2vw, 20px);
+            font-weight: bold;
+            min-width: clamp(30px, 7vw, 35px);
+            text-align: center;
+        }
+        
+        /* Toggle Switch */
+        .toggle-switch {
+            width: clamp(50px, 12vw, 55px);
+            height: clamp(26px, 6vw, 30px);
+            background: #666;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #4CAF50;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: clamp(22px, 5vw, 26px);
+            height: clamp(22px, 5vw, 26px);
+            border-radius: 50%;
+            background: white;
+            top: 50%;
+            left: 2px;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active::after {
+            left: calc(100% - clamp(22px, 5vw, 26px) - 2px);
+        }
+        
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: clamp(8px, 2vw, 10px) clamp(15px, 3.5vw, 18px);
+            font-size: clamp(13px, 3.2vw, 15px);
+            cursor: pointer;
+            min-width: clamp(80px, 20vw, 90px);
+            text-align: center;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            border-radius: 12px;
+            margin-top: 8px;
+            min-width: 120px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 100;
+        }
+        
+        .dropdown-item {
+            padding: clamp(10px, 2.5vw, 12px) clamp(15px, 3.5vw, 18px);
+            color: white;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: clamp(13px, 3.2vw, 15px);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:active {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Buttons */
         .button {
             background: rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 20px;
             color: white;
-            font-size: clamp(14px, 4vw, 18px);
+            font-size: clamp(15px, 4vw, 19px);
             font-weight: bold;
-            padding: clamp(15px, 4vw, 20px) clamp(25px, 6vw, 35px);
-            margin: 8px;
-            min-width: clamp(200px, 55vw, 280px);
+            padding: clamp(16px, 4vw, 22px) clamp(28px, 7vw, 38px);
+            margin: 10px;
+            min-width: clamp(220px, 60vw, 300px);
             max-width: 90vw;
             text-align: center;
             cursor: pointer;
@@ -122,220 +428,21 @@
             z-index: 100;
         }
         
-        .button::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: transparent;
-            border-radius: 30px;
-        }
-        
         .button:active, .button:hover {
             transform: scale(0.95);
             background: rgba(0,0,0,0.5);
-        }
-        
-        .button:disabled {
-            opacity: 0.6;
-        }
-        
-        .primary-button {
-            background: linear-gradient(135deg, #f85032 0%, #e73827 100%);
-            border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 8px 25px rgba(248, 80, 50, 0.3);
-        }
-        
-        .primary-button:active {
-            transform: scale(0.95);
-            box-shadow: 0 4px 15px rgba(248, 80, 50, 0.5);
-        }
-        
-        /* Back Button */
-        .back-button {
-            position: absolute;
-            top: clamp(15px, 4vw, 20px);
-            left: clamp(15px, 4vw, 20px);
-            background: rgba(0,0,0,0.3);
-            border: none;
-            border-radius: 15px;
-            color: white;
-            font-size: clamp(16px, 4vw, 20px);
-            width: clamp(35px, 8vw, 45px);
-            height: clamp(35px, 8vw, 45px);
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Settings Container */
-        .settings-container {
-            background: rgba(0,0,0,0.2);
-            border-radius: 25px;
-            padding: clamp(20px, 5vw, 30px);
-            margin: 15px 0;
-            width: 100%;
-            max-width: min(400px, 90vw);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .setting-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: clamp(15px, 4vw, 20px) 0;
-            color: white;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .setting-label {
-            font-size: clamp(14px, 3.5vw, 16px);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            flex: 1;
-            min-width: 120px;
-        }
-        
-        .setting-icon {
-            font-size: clamp(16px, 4vw, 20px);
-            margin-right: 12px;
-            width: 25px;
-            text-align: center;
-        }
-        
-        /* Counter Controls */
-        .counter-controls {
-            display: flex;
-            align-items: center;
-            gap: clamp(10px, 3vw, 15px);
-        }
-        
-        .counter-btn {
-            width: clamp(30px, 7vw, 35px);
-            height: clamp(30px, 7vw, 35px);
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            font-size: clamp(16px, 4vw, 20px);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .counter-btn:active {
-            transform: scale(0.9);
-            background: rgba(255,255,255,0.3);
-        }
-        
-        .counter-value {
-            font-size: clamp(16px, 4vw, 18px);
-            font-weight: bold;
-            min-width: clamp(25px, 6vw, 30px);
-            text-align: center;
-        }
-        
-        /* Toggle Switch - Fixed centering */
-        .toggle-switch {
-            width: clamp(45px, 10vw, 50px);
-            height: clamp(24px, 5vw, 28px);
-            background: #ccc;
-            border-radius: 14px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .toggle-switch.active {
-            background: #4CAF50;
-        }
-        
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: clamp(20px, 4vw, 24px);
-            height: clamp(20px, 4vw, 24px);
-            border-radius: 50%;
-            background: white;
-            top: 50%;
-            left: 2px;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-switch.active::after {
-            left: calc(100% - clamp(20px, 4vw, 24px) - 2px);
-        }
-        
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-button {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 15px;
-            color: white;
-            padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 15px);
-            font-size: clamp(12px, 3vw, 14px);
-            cursor: pointer;
-            min-width: clamp(70px, 18vw, 80px);
-            text-align: center;
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(0,0,0,0.8);
-            border-radius: 10px;
-            margin-top: 5px;
-            min-width: 100px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            z-index: 100;
-        }
-        
-        .dropdown-item {
-            padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
-            color: white;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: clamp(12px, 3vw, 14px);
-        }
-        
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-        
-        .dropdown-item:active {
-            background: rgba(255,255,255,0.1);
         }
         
         /* Player Card */
         .player-card {
             background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%);
             border-radius: 25px;
-            padding: clamp(20px, 5vw, 30px);
-            margin: 15px 0;
+            padding: clamp(25px, 6vw, 35px);
+            margin: 20px 0;
             width: 100%;
-            max-width: min(350px, 90vw);
+            max-width: min(370px, 90vw);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
             border: 4px solid rgba(255,255,255,0.3);
             transition: all 0.5s ease;
             position: relative;
@@ -353,37 +460,37 @@
         
         .player-card.lifted {
             transform: translateY(-15px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
         
         .player-title {
-            font-size: clamp(20px, 5vw, 28px);
+            font-size: clamp(22px, 5.5vw, 30px);
             font-weight: bold;
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
         
         .player-emoji {
-            font-size: clamp(45px, 12vw, 60px);
-            margin: 15px 0;
+            font-size: clamp(50px, 13vw, 65px);
+            margin: 18px 0;
             background: rgba(255,255,255,0.3);
-            width: clamp(60px, 15vw, 80px);
-            height: clamp(60px, 15vw, 80px);
-            border-radius: 20px;
+            width: clamp(70px, 17vw, 90px);
+            height: clamp(70px, 17vw, 90px);
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 15px auto;
+            margin: 18px auto;
         }
         
         .reveal-button {
             background: rgba(255,255,255,0.2);
-            border-radius: 15px;
+            border-radius: 18px;
             color: white;
-            font-size: clamp(14px, 3.5vw, 16px);
+            font-size: clamp(15px, 3.8vw, 17px);
             font-weight: bold;
-            padding: clamp(12px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            padding: clamp(15px, 3.5vw, 18px) clamp(18px, 4.5vw, 22px);
             width: 100%;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -396,7 +503,7 @@
             background: rgba(255,255,255,0.3);
         }
         
-        /* Revealed Content - NO BORDERS */
+        /* Revealed Content */
         .revealed-content {
             position: absolute;
             top: 100%;
@@ -404,8 +511,8 @@
             right: 0;
             background: rgba(0,0,0,0.9);
             border-radius: 25px;
-            padding: clamp(15px, 4vw, 20px);
-            margin-top: 5px;
+            padding: clamp(18px, 4.5vw, 22px);
+            margin-top: 8px;
             text-align: center;
             opacity: 0;
             transform: translateY(10px);
@@ -421,14 +528,14 @@
         }
         
         .role-icon {
-            width: clamp(40px, 10vw, 50px);
-            height: clamp(40px, 10vw, 50px);
+            width: clamp(45px, 11vw, 55px);
+            height: clamp(45px, 11vw, 55px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
-            font-size: clamp(18px, 5vw, 24px);
+            margin: 0 auto 15px;
+            font-size: clamp(20px, 5.5vw, 26px);
             font-weight: bold;
             color: white;
         }
@@ -442,40 +549,40 @@
         }
         
         .role-text {
-            font-size: clamp(16px, 4vw, 18px);
+            font-size: clamp(17px, 4.2vw, 20px);
             font-weight: bold;
             color: white;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         
         .word-display {
             background: rgba(255,255,255,0.9);
-            border-radius: 15px;
-            padding: clamp(12px, 3vw, 15px);
-            font-size: clamp(20px, 5vw, 24px);
+            border-radius: 18px;
+            padding: clamp(15px, 3.5vw, 18px);
+            font-size: clamp(22px, 5.5vw, 26px);
             font-weight: bold;
             color: #333;
         }
         
         .hint-display {
             background: rgba(255,255,255,0.9);
-            border-radius: 15px;
-            padding: clamp(8px, 2vw, 10px);
-            font-size: clamp(12px, 3vw, 14px);
+            border-radius: 18px;
+            padding: clamp(10px, 2.5vw, 12px);
+            font-size: clamp(13px, 3.2vw, 15px);
             color: #666;
         }
         
         /* Timer Display */
         .timer-display {
             position: absolute;
-            top: clamp(15px, 4vw, 20px);
+            top: clamp(20px, 5vw, 30px);
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: clamp(8px, 2vw, 10px) clamp(15px, 4vw, 20px);
+            border-radius: 22px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(18px, 4.5vw, 22px);
             color: white;
-            font-size: clamp(16px, 4vw, 18px);
+            font-size: clamp(17px, 4.2vw, 20px);
             font-weight: bold;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -483,17 +590,17 @@
         
         /* Starter Text */
         .starter-text {
-            font-size: clamp(24px, 6vw, 32px);
+            font-size: clamp(26px, 6.5vw, 34px);
             font-weight: bold;
             color: white;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
             animation: pulse 2s infinite;
             transition: font-size 1s ease;
         }
         
         .starter-text.shrunk {
-            font-size: clamp(16px, 4vw, 20px);
+            font-size: clamp(18px, 4.5vw, 22px);
             animation: none;
         }
         
@@ -505,11 +612,11 @@
         /* Goal Box */
         .goal-box {
             background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            padding: clamp(15px, 4vw, 20px);
-            margin: 15px 0;
+            border-radius: 22px;
+            padding: clamp(18px, 4.5vw, 22px);
+            margin: 18px 0;
             width: 100%;
-            max-width: min(350px, 90vw);
+            max-width: min(370px, 90vw);
             text-align: left;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -517,31 +624,31 @@
         }
         
         .goal-title {
-            font-size: clamp(18px, 4.5vw, 22px);
+            font-size: clamp(20px, 5vw, 24px);
             font-weight: bold;
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-align: center;
         }
         
         .goal-item {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: white;
             line-height: 1.4;
-            font-size: clamp(14px, 3.5vw, 16px);
+            font-size: clamp(15px, 3.8vw, 17px);
         }
         
         .goal-emoji {
-            font-size: clamp(18px, 4.5vw, 22px);
-            margin-right: 10px;
+            font-size: clamp(20px, 5vw, 24px);
+            margin-right: 12px;
         }
         
         /* Roles List */
         .roles-list {
             width: 100%;
-            max-width: min(400px, 90vw);
-            margin: 15px 0;
-            max-height: 60vh;
+            max-width: min(420px, 90vw);
+            margin: 18px 0;
+            max-height: 65vh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -551,9 +658,9 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-            padding: clamp(12px, 3vw, 15px);
-            margin: 8px 0;
+            border-radius: 18px;
+            padding: clamp(15px, 3.5vw, 18px);
+            margin: 10px 0;
             color: white;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -562,62 +669,46 @@
         .role-player {
             display: flex;
             align-items: center;
-            font-size: clamp(14px, 3.5vw, 16px);
+            font-size: clamp(15px, 3.8vw, 17px);
             font-weight: bold;
             flex: 1;
         }
         
         .role-result {
-            font-size: clamp(12px, 3vw, 14px);
+            font-size: clamp(13px, 3.2vw, 15px);
             text-align: right;
-            margin-left: 10px;
-        }
-        
-        /* Credits */
-        .credits {
-            position: absolute;
-            bottom: clamp(10px, 3vw, 15px);
-            left: 0;
-            right: 0;
-            font-size: clamp(10px, 2.5vw, 12px);
-            color: rgba(255,255,255,0.4);
-            text-align: center;
+            margin-left: 12px;
         }
         
         /* Small Screen Optimizations */
         @media screen and (max-height: 600px) {
             .screen {
-                padding: 10px;
+                padding: 15px;
                 justify-content: flex-start;
-                padding-top: 20px;
+                padding-top: 25px;
             }
             
             .big-emoji {
-                font-size: clamp(40px, 10vw, 60px);
-                margin-bottom: 10px;
+                font-size: clamp(50px, 12vw, 70px);
+                margin-bottom: 15px;
             }
             
             .title {
-                font-size: clamp(24px, 6vw, 36px);
-                margin-bottom: 10px;
+                font-size: clamp(26px, 6.5vw, 38px);
+                margin-bottom: 15px;
             }
             
             .settings-container, .player-card, .goal-box {
-                margin: 10px 0;
-                padding: 15px;
-            }
-            
-            .credits {
-                position: relative;
-                margin-top: 20px;
+                margin: 12px 0;
+                padding: 18px;
             }
         }
         
-        @media screen and (max-width: 280px) {
+        @media screen and (max-width: 320px) {
             .setting-row {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 8px;
+                gap: 10px;
             }
             
             .counter-controls {
@@ -626,7 +717,15 @@
             
             .button {
                 min-width: 90%;
-                margin: 5px auto;
+                margin: 8px auto;
+            }
+            
+            .games-container {
+                gap: 15px;
+            }
+            
+            .game-card {
+                min-width: 85vw;
             }
         }
         
@@ -637,23 +736,23 @@
                 flex-wrap: wrap;
                 align-content: center;
                 justify-content: center;
-                padding: 10px;
+                padding: 12px;
             }
             
             .big-emoji {
-                font-size: 40px;
-                margin: 5px;
+                font-size: 50px;
+                margin: 8px;
             }
             
             .title {
-                font-size: 24px;
-                margin: 5px 0;
+                font-size: 28px;
+                margin: 8px 0;
                 width: 100%;
             }
             
             .settings-container, .player-card {
-                max-width: 300px;
-                margin: 5px;
+                max-width: 320px;
+                margin: 8px;
             }
         }
     </style>
@@ -661,21 +760,32 @@
 <body>
     <!-- Mode Select Screen -->
     <div id="modeSelectScreen" class="screen home-bg">
-        <div class="big-emoji">🎮</div>
-        <h1 class="title">Party Games</h1>
-        <p class="subtitle">Wähle dein Spiel</p>
+        <div class="header-container">
+            <h1 class="title">Party-games</h1>
+            <div class="controller-emoji">🎮</div>
+        </div>
         
-        <button class="button primary-button" onclick="showImpostorSettings()">
-            <div style="font-size: clamp(30px, 8vw, 40px); margin-bottom: 8px;">🎭</div>
-            <div style="font-size: clamp(18px, 4.5vw, 24px); font-weight: bold;">Impostor</div>
-            <div style="font-size: clamp(12px, 3vw, 16px); margin-top: 5px; opacity: 0.9;">Finde den Verräter</div>
-        </button>
+        <div class="games-container" id="gamesContainer">
+            <div class="game-card impostor-card" onclick="showImpostorSettings()">
+                <div class="game-card-emoji">🎭</div>
+                <div class="game-card-title">FINDET DEN IMPOSTOR</div>
+                <div class="game-card-desc">Finde heraus, wer der Verräter in eurer Gruppe ist!</div>
+                <div class="game-card-players">👥 3-20</div>
+            </div>
+            
+            <div class="game-card coming-soon-card">
+                <div class="game-card-emoji">🎯</div>
+                <div class="game-card-title">MEHR SPIELE</div>
+                <div class="game-card-desc">Weitere Party-Spiele kommen bald!</div>
+                <div class="game-card-players">Bald verfügbar</div>
+            </div>
+        </div>
         
-        <button class="button" style="opacity: 0.6; cursor: not-allowed;" disabled>
-            <div style="font-size: clamp(30px, 8vw, 40px); margin-bottom: 8px;">🎯</div>
-            <div style="font-size: clamp(18px, 4.5vw, 24px); font-weight: bold;">Mehr Spiele</div>
-            <div style="font-size: clamp(12px, 3vw, 16px); margin-top: 5px;">Bald verfügbar</div>
-        </button>
+        <!-- Snap Indicators -->
+        <div class="snap-indicators">
+            <div class="snap-dot active" id="dot1"></div>
+            <div class="snap-dot" id="dot2"></div>
+        </div>
         
         <div class="credits">made by C at School</div>
     </div>
@@ -684,7 +794,7 @@
     <div id="impostorScreen" class="screen impostor-bg hidden">
         <button class="back-button" onclick="showModeSelect()">←</button>
         
-        <h1 class="title" style="font-size: clamp(24px, 6vw, 32px); margin-bottom: 20px;">Impostor</h1>
+        <h1 class="title" style="font-size: clamp(26px, 6.5vw, 34px); margin-bottom: 25px;">Impostor</h1>
         
         <div class="settings-container">
             <div class="setting-row">
@@ -701,7 +811,7 @@
             
             <div class="setting-row">
                 <div class="setting-label">
-                    <span class="setting-icon">👤</span>
+                    <span class="setting-icon">🎭</span>
                     Impostor
                 </div>
                 <div class="counter-controls">
@@ -713,15 +823,15 @@
             
             <div class="setting-row">
                 <div class="setting-label">
-                    <span class="setting-icon">🕒</span>
-                    Timer
+                    <span class="setting-icon">⏱️</span>
+                    Zeitlimit
                 </div>
                 <div class="toggle-switch" id="timerToggle" onclick="toggleTimer()"></div>
             </div>
             
             <div class="setting-row" id="timerMinutesRow" style="display: none;">
                 <div class="setting-label">
-                    <span class="setting-icon"></span>
+                    <span class="setting-icon">🕐</span>
                     Minuten
                 </div>
                 <div class="counter-controls">
@@ -733,7 +843,7 @@
             
             <div class="setting-row">
                 <div class="setting-label">
-                    <span class="setting-icon">📝</span>
+                    <span class="setting-icon">🏷️</span>
                     Kategorien
                 </div>
                 <div class="dropdown">
@@ -749,7 +859,7 @@
             
             <div class="setting-row">
                 <div class="setting-label">
-                    <span class="setting-icon">👁️</span>
+                    <span class="setting-icon">💡</span>
                     Hinweise für Impostor
                 </div>
                 <div class="toggle-switch active" id="hintsToggle" onclick="toggleHints()"></div>
@@ -765,7 +875,7 @@
     <div id="gameScreen" class="screen impostor-bg hidden">
         <button class="back-button" onclick="showImpostorSettings()">←</button>
         
-        <h2 style="color: white; font-size: clamp(16px, 4vw, 20px); margin-bottom: 20px;">Impostor</h2>
+        <h2 style="color: white; font-size: clamp(17px, 4.2vw, 22px); margin-bottom: 25px;">Impostor</h2>
         
         <div class="player-card" id="playerCard">
             <div class="player-title" id="playerTitle">Spieler 1</div>
@@ -773,7 +883,7 @@
             <button class="reveal-button" 
                     onmousedown="showRole()" onmouseup="hideRole()" onmouseleave="hideRole()"
                     ontouchstart="showRole()" ontouchend="hideRole()">
-                <div style="margin-bottom: 5px;">↑</div>
+                <div style="margin-bottom: 8px;">↑</div>
                 Karte aufdecken
             </button>
             
@@ -784,13 +894,13 @@
             </div>
         </div>
         
-        <div style="height: 120px;"></div> <!-- BIG SPACER -->
+        <div style="height: 130px;"></div> <!-- SPACER -->
         
         <button class="button" onclick="handleNextPlayer()" id="nextButton">
             Weitergeben
         </button>
         
-        <p style="color: rgba(255,255,255,0.7); font-size: clamp(12px, 3vw, 14px); text-align: center; margin-top: 10px;">
+        <p style="color: rgba(255,255,255,0.7); font-size: clamp(13px, 3.2vw, 15px); text-align: center; margin-top: 12px;">
             Gerät an den nächsten Spieler weitergeben
         </p>
     </div>
@@ -802,8 +912,8 @@
         <div id="timerDisplay" class="timer-display hidden">5:00</div>
         
         <div style="text-align: center;">
-            <div style="font-size: clamp(60px, 15vw, 80px); margin-bottom: 20px;">🎭</div>
-            <h1 class="title" style="font-size: clamp(28px, 7vw, 36px); margin-bottom: 15px;">Spiel läuft!</h1>
+            <div style="font-size: clamp(70px, 17vw, 90px); margin-bottom: 25px;">🎭</div>
+            <h1 class="title" style="font-size: clamp(30px, 7.5vw, 38px); margin-bottom: 18px;">Spiel läuft!</h1>
             <div class="starter-text" id="starterText">Spieler 1 beginnt</div>
         </div>
         
@@ -819,7 +929,7 @@
             </div>
         </div>
         
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 25px;">
             <button class="button" onclick="showRoles()">
                 Rollen aufdecken
             </button>
@@ -833,7 +943,7 @@
     <div id="endScreen" class="screen impostor-bg hidden">
         <button class="back-button" onclick="showGameStarted()">←</button>
         
-        <h1 class="title" style="font-size: clamp(20px, 5vw, 28px); margin-bottom: 20px;">Rollen aufdecken</h1>
+        <h1 class="title" style="font-size: clamp(22px, 5.5vw, 30px); margin-bottom: 25px;">Rollen aufdecken</h1>
         
         <div class="roles-list" id="rolesList">
             <!-- Dynamically populated -->
@@ -922,7 +1032,7 @@
 
         const wordCategories = WORD_CATEGORIES;
 
-        const coolEmojis = ['😎', '🤩', '🔥', '⚡', '🎯', '🚀', '💎', '⭐', '✨', '🎊', '🎉', '🦄', '🐉', '👑', '🏆'];
+        const coolEmojis = ['😎', '🥸', '🔥', '⚡', '🎯', '🚀', '🥳', '⭐', '✨', '🎊', '🎉', '🔫', '🐉', '👑', '🏆'];
 
         // Screen Management
         function showScreen(screenId) {
@@ -958,7 +1068,7 @@
 
         // Settings Functions
         function changePlayerCount(delta) {
-            gameState.totalPlayers = Math.max(3, Math.min(10, gameState.totalPlayers + delta));
+            gameState.totalPlayers = Math.max(3, Math.min(20, gameState.totalPlayers + delta));
             if (gameState.impostors >= Math.floor(gameState.totalPlayers / 2)) {
                 gameState.impostors = Math.max(1, Math.floor(gameState.totalPlayers / 2) - 1);
             }
@@ -1225,14 +1335,14 @@
                 
                 const roleItem = document.createElement('div');
                 roleItem.className = 'role-item';
-                roleItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-radius: 15px; padding: 15px; margin: 8px 0; color: white;';
+                roleItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-radius: 18px; padding: 18px; margin: 10px 0; color: white;';
                 
                 // Left side - player info
                 const rolePlayer = document.createElement('div');
-                rolePlayer.style.cssText = 'display: flex; align-items: center; font-size: 16px; font-weight: bold; flex: 1;';
+                rolePlayer.style.cssText = 'display: flex; align-items: center; font-size: 17px; font-weight: bold; flex: 1;';
                 
                 const roleIcon = document.createElement('div');
-                roleIcon.style.cssText = `width: 25px; height: 25px; font-size: 14px; margin-right: 10px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: ${isImpostor ? '#f44336' : '#4CAF50'}; color: white; font-weight: bold;`;
+                roleIcon.style.cssText = `width: 28px; height: 28px; font-size: 16px; margin-right: 12px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: ${isImpostor ? '#f44336' : '#4CAF50'}; color: white; font-weight: bold;`;
                 roleIcon.textContent = isImpostor ? '✕' : '✓';
                 
                 const playerText = document.createElement('span');
@@ -1243,7 +1353,7 @@
                 
                 // Right side - role result
                 const roleResult = document.createElement('div');
-                roleResult.style.cssText = 'font-size: 14px; text-align: right; margin-left: 10px;';
+                roleResult.style.cssText = 'font-size: 15px; text-align: right; margin-left: 12px;';
                 
                 if (isImpostor) {
                     const roleStrong = document.createElement('strong');
@@ -1306,14 +1416,40 @@
             e.preventDefault();
         });
 
+        // Initialize scroll snap indicators
+        function initScrollSnapIndicators() {
+            const container = document.getElementById('gamesContainer');
+            const dot1 = document.getElementById('dot1');
+            const dot2 = document.getElementById('dot2');
+            
+            if (!container || !dot1 || !dot2) return;
+            
+            container.addEventListener('scroll', function() {
+                const scrollLeft = container.scrollLeft;
+                const cardWidth = container.querySelector('.game-card').offsetWidth + 20; // card width + gap
+                
+                if (scrollLeft < cardWidth / 2) {
+                    // First card is active
+                    dot1.classList.add('active');
+                    dot2.classList.remove('active');
+                } else {
+                    // Second card is active
+                    dot1.classList.remove('active');
+                    dot2.classList.add('active');
+                }
+            });
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             updateSettingsDisplay();
             updateCategoryDropdown();
+            initScrollSnapIndicators();
         });
         
         updateSettingsDisplay();
         updateCategoryDropdown();
+        initScrollSnapIndicators();
 
         // Service Worker for offline functionality
         if ('serviceWorker' in navigator) {
