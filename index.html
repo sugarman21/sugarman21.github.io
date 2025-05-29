@@ -57,7 +57,7 @@
         
         /* Background Gradients */
         .home-bg {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: #000000;
         }
         
         .impostor-bg {
@@ -88,9 +88,9 @@
             justify-content: center;
             position: relative;
             width: 100%;
-            height: clamp(80px, 18vh, 120px);
-            margin-bottom: 30px;
-            margin-top: 20px;
+            height: clamp(90px, 20vh, 130px);
+            margin-bottom: 20px;
+            margin-top: 30px;
         }
         
         /* Typography */
@@ -103,6 +103,13 @@
             line-height: 1;
             z-index: 2;
             position: relative;
+        }
+        
+        .title-suffix {
+            font-size: clamp(18px, 5vw, 28px);
+            color: rgba(255,255,255,0.5);
+            font-weight: normal;
+            margin-left: 8px;
         }
         
         /* Controller Emoji specific styling */
@@ -761,7 +768,7 @@
     <!-- Mode Select Screen -->
     <div id="modeSelectScreen" class="screen home-bg">
         <div class="header-container">
-            <h1 class="title">Party-games</h1>
+            <h1 class="title">Party-games<span class="title-suffix">.me</span></h1>
             <div class="controller-emoji">🎮</div>
         </div>
         
@@ -1032,7 +1039,7 @@
 
         const wordCategories = WORD_CATEGORIES;
 
-        const coolEmojis = ['😎', '🥸', '🔥', '⚡', '🎯', '🚀', '🥳', '⭐', '✨', '🎊', '🎉', '🔫', '🐉', '👑', '🏆'];
+        const coolEmojis = ['😎', '🤩', '🔥', '⚡', '🎯', '🚀', '💎', '⭐', '✨', '🎊', '🎉', '🦄', '🐉', '👑', '🏆'];
 
         // Screen Management
         function showScreen(screenId) {
