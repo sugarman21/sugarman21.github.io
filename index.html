@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Impostor">
+    <title>Impostor - Party Game</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Background Gradients */
+        .home-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .impostor-bg {
+            background: linear-gradient(135deg, #f85032 0%, #e73827 50%, #ff6b35 100%);
+        }
+        
+        /* Typography */
+        .title {
+            font-size: clamp(28px, 8vw, 48px);
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: clamp(14px, 4vw, 18px);
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .big-emoji {
+            font-size: clamp(60px, 15vw, 80px);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* Buttons - FULL reliable hitbox */
+        .button {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            color: white;
+            font-size: clamp(14px, 4vw, 18px);
+            font-weight: bold;
+            padding: clamp(15px, 4vw, 20px) clamp(25px, 6vw, 35px);
+            margin: 8px;
+            min-width: clamp(200px, 55vw, 280px);
+            max-width: 90vw;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: block;
+            border: none;
+            outline: none;
+            -webkit-appearance: none;
+            user-select: none;
+            -webkit-user-select: none;
+            position: relative;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            z-index: 100;
+        }
+        
+        .button::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: transparent;
+            border-radius: 30px;
+        }
+        
+        .button:active, .button:hover {
+            transform: scale(0.95);
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .button:disabled {
+            opacity: 0.6;
+        }
+        
+        .primary-button {
+            background: linear-gradient(135deg, #f85032 0%, #e73827 100%);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 25px rgba(248, 80, 50, 0.3);
+        }
+        
+        .primary-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 15px rgba(248, 80, 50, 0.5);
+        }
+        
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: clamp(15px, 4vw, 20px);
+            left: clamp(15px, 4vw, 20px);
+            background: rgba(0,0,0,0.3);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: clamp(16px, 4vw, 20px);
+            width: clamp(35px, 8vw, 45px);
+            height: clamp(35px, 8vw, 45px);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Settings Container */
+        .settings-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            padding: clamp(20px, 5vw, 30px);
+            margin: 15px 0;
+            width: 100%;
+            max-width: min(400px, 90vw);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: clamp(15px, 4vw, 20px) 0;
+            color: white;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .setting-label {
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .setting-icon {
+            font-size: clamp(16px, 4vw, 20px);
+            margin-right: 12px;
+            width: 25px;
+            text-align: center;
+        }
+        
+        /* Counter Controls */
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 3vw, 15px);
+        }
+        
+        .counter-btn {
+            width: clamp(30px, 7vw, 35px);
+            height: clamp(30px, 7vw, 35px);
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .counter-btn:active {
+            transform: scale(0.9);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .counter-value {
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: bold;
+            min-width: clamp(25px, 6vw, 30px);
+            text-align: center;
+        }
+        
+        /* Toggle Switch - Fixed centering */
+        .toggle-switch {
+            width: clamp(45px, 10vw, 50px);
+            height: clamp(24px, 5vw, 28px);
+            background: #ccc;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #4CAF50;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: clamp(20px, 4vw, 24px);
+            height: clamp(20px, 4vw, 24px);
+            border-radius: 50%;
+            background: white;
+            top: 50%;
+            left: 2px;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active::after {
+            left: calc(100% - clamp(20px, 4vw, 24px) - 2px);
+        }
+        
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 15px);
+            font-size: clamp(12px, 3vw, 14px);
+            cursor: pointer;
+            min-width: clamp(70px, 18vw, 80px);
+            text-align: center;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            border-radius: 10px;
+            margin-top: 5px;
+            min-width: 100px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 100;
+        }
+        
+        .dropdown-item {
+            padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
+            color: white;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: clamp(12px, 3vw, 14px);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:active {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Player Card */
+        .player-card {
+            background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%);
+            border-radius: 25px;
+            padding: clamp(20px, 5vw, 30px);
+            margin: 15px 0;
+            width: 100%;
+            max-width: min(350px, 90vw);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 4px solid rgba(255,255,255,0.3);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .player-card.flipping {
+            animation: cardFlip 0.6s ease-in-out;
+        }
+        
+        @keyframes cardFlip {
+            0% { transform: rotateY(0deg) scale(1); }
+            50% { transform: rotateY(90deg) scale(0.95); }
+            100% { transform: rotateY(0deg) scale(1); }
+        }
+        
+        .player-card.lifted {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        
+        .player-title {
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .player-emoji {
+            font-size: clamp(45px, 12vw, 60px);
+            margin: 15px 0;
+            background: rgba(255,255,255,0.3);
+            width: clamp(60px, 15vw, 80px);
+            height: clamp(60px, 15vw, 80px);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+        }
+        
+        .reveal-button {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            color: white;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: bold;
+            padding: clamp(12px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .reveal-button:active {
+            transform: scale(0.95);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* Revealed Content - NO BORDERS */
+        .revealed-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            border-radius: 25px;
+            padding: clamp(15px, 4vw, 20px);
+            margin-top: 5px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 40;
+            pointer-events: none;
+        }
+        
+        .revealed-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .role-icon {
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: bold;
+            color: white;
+        }
+        
+        .role-icon.impostor {
+            background: #f44336;
+        }
+        
+        .role-icon.normal {
+            background: #4CAF50;
+        }
+        
+        .role-text {
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: bold;
+            color: white;
+            margin-bottom: 12px;
+        }
+        
+        .word-display {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: clamp(12px, 3vw, 15px);
+            font-size: clamp(20px, 5vw, 24px);
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .hint-display {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: clamp(8px, 2vw, 10px);
+            font-size: clamp(12px, 3vw, 14px);
+            color: #666;
+        }
+        
+        /* Timer Display */
+        .timer-display {
+            position: absolute;
+            top: clamp(15px, 4vw, 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: clamp(8px, 2vw, 10px) clamp(15px, 4vw, 20px);
+            color: white;
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Starter Text */
+        .starter-text {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+            transition: font-size 1s ease;
+        }
+        
+        .starter-text.shrunk {
+            font-size: clamp(16px, 4vw, 20px);
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        /* Goal Box */
+        .goal-box {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: clamp(15px, 4vw, 20px);
+            margin: 15px 0;
+            width: 100%;
+            max-width: min(350px, 90vw);
+            text-align: left;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .goal-title {
+            font-size: clamp(18px, 4.5vw, 22px);
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .goal-item {
+            margin-bottom: 12px;
+            color: white;
+            line-height: 1.4;
+            font-size: clamp(14px, 3.5vw, 16px);
+        }
+        
+        .goal-emoji {
+            font-size: clamp(18px, 4.5vw, 22px);
+            margin-right: 10px;
+        }
+        
+        /* Roles List */
+        .roles-list {
+            width: 100%;
+            max-width: min(400px, 90vw);
+            margin: 15px 0;
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .role-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: clamp(12px, 3vw, 15px);
+            margin: 8px 0;
+            color: white;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .role-player {
+            display: flex;
+            align-items: center;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: bold;
+            flex: 1;
+        }
+        
+        .role-result {
+            font-size: clamp(12px, 3vw, 14px);
+            text-align: right;
+            margin-left: 10px;
+        }
+        
+        /* Credits */
+        .credits {
+            position: absolute;
+            bottom: clamp(10px, 3vw, 15px);
+            left: 0;
+            right: 0;
+            font-size: clamp(10px, 2.5vw, 12px);
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+        }
+        
+        /* Small Screen Optimizations */
+        @media screen and (max-height: 600px) {
+            .screen {
+                padding: 10px;
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+            
+            .big-emoji {
+                font-size: clamp(40px, 10vw, 60px);
+                margin-bottom: 10px;
+            }
+            
+            .title {
+                font-size: clamp(24px, 6vw, 36px);
+                margin-bottom: 10px;
+            }
+            
+            .settings-container, .player-card, .goal-box {
+                margin: 10px 0;
+                padding: 15px;
+            }
+            
+            .credits {
+                position: relative;
+                margin-top: 20px;
+            }
+        }
+        
+        @media screen and (max-width: 280px) {
+            .setting-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            
+            .counter-controls {
+                justify-content: center;
+            }
+            
+            .button {
+                min-width: 90%;
+                margin: 5px auto;
+            }
+        }
+        
+        /* Landscape Orientation */
+        @media screen and (orientation: landscape) and (max-height: 500px) {
+            .screen {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                padding: 10px;
+            }
+            
+            .big-emoji {
+                font-size: 40px;
+                margin: 5px;
+            }
+            
+            .title {
+                font-size: 24px;
+                margin: 5px 0;
+                width: 100%;
+            }
+            
+            .settings-container, .player-card {
+                max-width: 300px;
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mode Select Screen -->
+    <div id="modeSelectScreen" class="screen home-bg">
+        <div class="big-emoji">🎮</div>
+        <h1 class="title">Party Games</h1>
+        <p class="subtitle">Wähle dein Spiel</p>
+        
+        <button class="button primary-button" onclick="showImpostorSettings()">
+            <div style="font-size: clamp(30px, 8vw, 40px); margin-bottom: 8px;">🎭</div>
+            <div style="font-size: clamp(18px, 4.5vw, 24px); font-weight: bold;">Impostor</div>
+            <div style="font-size: clamp(12px, 3vw, 16px); margin-top: 5px; opacity: 0.9;">Finde den Verräter</div>
+        </button>
+        
+        <button class="button" style="opacity: 0.6; cursor: not-allowed;" disabled>
+            <div style="font-size: clamp(30px, 8vw, 40px); margin-bottom: 8px;">🎯</div>
+            <div style="font-size: clamp(18px, 4.5vw, 24px); font-weight: bold;">Mehr Spiele</div>
+            <div style="font-size: clamp(12px, 3vw, 16px); margin-top: 5px;">Bald verfügbar</div>
+        </button>
+        
+        <div class="credits">made by C at School</div>
+    </div>
+
+    <!-- Impostor Settings Screen -->
+    <div id="impostorScreen" class="screen impostor-bg hidden">
+        <button class="back-button" onclick="showModeSelect()">←</button>
+        
+        <h1 class="title" style="font-size: clamp(24px, 6vw, 32px); margin-bottom: 20px;">Impostor</h1>
+        
+        <div class="settings-container">
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span class="setting-icon">👥</span>
+                    Spieler
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-btn" onclick="changePlayerCount(-1)">−</button>
+                    <span class="counter-value" id="playersCount">4</span>
+                    <button class="counter-btn" onclick="changePlayerCount(1)">+</button>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span class="setting-icon">👤</span>
+                    Impostor
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-btn" onclick="changeImpostorCount(-1)">−</button>
+                    <span class="counter-value" id="impostorsCount">1</span>
+                    <button class="counter-btn" onclick="changeImpostorCount(1)">+</button>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span class="setting-icon">🕒</span>
+                    Timer
+                </div>
+                <div class="toggle-switch" id="timerToggle" onclick="toggleTimer()"></div>
+            </div>
+            
+            <div class="setting-row" id="timerMinutesRow" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon"></span>
+                    Minuten
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-btn" onclick="changeTimerMinutes(-1)">−</button>
+                    <span class="counter-value" id="timerMinutesCount">2</span>
+                    <button class="counter-btn" onclick="changeTimerMinutes(1)">+</button>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span class="setting-icon">📝</span>
+                    Kategorien
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-button" id="categoryButton" onclick="toggleCategoryDropdown()">Alle ▼</button>
+                    <div class="dropdown-menu hidden" id="categoryDropdown">
+                        <div class="dropdown-item" onclick="selectCategory('alle')">Alle</div>
+                        <div class="dropdown-item" onclick="selectCategory('food')">Essen</div>
+                        <div class="dropdown-item" onclick="selectCategory('animals')">Tiere</div>
+                        <div class="dropdown-item" onclick="selectCategory('objects')">Objekte</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span class="setting-icon">👁️</span>
+                    Hinweise für Impostor
+                </div>
+                <div class="toggle-switch active" id="hintsToggle" onclick="toggleHints()"></div>
+            </div>
+        </div>
+        
+        <button class="button" onclick="startGame()">
+            Spiel starten
+        </button>
+    </div>
+
+    <!-- Game Playing Screen -->
+    <div id="gameScreen" class="screen impostor-bg hidden">
+        <button class="back-button" onclick="showImpostorSettings()">←</button>
+        
+        <h2 style="color: white; font-size: clamp(16px, 4vw, 20px); margin-bottom: 20px;">Impostor</h2>
+        
+        <div class="player-card" id="playerCard">
+            <div class="player-title" id="playerTitle">Spieler 1</div>
+            <div class="player-emoji" id="playerEmoji">👤</div>
+            <button class="reveal-button" 
+                    onmousedown="showRole()" onmouseup="hideRole()" onmouseleave="hideRole()"
+                    ontouchstart="showRole()" ontouchend="hideRole()">
+                <div style="margin-bottom: 5px;">↑</div>
+                Karte aufdecken
+            </button>
+            
+            <div class="revealed-content" id="revealedContent">
+                <div class="role-icon" id="roleIcon">✓</div>
+                <div class="role-text" id="roleText">Du bist Impostor!</div>
+                <div id="wordOrHint"></div>
+            </div>
+        </div>
+        
+        <div style="height: 120px;"></div> <!-- BIG SPACER -->
+        
+        <button class="button" onclick="handleNextPlayer()" id="nextButton">
+            Weitergeben
+        </button>
+        
+        <p style="color: rgba(255,255,255,0.7); font-size: clamp(12px, 3vw, 14px); text-align: center; margin-top: 10px;">
+            Gerät an den nächsten Spieler weitergeben
+        </p>
+    </div>
+
+    <!-- Game Started Screen -->
+    <div id="gameStartedScreen" class="screen impostor-bg hidden">
+        <button class="back-button" onclick="showImpostorSettings()">←</button>
+        
+        <div id="timerDisplay" class="timer-display hidden">5:00</div>
+        
+        <div style="text-align: center;">
+            <div style="font-size: clamp(60px, 15vw, 80px); margin-bottom: 20px;">🎭</div>
+            <h1 class="title" style="font-size: clamp(28px, 7vw, 36px); margin-bottom: 15px;">Spiel läuft!</h1>
+            <div class="starter-text" id="starterText">Spieler 1 beginnt</div>
+        </div>
+        
+        <div class="goal-box">
+            <div class="goal-title">Ziel:</div>
+            <div class="goal-item">
+                <span class="goal-emoji">👥</span>
+                <strong>Normale Spieler:</strong><br>Findet den Impostor!
+            </div>
+            <div class="goal-item">
+                <span class="goal-emoji">🎭</span>
+                <strong>Impostor:</strong><br>Erratet das Wort!
+            </div>
+        </div>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
+            <button class="button" onclick="showRoles()">
+                Rollen aufdecken
+            </button>
+            <button class="button" onclick="showImpostorSettings()">
+                Neues Spiel
+            </button>
+        </div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="endScreen" class="screen impostor-bg hidden">
+        <button class="back-button" onclick="showGameStarted()">←</button>
+        
+        <h1 class="title" style="font-size: clamp(20px, 5vw, 28px); margin-bottom: 20px;">Rollen aufdecken</h1>
+        
+        <div class="roles-list" id="rolesList">
+            <!-- Dynamically populated -->
+        </div>
+        
+        <button class="button" onclick="showImpostorSettings()">
+            Neues Spiel
+        </button>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            totalPlayers: 4,
+            impostors: 1,
+            timerEnabled: false,
+            timerMinutes: 2,
+            hintsEnabled: true,
+            category: 'alle',
+            currentPlayer: 1,
+            gameWord: '',
+            gameHint: '',
+            impostorPlayers: [],
+            playerEmojis: [],
+            startingPlayer: 1,
+            timer: null,
+            timeLeft: 0
+        };
+
+        // Word categories - embedded directly in the HTML
+        const WORD_CATEGORIES = {
+            food: [
+                { word: "Sushi", hint: "japanisch" },
+                { word: "Croissant", hint: "französisch" },
+                { word: "Tacos", hint: "mexikanisch" },
+                { word: "Pasta", hint: "al dente" },
+                { word: "Curry", hint: "scharf" },
+                { word: "Döner", hint: "türkisch" },
+                { word: "Ramen", hint: "Nudeln" },
+                { word: "Burger", hint: "amerikanisch" },
+                { word: "Spaghetti", hint: "lang" },
+                { word: "Popcorn", hint: "knallt" },
+                { word: "Wasabi", hint: "brennt" },
+                { word: "Mozzarella", hint: "cremig" },
+                { word: "Pizza", hint: "italienisch" },
+                { word: "Bratwurst", hint: "deutsch" },
+                { word: "Kimchi", hint: "koreanisch" }
+            ],
+            
+            animals: [
+                { word: "Flamingo", hint: "rosa" },
+                { word: "Pinguin", hint: "watschelt" },
+                { word: "Koala", hint: "australisch" },
+                { word: "Giraffe", hint: "Hals" },
+                { word: "Delfin", hint: "intelligent" },
+                { word: "Faultier", hint: "langsam" },
+                { word: "Chamäleon", hint: "wechselt" },
+                { word: "Känguru", hint: "hüpft" },
+                { word: "Oktopus", hint: "acht" },
+                { word: "Seepferdchen", hint: "maritim" },
+                { word: "Erdmännchen", hint: "wacht" },
+                { word: "Alpaka", hint: "flauschig" },
+                { word: "Elefant", hint: "Rüssel" },
+                { word: "Tiger", hint: "gestreift" },
+                { word: "Eule", hint: "nachts" }
+            ],
+            
+            objects: [
+                { word: "Regenschirm", hint: "schützt" },
+                { word: "Kopfhörer", hint: "Musik" },
+                { word: "Skateboard", hint: "rollt" },
+                { word: "Fernbedienung", hint: "zappt" },
+                { word: "Sonnenbrille", hint: "cool" },
+                { word: "Rucksack", hint: "trägt" },
+                { word: "Wasserflasche", hint: "Durst" },
+                { word: "Powerbank", hint: "lädt" },
+                { word: "Selfie-Stick", hint: "verlängert" },
+                { word: "Bluetooth-Box", hint: "drahtlos" },
+                { word: "Smartwatch", hint: "Handgelenk" },
+                { word: "Gaming-Stuhl", hint: "zocken" },
+                { word: "Kamera", hint: "klick" },
+                { word: "Schreibtisch", hint: "arbeiten" },
+                { word: "Kühlschrank", hint: "kalt" }
+            ]
+        };
+
+        const wordCategories = WORD_CATEGORIES;
+
+        const coolEmojis = ['😎', '🤩', '🔥', '⚡', '🎯', '🚀', '💎', '⭐', '✨', '🎊', '🎉', '🦄', '🐉', '👑', '🏆'];
+
+        // Screen Management
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function showModeSelect() {
+            showScreen('modeSelectScreen');
+        }
+
+        function showImpostorSettings() {
+            showScreen('impostorScreen');
+            updateSettingsDisplay();
+        }
+
+        function showGame() {
+            showScreen('gameScreen');
+            updateGameDisplay();
+        }
+
+        function showGameStarted() {
+            showScreen('gameStartedScreen');
+            updateGameStartedDisplay();
+        }
+
+        function showRoles() {
+            showScreen('endScreen');
+            displayRoles();
+        }
+
+        // Settings Functions
+        function changePlayerCount(delta) {
+            gameState.totalPlayers = Math.max(3, Math.min(10, gameState.totalPlayers + delta));
+            if (gameState.impostors >= Math.floor(gameState.totalPlayers / 2)) {
+                gameState.impostors = Math.max(1, Math.floor(gameState.totalPlayers / 2) - 1);
+            }
+            updateSettingsDisplay();
+        }
+
+        function changeImpostorCount(delta) {
+            gameState.impostors = Math.max(1, Math.min(Math.floor(gameState.totalPlayers / 2), gameState.impostors + delta));
+            updateSettingsDisplay();
+        }
+
+        function toggleTimer() {
+            gameState.timerEnabled = !gameState.timerEnabled;
+            const toggle = document.getElementById('timerToggle');
+            const minutesRow = document.getElementById('timerMinutesRow');
+            
+            toggle.classList.toggle('active', gameState.timerEnabled);
+            minutesRow.style.display = gameState.timerEnabled ? 'flex' : 'none';
+        }
+
+        function changeTimerMinutes(delta) {
+            gameState.timerMinutes = Math.max(1, Math.min(10, gameState.timerMinutes + delta));
+            document.getElementById('timerMinutesCount').textContent = gameState.timerMinutes;
+        }
+
+        function toggleHints() {
+            gameState.hintsEnabled = !gameState.hintsEnabled;
+            document.getElementById('hintsToggle').classList.toggle('active', gameState.hintsEnabled);
+        }
+
+        function toggleCategoryDropdown() {
+            const dropdown = document.getElementById('categoryDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function selectCategory(category) {
+            gameState.category = category;
+            const categoryNames = {
+                'alle': 'Alle',
+                'food': 'Essen',
+                'animals': 'Tiere', 
+                'objects': 'Objekte'
+            };
+            
+            document.getElementById('categoryButton').textContent = (categoryNames[category] || category) + ' ▼';
+            document.getElementById('categoryDropdown').classList.add('hidden');
+        }
+
+        function updateCategoryDropdown() {
+            const dropdown = document.getElementById('categoryDropdown');
+            if (!dropdown) return;
+            
+            dropdown.innerHTML = '<div class="dropdown-item" onclick="selectCategory(\'alle\')">Alle</div>';
+            
+            // Add all available categories dynamically
+            Object.keys(wordCategories).forEach(key => {
+                const categoryNames = {
+                    'food': 'Essen',
+                    'animals': 'Tiere',
+                    'objects': 'Objekte'
+                };
+                const categoryName = categoryNames[key] || key.charAt(0).toUpperCase() + key.slice(1);
+                dropdown.innerHTML += `<div class="dropdown-item" onclick="selectCategory('${key}')">${categoryName}</div>`;
+            });
+        }
+
+        function updateSettingsDisplay() {
+            document.getElementById('playersCount').textContent = gameState.totalPlayers;
+            document.getElementById('impostorsCount').textContent = gameState.impostors;
+            document.getElementById('timerMinutesCount').textContent = gameState.timerMinutes;
+            
+            // Update timer toggle and minutes row visibility
+            const timerToggle = document.getElementById('timerToggle');
+            const minutesRow = document.getElementById('timerMinutesRow');
+            timerToggle.classList.toggle('active', gameState.timerEnabled);
+            minutesRow.style.display = gameState.timerEnabled ? 'flex' : 'none';
+        }
+
+        // Game Logic
+        function generateGame() {
+            // Select words based on category
+            let selectedWords = [];
+            if (gameState.category === 'alle') {
+                selectedWords = [...wordCategories.food, ...wordCategories.animals, ...wordCategories.objects];
+            } else {
+                selectedWords = wordCategories[gameState.category] || wordCategories.food;
+            }
+            
+            const selectedWord = selectedWords[Math.floor(Math.random() * selectedWords.length)];
+            gameState.gameWord = selectedWord.word;
+            gameState.gameHint = selectedWord.hint;
+            
+            // Generate impostor assignments
+            gameState.impostorPlayers = [];
+            while (gameState.impostorPlayers.length < gameState.impostors) {
+                const randomPlayer = Math.floor(Math.random() * gameState.totalPlayers) + 1;
+                if (!gameState.impostorPlayers.includes(randomPlayer)) {
+                    gameState.impostorPlayers.push(randomPlayer);
+                }
+            }
+            
+            // Generate player emojis
+            gameState.playerEmojis = [];
+            const shuffledEmojis = [...coolEmojis].sort(() => Math.random() - 0.5);
+            for (let i = 0; i < gameState.totalPlayers; i++) {
+                gameState.playerEmojis.push(shuffledEmojis[i] || coolEmojis[Math.floor(Math.random() * coolEmojis.length)]);
+            }
+        }
+
+        function startGame() {
+            generateGame();
+            gameState.currentPlayer = 1;
+            showGame();
+        }
+
+        function updateGameDisplay() {
+            document.getElementById('playerTitle').textContent = `Spieler ${gameState.currentPlayer}`;
+            document.getElementById('playerEmoji').textContent = gameState.playerEmojis[gameState.currentPlayer - 1] || '👤';
+            
+            if (gameState.currentPlayer < gameState.totalPlayers) {
+                document.getElementById('nextButton').textContent = 'Weitergeben';
+            } else {
+                document.getElementById('nextButton').textContent = 'Spiel starten';
+            }
+            
+            hideRole();
+        }
+
+        function showRole() {
+            const isImpostor = gameState.impostorPlayers.includes(gameState.currentPlayer);
+            const roleIcon = document.getElementById('roleIcon');
+            const roleText = document.getElementById('roleText');
+            const wordOrHint = document.getElementById('wordOrHint');
+            
+            if (isImpostor) {
+                roleIcon.textContent = '✕';
+                roleIcon.className = 'role-icon impostor';
+                roleText.textContent = 'Du bist Impostor!';
+                if (gameState.hintsEnabled) {
+                    wordOrHint.innerHTML = `<div class="hint-display">Tipp: ${gameState.gameHint}</div>`;
+                } else {
+                    wordOrHint.innerHTML = '';
+                }
+            } else {
+                roleIcon.textContent = '✓';
+                roleIcon.className = 'role-icon normal';
+                roleText.textContent = '';
+                wordOrHint.innerHTML = `<div class="word-display">${gameState.gameWord}</div>`;
+            }
+            
+            document.getElementById('revealedContent').classList.add('visible');
+            document.getElementById('playerCard').classList.add('lifted');
+        }
+
+        function hideRole() {
+            document.getElementById('revealedContent').classList.remove('visible');
+            document.getElementById('playerCard').classList.remove('lifted');
+        }
+
+        function handleNextPlayer() {
+            const nextButton = document.getElementById('nextButton');
+            
+            if (gameState.currentPlayer < gameState.totalPlayers) {
+                // Normal card flip for next player
+                const playerCard = document.getElementById('playerCard');
+                
+                // Visual feedback only
+                nextButton.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    nextButton.style.transform = 'scale(1)';
+                }, 150);
+                
+                playerCard.classList.remove('flipping');
+                
+                setTimeout(() => {
+                    playerCard.classList.add('flipping');
+                }, 50);
+                
+                setTimeout(() => {
+                    gameState.currentPlayer++;
+                    updateGameDisplay();
+                    playerCard.classList.remove('flipping');
+                }, 650);
+                
+            } else {
+                // Game start - simple and reliable
+                const originalText = nextButton.textContent;
+                nextButton.textContent = 'Spiel startet...';
+                nextButton.style.transform = 'scale(0.9)';
+                
+                setTimeout(() => {
+                    nextButton.style.transform = 'scale(1)';
+                }, 150);
+                
+                setTimeout(() => {
+                    gameState.startingPlayer = Math.floor(Math.random() * gameState.totalPlayers) + 1;
+                    showGameStarted();
+                    nextButton.textContent = originalText;
+                }, 500);
+            }
+        }
+
+        function nextPlayer() {
+            // Backup function - same as handleNextPlayer
+            handleNextPlayer();
+        }
+
+        function updateGameStartedDisplay() {
+            const starterText = document.getElementById('starterText');
+            starterText.textContent = `Spieler ${gameState.startingPlayer} beginnt`;
+            starterText.classList.remove('shrunk');
+            
+            // Show timer if enabled
+            if (gameState.timerEnabled) {
+                gameState.timeLeft = gameState.timerMinutes * 60;
+                document.getElementById('timerDisplay').classList.remove('hidden');
+                startTimer();
+            } else {
+                document.getElementById('timerDisplay').classList.add('hidden');
+            }
+            
+            // Shrink text after 5 seconds
+            setTimeout(() => {
+                starterText.classList.add('shrunk');
+            }, 5000);
+        }
+
+        function startTimer() {
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+            }
+            
+            updateTimerDisplay();
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                updateTimerDisplay();
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timer);
+                    gameState.timer = null;
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(gameState.timeLeft / 60);
+            const seconds = gameState.timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function displayRoles() {
+            const rolesList = document.getElementById('rolesList');
+            if (!rolesList) {
+                console.error('rolesList element not found');
+                return;
+            }
+            
+            // Clear existing content
+            rolesList.innerHTML = '';
+            
+            for (let i = 1; i <= gameState.totalPlayers; i++) {
+                const isImpostor = gameState.impostorPlayers.includes(i);
+                const playerEmoji = gameState.playerEmojis[i-1] || '👤';
+                
+                const roleItem = document.createElement('div');
+                roleItem.className = 'role-item';
+                roleItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-radius: 15px; padding: 15px; margin: 8px 0; color: white;';
+                
+                // Left side - player info
+                const rolePlayer = document.createElement('div');
+                rolePlayer.style.cssText = 'display: flex; align-items: center; font-size: 16px; font-weight: bold; flex: 1;';
+                
+                const roleIcon = document.createElement('div');
+                roleIcon.style.cssText = `width: 25px; height: 25px; font-size: 14px; margin-right: 10px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: ${isImpostor ? '#f44336' : '#4CAF50'}; color: white; font-weight: bold;`;
+                roleIcon.textContent = isImpostor ? '✕' : '✓';
+                
+                const playerText = document.createElement('span');
+                playerText.textContent = `${playerEmoji} Spieler ${i}`;
+                
+                rolePlayer.appendChild(roleIcon);
+                rolePlayer.appendChild(playerText);
+                
+                // Right side - role result
+                const roleResult = document.createElement('div');
+                roleResult.style.cssText = 'font-size: 14px; text-align: right; margin-left: 10px;';
+                
+                if (isImpostor) {
+                    const roleStrong = document.createElement('strong');
+                    roleStrong.textContent = 'Impostor';
+                    roleResult.appendChild(roleStrong);
+                    
+                    if (gameState.hintsEnabled && gameState.gameHint) {
+                        const lineBreak = document.createElement('br');
+                        const hintSmall = document.createElement('small');
+                        hintSmall.textContent = `Tipp: ${gameState.gameHint}`;
+                        roleResult.appendChild(lineBreak);
+                        roleResult.appendChild(hintSmall);
+                    }
+                } else {
+                    const wordStrong = document.createElement('strong');
+                    wordStrong.textContent = gameState.gameWord || 'Wort';
+                    roleResult.appendChild(wordStrong);
+                }
+                
+                roleItem.appendChild(rolePlayer);
+                roleItem.appendChild(roleResult);
+                rolesList.appendChild(roleItem);
+            }
+        }
+
+        // Keyboard support - Spacebar for revealing card
+        document.addEventListener('keydown', function(event) {
+            // Only handle spacebar in game screen
+            if (document.getElementById('gameScreen').classList.contains('hidden')) {
+                return;
+            }
+            
+            if (event.code === 'Space' || event.key === ' ') {
+                event.preventDefault();
+                showRole();
+            }
+        });
+
+        document.addEventListener('keyup', function(event) {
+            // Only handle spacebar in game screen
+            if (document.getElementById('gameScreen').classList.contains('hidden')) {
+                return;
+            }
+            
+            if (event.code === 'Space' || event.key === ' ') {
+                event.preventDefault();
+                hideRole();
+            }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.getElementById('categoryDropdown').classList.add('hidden');
+            }
+        });
+
+        // Prevent context menu on touch devices
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSettingsDisplay();
+            updateCategoryDropdown();
+        });
+        
+        updateSettingsDisplay();
+        updateCategoryDropdown();
+
+        // Service Worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register(
+                    'data:text/javascript,' + encodeURIComponent(`
+                        const CACHE_NAME = 'impostor-game-v1';
+                        const urlsToCache = ['/'];
+                        
+                        self.addEventListener('install', function(event) {
+                            event.waitUntil(
+                                caches.open(CACHE_NAME)
+                                    .then(function(cache) {
+                                        return cache.addAll(urlsToCache);
+                                    })
+                            );
+                        });
+                        
+                        self.addEventListener('fetch', function(event) {
+                            event.respondWith(
+                                caches.match(event.request)
+                                    .then(function(response) {
+                                        if (response) {
+                                            return response;
+                                        }
+                                        return fetch(event.request);
+                                    })
+                            );
+                        });
+                    `)
+                ).catch(function() {
+                    // Service worker registration failed, but app still works
+                });
+            });
+        }
+    </script>
+</body>
+</html>
