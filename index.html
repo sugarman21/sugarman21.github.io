@@ -9,8 +9,8 @@
     <title>Party Games - Impostor</title>
     
     <!-- PWA Icons -->
-    <link rel="apple-touch-icon" href="icon.png">
-    <link rel="icon" href="icon.png">
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==">
     <meta name="theme-color" content="#f85032">
     
     <style>
@@ -62,23 +62,6 @@
         
         .impostor-bg {
             background: linear-gradient(135deg, #f85032 0%, #e73827 50%, #ff6b35 100%);
-        }
-        
-        /* Typography */
-        .title {
-            font-size: clamp(32px, 8vw, 48px);
-            font-weight: bold;
-            color: white;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            line-height: 1.2;
-        }
-        
-        .big-emoji {
-            font-size: clamp(80px, 20vw, 120px);
-            margin-bottom: 30px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
         
         /* Header Container */
@@ -218,6 +201,26 @@
             padding: 8px 16px;
             font-size: clamp(12px, 3vw, 14px);
             font-weight: 500;
+        }
+        
+        /* Snap Indicators */
+        .snap-indicators {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        
+        .snap-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .snap-dot.active {
+            background: rgba(255,255,255,0.8);
+            transform: scale(1.2);
         }
         
         /* Credits */
@@ -695,11 +698,6 @@
                 padding-top: 25px;
             }
             
-            .big-emoji {
-                font-size: clamp(50px, 12vw, 70px);
-                margin-bottom: 15px;
-            }
-            
             .title {
                 font-size: clamp(26px, 6.5vw, 38px);
                 margin-bottom: 15px;
@@ -744,11 +742,6 @@
                 align-content: center;
                 justify-content: center;
                 padding: 12px;
-            }
-            
-            .big-emoji {
-                font-size: 50px;
-                margin: 8px;
             }
             
             .title {
@@ -980,7 +973,7 @@
             timeLeft: 0
         };
 
-        // Word categories - embedded directly in the HTML
+        // Word categories - Fixed syntax errors
         const WORD_CATEGORIES = {
             food: [
                 { word: "Sushi", hint: "japanisch" },
@@ -997,7 +990,8 @@
                 { word: "Mozzarella", hint: "cremig" },
                 { word: "Pizza", hint: "italienisch" },
                 { word: "Bratwurst", hint: "deutsch" },
-                { word: "Kimchi", hint: "koreanisch" }
+                { word: "Kimchi", hint: "koreanisch" },
+                { word: "Bolognese", hint: "Soße" }
             ],
             
             animals: [
@@ -1033,36 +1027,30 @@
                 { word: "Gaming-Stuhl", hint: "zocken" },
                 { word: "Kamera", hint: "klick" },
                 { word: "Schreibtisch", hint: "arbeiten" },
-                { word: "Kühlschrank", hint: "abkühlen" }
+                { word: "Kühlschrank", hint: "abkühlen" },
                 { word: "Hoodie", hint: "Kapuze" },
-            { word: "Bob Marley", hint: "Jamaika" },
-            { word: "Herausforderung", hint: "Anstrengend" },
-            { word: "Laptop", hint: "aufklappen" },
-            { word: "Monitor", hint: "Bild" },
-            { word: "Bolognese", hint: "Soße" },
-            { word: "Paket", hint: "pappe" },
-            { word: "DHL", hint: "Bestellen" },
-            { word: "Cappie", hint: "Kopfbedeckung" },
-            { word: "Links", hint: "seite" },
-            { word: "Rechts", hint: "politisch" },
-            { word: "Kamera", hint: "Aufnahme" },
-            { word: "Spotify", hint: "Playlist" },
-            { word: "LED", hint: "leuchtet" },
-            { word: "Filter", hint: "verschönt" },
-            { word: "Zoomen", hint: "näher" },
-            { word: "Snackautomat", hint: "klemmt" },
-            { word: "Influencer", hint: "Story" },
-            { word: "Escape Room", hint: "Rätsel" },
-            { word: "Timer", hint: "tick" },
-            { word: "Spiegel", hint: "selber" },
-            { word: "U8", hint: "vercraked" },
-            { word: "1%", hint: "wenig" },
-        
-                
+                { word: "Bob Marley", hint: "Jamaika" },
+                { word: "Herausforderung", hint: "Anstrengend" },
+                { word: "Laptop", hint: "aufklappen" },
+                { word: "Monitor", hint: "Bild" },
+                { word: "Paket", hint: "pappe" },
+                { word: "DHL", hint: "Bestellen" },
+                { word: "Cappie", hint: "Kopfbedeckung" },
+                { word: "Links", hint: "seite" },
+                { word: "Rechts", hint: "politisch" },
+                { word: "Spotify", hint: "Playlist" },
+                { word: "LED", hint: "leuchtet" },
+                { word: "Filter", hint: "verschönt" },
+                { word: "Zoomen", hint: "näher" },
+                { word: "Snackautomat", hint: "klemmt" },
+                { word: "Influencer", hint: "Story" },
+                { word: "Escape Room", hint: "Rätsel" },
+                { word: "Timer", hint: "tick" },
+                { word: "Spiegel", hint: "selber" },
+                { word: "U8", hint: "vercraked" },
+                { word: "1%", hint: "wenig" }
             ]
         };
-
-        const wordCategories = WORD_CATEGORIES;
 
         const coolEmojis = ['😎', '🤩', '🔥', '⚡', '🎯', '💀', '💎', '👾', '🪼', '🎊', '🎉', '🦄', '🐉', '👑', '🏆'];
 
@@ -1149,24 +1137,6 @@
             document.getElementById('categoryDropdown').classList.add('hidden');
         }
 
-        function updateCategoryDropdown() {
-            const dropdown = document.getElementById('categoryDropdown');
-            if (!dropdown) return;
-            
-            dropdown.innerHTML = '<div class="dropdown-item" onclick="selectCategory(\'alle\')">Alle</div>';
-            
-            // Add all available categories dynamically
-            Object.keys(wordCategories).forEach(key => {
-                const categoryNames = {
-                    'food': 'Essen',
-                    'animals': 'Tiere',
-                    'objects': 'Objekte'
-                };
-                const categoryName = categoryNames[key] || key.charAt(0).toUpperCase() + key.slice(1);
-                dropdown.innerHTML += `<div class="dropdown-item" onclick="selectCategory('${key}')">${categoryName}</div>`;
-            });
-        }
-
         function updateSettingsDisplay() {
             document.getElementById('playersCount').textContent = gameState.totalPlayers;
             document.getElementById('impostorsCount').textContent = gameState.impostors;
@@ -1184,9 +1154,9 @@
             // Select words based on category
             let selectedWords = [];
             if (gameState.category === 'alle') {
-                selectedWords = [...wordCategories.food, ...wordCategories.animals, ...wordCategories.objects];
+                selectedWords = [...WORD_CATEGORIES.food, ...WORD_CATEGORIES.animals, ...WORD_CATEGORIES.objects];
             } else {
-                selectedWords = wordCategories[gameState.category] || wordCategories.food;
+                selectedWords = WORD_CATEGORIES[gameState.category] || WORD_CATEGORIES.food;
             }
             
             const selectedWord = selectedWords[Math.floor(Math.random() * selectedWords.length)];
@@ -1267,26 +1237,21 @@
                 // Normal card flip for next player
                 const playerCard = document.getElementById('playerCard');
                 
-                // Visual feedback only
                 nextButton.style.transform = 'scale(0.9)';
                 setTimeout(() => {
                     nextButton.style.transform = 'scale(1)';
                 }, 150);
                 
-                playerCard.classList.remove('flipping');
-                
-                setTimeout(() => {
-                    playerCard.classList.add('flipping');
-                }, 50);
+                playerCard.classList.add('flipping');
                 
                 setTimeout(() => {
                     gameState.currentPlayer++;
                     updateGameDisplay();
                     playerCard.classList.remove('flipping');
-                }, 650);
+                }, 300);
                 
             } else {
-                // Game start - simple and reliable
+                // Game start
                 const originalText = nextButton.textContent;
                 nextButton.textContent = 'Spiel startet...';
                 nextButton.style.transform = 'scale(0.9)';
@@ -1301,11 +1266,6 @@
                     nextButton.textContent = originalText;
                 }, 500);
             }
-        }
-
-        function nextPlayer() {
-            // Backup function - same as handleNextPlayer
-            handleNextPlayer();
         }
 
         function updateGameStartedDisplay() {
@@ -1353,12 +1313,6 @@
 
         function displayRoles() {
             const rolesList = document.getElementById('rolesList');
-            if (!rolesList) {
-                console.error('rolesList element not found');
-                return;
-            }
-            
-            // Clear existing content
             rolesList.innerHTML = '';
             
             for (let i = 1; i <= gameState.totalPlayers; i++) {
@@ -1367,11 +1321,9 @@
                 
                 const roleItem = document.createElement('div');
                 roleItem.className = 'role-item';
-                roleItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-radius: 18px; padding: 18px; margin: 10px 0; color: white;';
                 
-                // Left side - player info
                 const rolePlayer = document.createElement('div');
-                rolePlayer.style.cssText = 'display: flex; align-items: center; font-size: 17px; font-weight: bold; flex: 1;';
+                rolePlayer.className = 'role-player';
                 
                 const roleIcon = document.createElement('div');
                 roleIcon.style.cssText = `width: 28px; height: 28px; font-size: 16px; margin-right: 12px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: ${isImpostor ? '#f44336' : '#4CAF50'}; color: white; font-weight: bold;`;
@@ -1383,26 +1335,14 @@
                 rolePlayer.appendChild(roleIcon);
                 rolePlayer.appendChild(playerText);
                 
-                // Right side - role result
                 const roleResult = document.createElement('div');
-                roleResult.style.cssText = 'font-size: 15px; text-align: right; margin-left: 12px;';
+                roleResult.className = 'role-result';
                 
                 if (isImpostor) {
-                    const roleStrong = document.createElement('strong');
-                    roleStrong.textContent = 'Impostor';
-                    roleResult.appendChild(roleStrong);
-                    
-                    if (gameState.hintsEnabled && gameState.gameHint) {
-                        const lineBreak = document.createElement('br');
-                        const hintSmall = document.createElement('small');
-                        hintSmall.textContent = `Tipp: ${gameState.gameHint}`;
-                        roleResult.appendChild(lineBreak);
-                        roleResult.appendChild(hintSmall);
-                    }
+                    roleResult.innerHTML = `<strong>Impostor</strong>` + 
+                        (gameState.hintsEnabled && gameState.gameHint ? `<br><small>Tipp: ${gameState.gameHint}</small>` : '');
                 } else {
-                    const wordStrong = document.createElement('strong');
-                    wordStrong.textContent = gameState.gameWord || 'Wort';
-                    roleResult.appendChild(wordStrong);
+                    roleResult.innerHTML = `<strong>${gameState.gameWord}</strong>`;
                 }
                 
                 roleItem.appendChild(rolePlayer);
@@ -1411,13 +1351,9 @@
             }
         }
 
-        // Keyboard support - Spacebar for revealing card
+        // Event Listeners
         document.addEventListener('keydown', function(event) {
-            // Only handle spacebar in game screen
-            if (document.getElementById('gameScreen').classList.contains('hidden')) {
-                return;
-            }
-            
+            if (document.getElementById('gameScreen').classList.contains('hidden')) return;
             if (event.code === 'Space' || event.key === ' ') {
                 event.preventDefault();
                 showRole();
@@ -1425,25 +1361,19 @@
         });
 
         document.addEventListener('keyup', function(event) {
-            // Only handle spacebar in game screen
-            if (document.getElementById('gameScreen').classList.contains('hidden')) {
-                return;
-            }
-            
+            if (document.getElementById('gameScreen').classList.contains('hidden')) return;
             if (event.code === 'Space' || event.key === ' ') {
                 event.preventDefault();
                 hideRole();
             }
         });
 
-        // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.dropdown')) {
                 document.getElementById('categoryDropdown').classList.add('hidden');
             }
         });
 
-        // Prevent context menu on touch devices
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
@@ -1458,14 +1388,12 @@
             
             container.addEventListener('scroll', function() {
                 const scrollLeft = container.scrollLeft;
-                const cardWidth = container.querySelector('.game-card').offsetWidth + 20; // card width + gap
+                const cardWidth = container.querySelector('.game-card').offsetWidth + 20;
                 
                 if (scrollLeft < cardWidth / 2) {
-                    // First card is active
                     dot1.classList.add('active');
                     dot2.classList.remove('active');
                 } else {
-                    // Second card is active
                     dot1.classList.remove('active');
                     dot2.classList.add('active');
                 }
@@ -1475,48 +1403,12 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             updateSettingsDisplay();
-            updateCategoryDropdown();
             initScrollSnapIndicators();
         });
         
+        // Fallback initialization
         updateSettingsDisplay();
-        updateCategoryDropdown();
         initScrollSnapIndicators();
-
-        // Service Worker for offline functionality
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register(
-                    'data:text/javascript,' + encodeURIComponent(`
-                        const CACHE_NAME = 'impostor-game-v1';
-                        const urlsToCache = ['/'];
-                        
-                        self.addEventListener('install', function(event) {
-                            event.waitUntil(
-                                caches.open(CACHE_NAME)
-                                    .then(function(cache) {
-                                        return cache.addAll(urlsToCache);
-                                    })
-                            );
-                        });
-                        
-                        self.addEventListener('fetch', function(event) {
-                            event.respondWith(
-                                caches.match(event.request)
-                                    .then(function(response) {
-                                        if (response) {
-                                            return response;
-                                        }
-                                        return fetch(event.request);
-                                    })
-                            );
-                        });
-                    `)
-                ).catch(function() {
-                    // Service worker registration failed, but app still works
-                });
-            });
-        }
     </script>
 </body>
 </html>
