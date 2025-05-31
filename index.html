@@ -70,18 +70,18 @@
 
 
         
-        /* Settings Icon - Clean Apple UI Style */
+        /* Settings Icon - Clean Apple UI Style - UNTEN LINKS SYMMETRISCH */
         .settings-icon {
             position: fixed;
-            top: clamp(50px, 10vw, 70px);
-            right: clamp(20px, 5vw, 30px);
-            background: rgba(255,255,255,0.15);
+            bottom: clamp(25px, 6vw, 35px);
+            left: clamp(20px, 5vw, 30px);
+            background: rgba(0,0,0,0.8);
             border: none;
-            border-radius: 22px;
+            border-radius: 50%;
             color: white;
-            font-size: clamp(20px, 5vw, 24px);
-            width: clamp(56px, 14vw, 64px);
-            height: clamp(56px, 14vw, 64px);
+            font-size: clamp(18px, 4.5vw, 22px);
+            width: clamp(52px, 13vw, 60px);
+            height: clamp(52px, 13vw, 60px);
             cursor: pointer;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -90,21 +90,26 @@
             justify-content: center;
             z-index: 1000;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.15);
         }
         
         .settings-icon:active {
             transform: scale(0.92);
-            background: rgba(255,255,255,0.25);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.9);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+        
+        .settings-icon:hover {
+            background: rgba(0,0,0,0.85);
+            transform: scale(1.05);
         }
         
         /* Clean Settings Symbol */
         .settings-icon::before {
             content: '';
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background: currentColor;
             mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'/%3E%3C/svg%3E") no-repeat center;
             mask-size: contain;
@@ -112,22 +117,70 @@
             -webkit-mask-size: contain;
         }
         
-        /* Modern Settings Menu - DARK */
+        /* Info Icon - SYMMETRISCH RECHTS */
+        .info-icon {
+            position: fixed;
+            bottom: clamp(25px, 6vw, 35px);
+            right: clamp(20px, 5vw, 30px);
+            background: rgba(0,0,0,0.8);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: clamp(18px, 4.5vw, 22px);
+            width: clamp(52px, 13vw, 60px);
+            height: clamp(52px, 13vw, 60px);
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+        
+        .info-icon:active {
+            transform: scale(0.92);
+            background: rgba(0,0,0,0.9);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+        
+        .info-icon:hover {
+            background: rgba(0,0,0,0.85);
+            transform: scale(1.05);
+        }
+        
+        /* Info Symbol */
+        .info-icon::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: currentColor;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E") no-repeat center;
+            mask-size: contain;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E") no-repeat center;
+            -webkit-mask-size: contain;
+        }
+        
+        /* Modern Settings Menu - DARK - VON UNTEN LINKS */
         .settings-menu {
             position: fixed;
-            top: clamp(110px, 20vw, 140px);
-            right: clamp(20px, 5vw, 30px);
+            bottom: clamp(90px, 20vw, 110px);
+            left: clamp(20px, 5vw, 30px);
             background: rgba(0,0,0,0.95);
             border-radius: 24px;
             padding: 8px;
             min-width: 220px;
+            max-width: 280px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             z-index: 999;
             opacity: 0;
-            transform: translateY(-10px) scale(0.95);
+            transform: translateY(10px) scale(0.95);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             pointer-events: none;
         }
@@ -293,17 +346,17 @@
         }
 
         .dropdown-menu {
-            background: rgba(0,0,0,0.95);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.95) !important;
+            color: white !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
         }
 
         .dropdown-item {
-            color: white;
+            color: white !important;
         }
 
         .dropdown-item:hover, .dropdown-item:active {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.1) !important;
         }
 
         /* GAME SCREEN - CLEAN DARK */
@@ -412,9 +465,21 @@
             color: white;
         }
 
-        body.light-theme .settings-icon {
-            background: rgba(255,255,255,0.2);
-            color: white;
+        body.light-theme .settings-icon,
+        body.light-theme .info-icon {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+
+        body.light-theme .settings-icon:active,
+        body.light-theme .info-icon:active {
+            background: rgba(255,255,255,0.95);
+        }
+
+        body.light-theme .settings-icon:hover,
+        body.light-theme .info-icon:hover {
+            background: rgba(255,255,255,0.92);
         }
 
         body.light-theme .settings-menu {
@@ -492,6 +557,10 @@
 
         body.light-theme .dropdown-item {
             color: #333;
+        }
+
+        body.light-theme .dropdown-item:hover, body.light-theme .dropdown-item:active {
+            background: rgba(0,0,0,0.08);
         }
 
         /* PLAYER CARD LIGHT THEME */
@@ -599,7 +668,6 @@
             background: linear-gradient(135deg, rgba(100, 100, 100, 0.8) 0%, rgba(150, 150, 150, 0.8) 100%);
             color: white;
             opacity: 0.7;
-            cursor: not-allowed;
             border: 2px solid rgba(255,255,255,0.1);
         }
         
@@ -722,8 +790,8 @@
         .credits {
             position: fixed;
             bottom: clamp(15px, 4vw, 25px);
-            left: 0;
-            right: 0;
+            left: clamp(90px, 20vw, 110px); /* Platz für Settings Icon links */
+            right: clamp(90px, 20vw, 110px); /* Platz für Info Icon rechts */
             font-size: clamp(11px, 2.8vw, 13px);
             color: rgba(255,255,255,0.6);
             text-align: center;
@@ -897,7 +965,7 @@
             position: absolute;
             top: 100%;
             right: 0;
-            background: rgba(255,255,255,0.95);
+            background: rgba(0,0,0,0.95);
             border-radius: 16px;
             margin-top: 8px;
             min-width: 140px;
@@ -905,13 +973,14 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 16px 40px rgba(0,0,0,0.15);
-            z-index: 100;
+            z-index: 10000;
             overflow: hidden;
+            color: white;
         }
         
         .dropdown-item {
             padding: clamp(12px, 3vw, 14px) clamp(18px, 4.5vw, 20px);
-            color: #333;
+            color: white;
             cursor: pointer;
             font-size: clamp(14px, 3.5vw, 16px);
             font-weight: 500;
@@ -919,7 +988,7 @@
         }
         
         .dropdown-item:hover, .dropdown-item:active {
-            background: rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.1);
         }
         
         /* Buttons - OHNE KONTUR */
@@ -948,7 +1017,7 @@
             position: relative;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            z-index: 100;
+            z-index: 50;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
         
@@ -971,6 +1040,7 @@
             border: 3px solid rgba(255,255,255,0.3);
             transition: all 0.4s ease;
             position: relative;
+            z-index: 1000;
         }
         
         .player-card.flipping {
@@ -1039,14 +1109,16 @@
             background: rgba(0,0,0,0.9);
             border-radius: 28px;
             padding: clamp(20px, 5vw, 24px);
-            margin-top: 12px;
+            margin-top: 20px;
             text-align: center;
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 40;
+            z-index: 999999;
             pointer-events: none;
             backdrop-filter: blur(20px);
+            max-width: 100%;
+            box-sizing: border-box;
         }
         
         .revealed-content.visible {
@@ -1211,7 +1283,7 @@
             margin-left: 14px;
         }
         
-        /* Confetti Animation */
+        /* EXPLOSIVE KONFETTI ANIMATION - RESPONSIVE */
         .confetti {
             position: fixed;
             top: 0;
@@ -1220,23 +1292,53 @@
             height: 100%;
             pointer-events: none;
             z-index: 10000;
+            overflow: hidden;
         }
         
         .confetti-piece {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #f39c12;
-            animation: confetti-fall 3s linear infinite;
+            font-size: clamp(12px, 3vw, 16px);
+            transform-origin: center;
+            left: 50%;
+            top: 50%;
+        }
+
+        .confetti-piece.square {
+            width: clamp(6px, 1.5vw, 8px);
+            height: clamp(6px, 1.5vw, 8px);
+            border-radius: 2px;
+        }
+
+        .confetti-piece.circle {
+            width: clamp(4px, 1vw, 6px);
+            height: clamp(4px, 1vw, 6px);
+            border-radius: 50%;
+        }
+
+        .confetti-piece.triangle {
+            width: 0;
+            height: 0;
+            border-left: clamp(3px, 0.75vw, 4px) solid transparent;
+            border-right: clamp(3px, 0.75vw, 4px) solid transparent;
+            border-bottom: clamp(6px, 1.5vw, 8px) solid;
+        }
+
+        .confetti-piece.emoji::before {
+            content: attr(data-emoji);
+            font-size: clamp(10px, 2.5vw, 14px);
         }
         
-        @keyframes confetti-fall {
+        @keyframes confetti-explode {
             0% {
-                transform: translateY(-100vh) rotate(0deg);
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            15% {
+                transform: translate(var(--dx), var(--dy)) scale(1) rotate(180deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(720deg);
+                transform: translate(calc(var(--dx) + var(--fx)), calc(var(--dy) + 100vh)) scale(0.5) rotate(720deg);
                 opacity: 0;
             }
         }
@@ -1401,22 +1503,108 @@
             margin-right: 16px;
         }
         
-        /* Small Screen Optimizations */
+        /* Small Screen Optimizations - ERWEITERT */
         @media screen and (max-height: 600px) {
             .screen {
-                padding: 16px;
+                padding: 12px;
                 justify-content: flex-start;
-                padding-top: 28px;
+                padding-top: 20px;
             }
             
             .title {
-                font-size: clamp(28px, 7vw, 40px);
-                margin-bottom: 16px;
+                font-size: clamp(22px, 6vw, 32px);
+                margin-bottom: 12px;
             }
             
             .settings-container, .player-card, .goal-box {
-                margin: 14px 0;
+                margin: 10px 0;
+                padding: 16px;
+            }
+            
+            .setting-row {
+                margin: clamp(16px, 4vw, 20px) 0;
+            }
+            
+            .player-card + div {
+                height: clamp(100px, 18vh, 140px) !important;
+            }
+            
+            .settings-icon, .info-icon {
+                bottom: clamp(15px, 4vw, 20px);
+                width: clamp(40px, 10vw, 46px);
+                height: clamp(40px, 10vw, 46px);
+                font-size: clamp(16px, 4vw, 18px);
+            }
+            
+            .settings-icon {
+                left: clamp(12px, 3vw, 16px);
+            }
+            
+            .info-icon {
+                right: clamp(12px, 3vw, 16px);
+            }
+            
+            .settings-menu {
+                bottom: clamp(65px, 15vw, 75px);
+                left: clamp(12px, 3vw, 16px);
+                min-width: 180px;
+                max-width: 200px;
+            }
+            
+            .settings-menu-item {
+                padding: 12px 16px;
+                font-size: clamp(13px, 3.2vw, 15px);
+            }
+        }
+        
+        /* Very Small Screens - NEUE OPTIMIERUNG */
+        @media screen and (max-width: 280px) {
+            .title {
+                font-size: clamp(18px, 5.5vw, 24px);
+            }
+            
+            .game-card {
+                min-width: calc(100vw - 30px);
+                max-width: calc(100vw - 30px);
+                height: clamp(280px, 50vh, 350px);
                 padding: 20px;
+            }
+            
+            .game-card-emoji {
+                font-size: clamp(40px, 12vw, 55px);
+                width: clamp(70px, 18vw, 90px);
+                height: clamp(70px, 18vw, 90px);
+            }
+            
+            .game-card-title {
+                font-size: clamp(16px, 4.5vw, 20px);
+            }
+            
+            .game-card-desc {
+                font-size: clamp(12px, 3.2vw, 14px);
+            }
+            
+            .button {
+                min-width: calc(100vw - 60px);
+                padding: clamp(14px, 4vw, 18px) clamp(20px, 6vw, 28px);
+                font-size: clamp(14px, 3.8vw, 16px);
+            }
+            
+            .player-emoji {
+                font-size: clamp(40px, 12vw, 56px);
+                width: clamp(60px, 16vw, 80px);
+                height: clamp(60px, 16vw, 80px);
+            }
+            
+            .settings-icon, .info-icon {
+                width: clamp(36px, 9vw, 42px);
+                height: clamp(36px, 9vw, 42px);
+                font-size: clamp(14px, 3.5vw, 16px);
+            }
+            
+            .settings-icon::before, .info-icon::before {
+                width: 14px;
+                height: 14px;
             }
         }
         
@@ -1424,7 +1612,7 @@
             .setting-row {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 12px;
+                gap: 8px;
             }
             
             .counter-controls {
@@ -1432,22 +1620,53 @@
             }
             
             .button {
-                min-width: 90%;
-                margin: 10px auto;
+                min-width: 85%;
+                margin: 8px auto;
             }
             
             .games-container {
-                gap: 16px;
-                padding: 0 16px;
+                gap: 12px;
+                padding: 0 12px;
             }
             
             .game-card {
-                min-width: calc(100vw - 40px);
-                max-width: calc(100vw - 40px);
+                min-width: calc(100vw - 32px);
+                max-width: calc(100vw - 32px);
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .player-card + div {
+                height: clamp(80px, 12vh, 120px) !important;
+            }
+            
+            .revealed-content {
+                padding: clamp(12px, 3.5vw, 16px);
+                margin-top: 6px;
+            }
+            
+            .word-display, .hint-display {
+                padding: clamp(8px, 2.5vw, 12px);
+                font-size: clamp(16px, 4.5vw, 20px);
+            }
+            
+            .credits {
+                left: clamp(60px, 14vw, 70px);
+                right: clamp(60px, 14vw, 70px);
+                font-size: clamp(9px, 2.2vw, 11px);
+            }
+            
+            .modal {
+                width: 96%;
+                padding: 20px;
+                max-height: 90vh;
+            }
+            
+            .modal-title {
+                font-size: clamp(20px, 5.5vw, 26px);
             }
         }
         
@@ -1471,12 +1690,49 @@
                 max-width: 340px;
                 margin: 10px;
             }
+            
+            /* Landscape-spezifische Anpassungen für Player Card */
+            .player-card + div {
+                height: 80px !important;
+                width: 100%;
+            }
+            
+            .button {
+                margin: 5px;
+                padding: 14px 28px;
+                min-width: 200px;
+            }
+            
+            /* Icons im Landscape-Modus anpassen */
+            .settings-icon, .info-icon {
+                bottom: clamp(15px, 4vw, 20px);
+                width: clamp(44px, 10vw, 48px);
+                height: clamp(44px, 10vw, 48px);
+            }
+            
+            .settings-icon {
+                left: clamp(15px, 4vw, 20px);
+            }
+            
+            .info-icon {
+                right: clamp(15px, 4vw, 20px);
+            }
+            
+            .settings-menu {
+                bottom: clamp(65px, 15vw, 75px);
+                left: clamp(15px, 4vw, 20px);
+                max-height: 60vh;
+                overflow-y: auto;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Settings Icon - Apple Style -->
     <button class="settings-icon" id="settingsIcon" onclick="toggleSettingsMenu()"></button>
+    
+    <!-- Info Icon - Symmetrisch rechts -->
+    <button class="info-icon" id="infoIcon" onclick="showInfoModal()"></button>
     
     <!-- Settings Menu -->
     <div class="settings-menu" id="settingsMenu">
@@ -1501,7 +1757,10 @@
         <div class="settings-menu-item" onclick="toggleVibration()">
             📳 Vibration: <span id="vibrationStatus">An</span>
         </div>
-        <div class="settings-menu-item" style="opacity: 0.6; cursor: default; border-top: 1px solid rgba(0,0,0,0.1); margin-top: 8px; padding-top: 16px;">
+        <div class="settings-menu-item" onclick="showComingSoonModal()">
+            🚀 Coming Soon
+        </div>
+        <div class="settings-menu-item version">
             💻 made by C at School
         </div>
     </div>
@@ -1524,7 +1783,7 @@
                 <div class="game-card-players">👥 3-20</div>
             </div>
             
-            <div class="game-card coming-soon-card">
+            <div class="game-card coming-soon-card" onclick="handleEasterEggClick()">
                 <div class="game-card-emoji">🎯</div>
                 <div class="game-card-title">MEHR SPIELE</div>
                 <div class="game-card-desc">Weitere Party-Spiele kommen bald!</div>
@@ -1643,13 +1902,13 @@
             </div>
         </div>
         
-        <div style="height: 140px;"></div> <!-- SPACER -->
+        <div style="height: clamp(180px, 25vh, 240px);"></div> <!-- VERGRÖSSERTER RESPONSIVE SPACER -->
         
         <button class="button" onclick="handleNextPlayer()" id="nextButton">
             Weitergeben
         </button>
         
-        <p style="color: rgba(255,255,255,0.8); font-size: clamp(14px, 3.5vw, 16px); text-align: center; margin-top: 14px;">
+        <p id="instructionText" style="color: rgba(255,255,255,0.8); font-size: clamp(14px, 3.5vw, 16px); text-align: center; margin-top: 14px; transition: all 0.3s ease; opacity: 1; visibility: visible;">
             Gerät an den nächsten Spieler weitergeben
         </p>
     </div>
@@ -1715,6 +1974,9 @@
     <div class="confetti" id="confetti"></div>
 
     <script>
+        // App Version
+        const APP_VERSION = '1.2.0';
+
         // Game State
         let gameState = {
             totalPlayers: 4,
@@ -1742,10 +2004,9 @@
             lightTheme: false
         };
 
-        // Stats and Achievements - OHNE GEWINNER/VERLIERER
+        // Stats and Achievements - OHNE IMPOSTOR TRACKING
         let playerStats = {
             gamesPlayed: 0,
-            totalImpostorRounds: 0,
             fastestGame: null,
             longestGame: null,
             totalPlayTime: 0
@@ -1753,6 +2014,10 @@
         
         let gameHistory = [];
         let achievements = {};
+
+        // Easter Egg Variables
+        let easterEggClicks = 0;
+        let easterEggTimer = null;
 
         // Word categories
         const WORD_CATEGORIES = {
@@ -1835,22 +2100,69 @@
 
         const coolEmojis = ['😎', '🤩', '🔥', '⚡', '🎯', '💀', '💎', '👾', '🪼', '🎊', '🎉', '🦄', '🐉', '👑', '🏆'];
 
-        // Achievement definitions - OHNE GEWINNER
+        // Achievement definitions - OHNE IMPOSTOR BEZUG + EASTER EGG
         const ACHIEVEMENTS = {
             firstGame: { name: "Erstes Spiel", description: "Spiele dein erstes Spiel", icon: "🎮" },
             veteran: { name: "Veteran", description: "Spiele 25 Spiele", icon: "🏅" },
-            impostor: { name: "Der Verräter", description: "Sei 10 Mal Impostor", icon: "🎭" },
             speedRunner: { name: "Speedrunner", description: "Spiele unter 30 Sekunden", icon: "⚡" },
             marathon: { name: "Marathon", description: "Spiele über 10 Minuten", icon: "🏃" },
             social: { name: "Gesellig", description: "Spiele mit 10+ Personen", icon: "👥" },
             dedicated: { name: "Hingabe", description: "Spiele 100 Spiele", icon: "💯" },
-            explorer: { name: "Entdecker", description: "Spiele alle Kategorien", icon: "🗺️" }
+            explorer: { name: "Entdecker", description: "Spiele alle Kategorien", icon: "🗺️" },
+            curious: { name: "Neugierig", description: "Finde das Easter Egg", icon: "🕵️" }
         };
 
         // Audio Context for Sound Effects
         let audioContext;
+
+        // Easter Egg Function
+        function handleEasterEggClick() {
+            easterEggClicks++;
+            playSound('tap'); // Sound bei jedem Klick
+            
+            // Reset timer on each click
+            if (easterEggTimer) {
+                clearTimeout(easterEggTimer);
+            }
+            
+            // Set timer to reset clicks after 3 seconds of inactivity
+            easterEggTimer = setTimeout(() => {
+                easterEggClicks = 0;
+            }, 3000);
+            
+            // Check if enough clicks (5 clicks in 3 seconds)
+            if (easterEggClicks >= 5) {
+                easterEggClicks = 0;
+                clearTimeout(easterEggTimer);
+                
+                // Unlock secret achievement
+                if (!achievements.curious) {
+                    achievements.curious = true;
+                    showAchievementNotification([ACHIEVEMENTS.curious]);
+                }
+                
+                // Show coming soon modal after a short delay
+                setTimeout(() => {
+                    showComingSoonModal();
+                }, 1000);
+                
+                return;
+            }
+            
+            // Visual feedback for clicks
+            const card = event.target.closest('.coming-soon-card');
+            if (card) {
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 100);
+                
+                // Subtle vibration
+                vibrate([20]);
+            }
+        }
         
-        // Sound Effects
+        // Sound Effects - ÜBERARBEITET
         function playSound(type) {
             if (!settings.soundsEnabled) return;
             
@@ -1867,36 +2179,50 @@
                 
                 switch(type) {
                     case 'card-flip':
-                        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                        oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
-                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                        // Modernerer, sanfterer Flip-Sound
+                        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.15);
+                        gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
                         oscillator.start(audioContext.currentTime);
-                        oscillator.stop(audioContext.currentTime + 0.1);
+                        oscillator.stop(audioContext.currentTime + 0.15);
                         break;
                         
                     case 'success':
-                        oscillator.frequency.setValueAtTime(523, audioContext.currentTime);
-                        oscillator.frequency.setValueAtTime(659, audioContext.currentTime + 0.1);
-                        oscillator.frequency.setValueAtTime(784, audioContext.currentTime + 0.2);
-                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                        // Triumphaler Success-Sound
+                        oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+                        oscillator.frequency.setValueAtTime(554, audioContext.currentTime + 0.1);
+                        oscillator.frequency.setValueAtTime(659, audioContext.currentTime + 0.2);
+                        oscillator.frequency.setValueAtTime(880, audioContext.currentTime + 0.3);
+                        gainNode.gain.setValueAtTime(0.12, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.4);
                         oscillator.start(audioContext.currentTime);
-                        oscillator.stop(audioContext.currentTime + 0.3);
+                        oscillator.stop(audioContext.currentTime + 0.4);
                         break;
                         
                     case 'shuffle':
-                        for(let i = 0; i < 3; i++) {
+                        // Rhythmischer Shuffle-Sound
+                        for(let i = 0; i < 4; i++) {
                             const osc = audioContext.createOscillator();
                             const gain = audioContext.createGain();
                             osc.connect(gain);
                             gain.connect(audioContext.destination);
-                            osc.frequency.setValueAtTime(300 + i * 100, audioContext.currentTime + i * 0.05);
-                            gain.gain.setValueAtTime(0.05, audioContext.currentTime + i * 0.05);
-                            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + i * 0.05 + 0.1);
-                            osc.start(audioContext.currentTime + i * 0.05);
-                            osc.stop(audioContext.currentTime + i * 0.05 + 0.1);
+                            osc.frequency.setValueAtTime(200 + i * 80, audioContext.currentTime + i * 0.08);
+                            gain.gain.setValueAtTime(0.06, audioContext.currentTime + i * 0.08);
+                            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + i * 0.08 + 0.12);
+                            osc.start(audioContext.currentTime + i * 0.08);
+                            osc.stop(audioContext.currentTime + i * 0.08 + 0.12);
                         }
+                        break;
+                        
+                    case 'tap':
+                        // Neuer sanfter Tap-Sound
+                        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.08);
+                        gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.08);
                         break;
                 }
             } catch(e) {
@@ -1911,25 +2237,87 @@
             }
         }
 
-        // Confetti Effect
+        // EXPLOSIVE KONFETTI ANIMATION - RESPONSIVE
         function showConfetti() {
             const confettiContainer = document.getElementById('confetti');
-            const colors = ['#f39c12', '#e74c3c', '#9b59b6', '#3498db', '#2ecc71', '#f1c40f'];
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE'];
+            const shapes = ['square', 'circle', 'triangle'];
+            const emojis = ['🎉', '🎊', '⭐', '✨', '🎈', '🎁', '🏆', '👏'];
             
-            for (let i = 0; i < 50; i++) {
+            // Responsive Konfetti-Anzahl basierend auf Bildschirmgröße
+            const screenWidth = window.innerWidth;
+            let confettiCount;
+            let baseVelocity;
+            let maxVelocity;
+            
+            if (screenWidth < 480) {
+                // Kleine Handys
+                confettiCount = 80;
+                baseVelocity = 120;
+                maxVelocity = 200;
+            } else if (screenWidth < 768) {
+                // Größere Handys / kleine Tablets
+                confettiCount = 100;
+                baseVelocity = 150;
+                maxVelocity = 250;
+            } else {
+                // Tablets / Desktop
+                confettiCount = 150;
+                baseVelocity = 200;
+                maxVelocity = 300;
+            }
+            
+            for (let i = 0; i < confettiCount; i++) {
                 const confettiPiece = document.createElement('div');
                 confettiPiece.className = 'confetti-piece';
-                confettiPiece.style.left = Math.random() * 100 + '%';
-                confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confettiPiece.style.animationDelay = Math.random() * 3 + 's';
-                confettiPiece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                // Zufällige Form wählen
+                const shapeType = Math.random();
+                if (shapeType < 0.6) {
+                    // Geometrische Formen (60%)
+                    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                    confettiPiece.classList.add(shape);
+                    
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    if (shape === 'triangle') {
+                        confettiPiece.style.borderBottomColor = color;
+                    } else {
+                        confettiPiece.style.backgroundColor = color;
+                    }
+                } else {
+                    // Emojis (40%)
+                    confettiPiece.classList.add('emoji');
+                    confettiPiece.setAttribute('data-emoji', emojis[Math.floor(Math.random() * emojis.length)]);
+                }
+                
+                // Explosive Bewegung berechnen - von Mitte nach außen (responsive)
+                const angle = (Math.PI * 2 * i) / confettiCount; // Gleichmäßige Verteilung im Kreis
+                const velocity = Math.random() * maxVelocity + baseVelocity; // Responsive Geschwindigkeit
+                const dx = Math.cos(angle) * velocity; // X-Richtung
+                const dy = Math.sin(angle) * velocity; // Y-Richtung
+                const fx = (Math.random() - 0.5) * (screenWidth < 480 ? 100 : 200); // Responsive finale X-Drift
+                
+                // CSS-Variablen für die Animation setzen
+                confettiPiece.style.setProperty('--dx', dx + 'px');
+                confettiPiece.style.setProperty('--dy', dy + 'px');
+                confettiPiece.style.setProperty('--fx', fx + 'px');
+                
+                // Animation anwenden (kürzere Dauer auf kleinen Bildschirmen)
+                const duration = screenWidth < 480 ? 
+                    (Math.random() * 1.5 + 2.5) : // 2.5-4s auf kleinen Bildschirmen
+                    (Math.random() * 2 + 3);      // 3-5s auf größeren Bildschirmen
+                
+                confettiPiece.style.animation = `confetti-explode ${duration}s ease-out forwards`;
+                confettiPiece.style.animationDelay = Math.random() * 0.5 + 's';
+                
                 confettiContainer.appendChild(confettiPiece);
                 
+                // Konfetti nach Animation entfernen
                 setTimeout(() => {
                     if (confettiPiece.parentNode) {
                         confettiPiece.remove();
                     }
-                }, 5000);
+                }, (duration + 0.5) * 1000);
             }
         }
 
@@ -2011,10 +2399,75 @@
             showModal('📱 App installieren', content);
         }
 
+        function showComingSoonModal() {
+            toggleSettingsMenu();
+            
+            const content = `
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🚀</div>
+                    <p style="color: #666; font-size: 16px; line-height: 1.5;">
+                        Kommende Features für Party Games - Sei gespannt!
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 16px; margin-bottom: 12px; color: white;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <span style="font-size: 24px;">🎯</span>
+                            <strong style="font-size: 16px;">Neue Spiele</strong>
+                        </div>
+                        <div style="font-size: 14px; opacity: 0.9;">
+                            • Wahrheit oder Pflicht<br>
+                            • Wer bin ich?<br>
+                            • Story Builder<br>
+                            • Schnelles Denken
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); border-radius: 16px; padding: 16px; margin-bottom: 12px; color: white;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <span style="font-size: 24px;">⚡</span>
+                            <strong style="font-size: 16px;">Neue Features</strong>
+                        </div>
+                        <div style="font-size: 14px; opacity: 0.9;">
+                            • Multiplayer-Modus<br>
+                            • Eigene Wortlisten<br>
+                            • Teams & Turniere<br>
+                            • Audio-Hinweise
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%); border-radius: 16px; padding: 16px; color: white;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <span style="font-size: 24px;">🎨</span>
+                            <strong style="font-size: 16px;">Verbesserungen</strong>
+                        </div>
+                        <div style="font-size: 14px; opacity: 0.9;">
+                            • Personalisierte Avatare<br>
+                            • Mehr Themes<br>
+                            • Erweiterte Statistiken<br>
+                            • Social Features
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; border-radius: 16px; padding: 16px; text-align: center;">
+                    <div style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                        💡 <strong>Hast du Ideen?</strong>
+                    </div>
+                    <div style="font-size: 13px; color: #888;">
+                        Lass uns wissen, welche Features du dir wünschst!
+                    </div>
+                </div>
+            `;
+            
+            showModal('🚀 Coming Soon', content);
+        }
+
         function toggleSounds() {
             settings.soundsEnabled = !settings.soundsEnabled;
             updateSettingsDisplay();
-            playSound('card-flip');
+            if (settings.soundsEnabled) playSound('tap'); // Nur spielen wenn sounds an sind
             toggleSettingsMenu();
         }
 
@@ -2022,6 +2475,7 @@
             settings.vibrationEnabled = !settings.vibrationEnabled;
             updateSettingsDisplay();
             vibrate([50]);
+            playSound('tap');
             toggleSettingsMenu();
         }
 
@@ -2042,7 +2496,7 @@
             settings.lightTheme = !settings.lightTheme;
             document.body.classList.toggle('light-theme', settings.lightTheme);
             updateSettingsDisplay();
-            playSound('card-flip');
+            playSound('tap');
             toggleSettingsMenu();
         }
 
@@ -2051,7 +2505,6 @@
             const totalGames = playerStats.gamesPlayed;
             const averageGameTime = playerStats.totalPlayTime > 0 ? 
                 Math.round(playerStats.totalPlayTime / playerStats.gamesPlayed) + 's' : 'N/A';
-            const favCategory = getFavoriteCategory();
             const playedCategories = getPlayedCategories();
             
             const content = `
@@ -2061,8 +2514,8 @@
                         <div class="stat-label">Spiele gespielt</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">${playerStats.totalImpostorRounds}</div>
-                        <div class="stat-label">Mal Impostor</div>
+                        <div class="stat-value">${averageGameTime}</div>
+                        <div class="stat-label">⌀ Spielzeit</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">${playerStats.fastestGame || 'N/A'}</div>
@@ -2073,12 +2526,12 @@
                         <div class="stat-label">Längstes Spiel</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">${averageGameTime}</div>
-                        <div class="stat-label">⌀ Spielzeit</div>
-                    </div>
-                    <div class="stat-item">
                         <div class="stat-value">${playedCategories}</div>
                         <div class="stat-label">Kategorien gespielt</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${APP_VERSION}</div>
+                        <div class="stat-label">App Version</div>
                     </div>
                 </div>
                 <button class="share-button" onclick="shareStats()">
@@ -2089,7 +2542,7 @@
         }
 
         function getPlayedCategories() {
-            if (gameHistory.length === 0) return '0/4';
+            if (gameHistory.length === 0) return '0/3';
             
             const categories = new Set();
             gameHistory.forEach(game => {
@@ -2110,38 +2563,13 @@
             return `${categories.size}/3`;
         }
 
-        function getFavoriteCategory() {
-            if (gameHistory.length === 0) return 'N/A';
-            
-            const categoryCounts = {};
-            gameHistory.forEach(game => {
-                // Simple category detection based on word
-                const word = game.word.toLowerCase();
-                let category = 'Objekte';
-                
-                const foodWords = ['sushi', 'pizza', 'pasta', 'burger', 'curry', 'döner', 'ramen'];
-                const animalWords = ['flamingo', 'pinguin', 'koala', 'giraffe', 'delfin', 'tiger', 'elefant'];
-                
-                if (foodWords.some(f => word.includes(f))) category = 'Essen';
-                else if (animalWords.some(a => word.includes(a))) category = 'Tiere';
-                
-                categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-            });
-            
-            return Object.keys(categoryCounts).reduce((a, b) => 
-                categoryCounts[a] > categoryCounts[b] ? a : b
-            );
-        }
-
         function shareStats() {
             const totalGames = playerStats.gamesPlayed;
-            const impostorGames = playerStats.totalImpostorRounds;
             const unlockedAchievements = Object.keys(achievements).filter(key => achievements[key]).length;
             const playedCategories = getPlayedCategories();
             
             const shareText = `🎭 Meine Impostor Stats:\n\n` +
                 `🎮 ${totalGames} Spiele gespielt\n` +
-                `🎭 ${impostorGames}x Impostor gewesen\n` +
                 `⚡ Schnellstes Spiel: ${playerStats.fastestGame || 'N/A'}\n` +
                 `🕐 Längstes Spiel: ${playerStats.longestGame || 'N/A'}\n` +
                 `🎯 Kategorien: ${playedCategories}\n` +
@@ -2358,12 +2786,6 @@
                 newAchievements.push(ACHIEVEMENTS.dedicated);
             }
             
-            // Impostor - 10x Impostor
-            if (!achievements.impostor && playerStats.totalImpostorRounds >= 10) {
-                achievements.impostor = true;
-                newAchievements.push(ACHIEVEMENTS.impostor);
-            }
-            
             // Speed Runner - unter 30 Sekunden
             if (!achievements.speedRunner && playerStats.fastestGame && parseInt(playerStats.fastestGame) < 30) {
                 achievements.speedRunner = true;
@@ -2388,12 +2810,18 @@
                 newAchievements.push(ACHIEVEMENTS.explorer);
             }
             
+            // Curious achievement is unlocked through Easter Egg
+            // (no automatic checking needed here)
+            
             if (newAchievements.length > 0) {
                 showAchievementNotification(newAchievements);
             }
         }
 
         function showAchievementNotification(newAchievements) {
+            // Show confetti for achievement unlock
+            showConfetti();
+            
             newAchievements.forEach((achievement, index) => {
                 setTimeout(() => {
                     const notification = document.createElement('div');
@@ -2446,13 +2874,67 @@
             document.getElementById(screenId).classList.remove('hidden');
             
             const settingsIcon = document.getElementById('settingsIcon');
-            if (settingsIcon) {
+            const infoIcon = document.getElementById('infoIcon');
+            
+            if (settingsIcon && infoIcon) {
                 if (screenId === 'modeSelectScreen') {
                     settingsIcon.style.display = 'flex';
+                    infoIcon.style.display = 'flex';
                 } else {
                     settingsIcon.style.display = 'none';
+                    infoIcon.style.display = 'none';
                 }
             }
+        }
+
+        function showInfoModal() {
+            const content = `
+                <div style="text-align: center; margin-bottom: 28px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🎮</div>
+                    <p style="color: #666; font-size: 16px; line-height: 1.5;">
+                        Die ultimative Party-App für unvergessliche Momente mit deinen Freunden!
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 24px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 20px; margin-bottom: 16px; color: white;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <span style="font-size: 24px;">⚡</span>
+                            <strong style="font-size: 17px;">Features</strong>
+                        </div>
+                        <div style="font-size: 15px; opacity: 0.95; line-height: 1.6;">
+                            • Komplett offline spielbar<br>
+                            • Responsive für alle Geräte<br>
+                            • Keine Registrierung erforderlich<br>
+                            • Kostenlos & werbefrei
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); border-radius: 20px; padding: 20px; color: white;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <span style="font-size: 24px;">🎯</span>
+                            <strong style="font-size: 17px;">So einfach geht's</strong>
+                        </div>
+                        <div style="font-size: 15px; opacity: 0.95; line-height: 1.6;">
+                            1. Spiel auswählen & Einstellungen anpassen<br>
+                            2. Gerät an alle Mitspieler weitergeben<br>
+                            3. Jeder schaut sich seine Rolle an<br>
+                            4. Spielen & Spaß haben!
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 16px; padding: 18px; text-align: center; border: 1px solid rgba(0,0,0,0.08);">
+                    <div style="font-size: 15px; color: #495057; font-weight: 600;">
+                        Version ${APP_VERSION}
+                    </div>
+                    <div style="font-size: 13px; color: #6c757d; margin-top: 4px;">
+                        Regelmäßige Updates mit neuen Spielen
+                    </div>
+                </div>
+            `;
+            
+            showModal('App Info', content);
         }
 
         // WIRKLICH SMOOTH TRANSITION
@@ -2622,7 +3104,7 @@
             
             document.getElementById('categoryButton').textContent = (categoryNames[category] || category) + ' ▼';
             document.getElementById('categoryDropdown').classList.add('hidden');
-            playSound('card-flip');
+            playSound('tap');
         }
 
         function updateGameSettingsDisplay() {
@@ -2713,12 +3195,49 @@
                 wordOrHint.innerHTML = `<div class="word-display">${gameState.gameWord}</div>`;
             }
             
+            // ROBUSTE Methode zum Verstecken der Elemente
+            setTimeout(() => {
+                const nextButton = document.querySelector('#nextButton');
+                const instructionText = document.querySelector('#instructionText');
+                
+                console.log('SHOW - Button gefunden:', !!nextButton);
+                console.log('SHOW - Text gefunden:', !!instructionText);
+                
+                if (nextButton) {
+                    nextButton.style.setProperty('opacity', '0', 'important');
+                    nextButton.style.setProperty('pointer-events', 'none', 'important');
+                }
+                if (instructionText) {
+                    instructionText.style.setProperty('opacity', '0', 'important');
+                    instructionText.style.setProperty('transform', 'translateY(-10px)', 'important');
+                }
+            }, 50);
+            
             document.getElementById('revealedContent').classList.add('visible');
             document.getElementById('playerCard').classList.add('lifted');
+            playSound('tap');
             vibrate([30]);
         }
 
         function hideRole() {
+            // ROBUSTE Methode zum Zeigen der Elemente
+            setTimeout(() => {
+                const nextButton = document.querySelector('#nextButton');
+                const instructionText = document.querySelector('#instructionText');
+                
+                console.log('HIDE - Button gefunden:', !!nextButton);
+                console.log('HIDE - Text gefunden:', !!instructionText);
+                
+                if (nextButton) {
+                    nextButton.style.setProperty('opacity', '1', 'important');
+                    nextButton.style.setProperty('pointer-events', 'auto', 'important');
+                }
+                if (instructionText) {
+                    instructionText.style.setProperty('opacity', '1', 'important');
+                    instructionText.style.setProperty('transform', 'translateY(0px)', 'important');
+                }
+            }, 50);
+            
             document.getElementById('revealedContent').classList.remove('visible');
             document.getElementById('playerCard').classList.remove('lifted');
         }
@@ -2822,15 +3341,9 @@
             // Calculate game duration
             gameState.roundDuration = Math.round((Date.now() - gameState.gameStartTime) / 1000);
             
-            // Update stats
+            // Update stats - OHNE IMPOSTOR TRACKING
             playerStats.gamesPlayed++;
             playerStats.totalPlayTime += gameState.roundDuration;
-            
-            // Check if current player was impostor (assuming player 1 is the user)
-            const wasImpostor = gameState.impostorPlayers.includes(1);
-            if (wasImpostor) {
-                playerStats.totalImpostorRounds++;
-            }
             
             // Update fastest and longest game
             if (!playerStats.fastestGame || gameState.roundDuration < parseInt(playerStats.fastestGame)) {
@@ -2840,7 +3353,7 @@
                 playerStats.longestGame = gameState.roundDuration + 's';
             }
             
-            // Add to history without impostor info
+            // Add to history
             gameHistory.push({
                 date: Date.now(),
                 word: gameState.gameWord,
