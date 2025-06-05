@@ -11,7 +11,7 @@
     <!-- PWA Icons -->
     <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==">
     <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==">
-    <meta name="theme-color" content="#f85032">
+    <meta name="theme-color" content="#ff453a">
     
     <style>
         * {
@@ -59,23 +59,22 @@
             pointer-events: none;
         }
         
-        /* Background Gradients */
+        /* Background Gradients - UPDATED */
         .home-bg {
             background: #000000;
         }
         
         .impostor-bg {
-            background: linear-gradient(135deg, #f85032 0%, #e73827 50%, #ff6b35 100%);
+            background: #ff453a;
         }
 
-
         
-        /* Settings Icon - Clean Apple UI Style - UNTEN LINKS SYMMETRISCH */
+        /* Settings Icon - Clean Apple UI Style - VERBESSERTER KONTRAST */
         .settings-icon {
             position: fixed;
             bottom: clamp(25px, 6vw, 35px);
             left: clamp(20px, 5vw, 30px);
-            background: rgba(0,0,0,0.8);
+            background: rgba(28, 28, 30, 0.95);
             border: none;
             border-radius: 50%;
             color: white;
@@ -91,17 +90,17 @@
             z-index: 1000;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
         }
         
         .settings-icon:active {
             transform: scale(0.92);
-            background: rgba(0,0,0,0.9);
+            background: rgba(28, 28, 30, 0.9);
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
         }
         
         .settings-icon:hover {
-            background: rgba(0,0,0,0.85);
+            background: rgba(48, 48, 52, 0.95);
             transform: scale(1.05);
         }
         
@@ -117,12 +116,12 @@
             -webkit-mask-size: contain;
         }
         
-        /* Info Icon - SYMMETRISCH RECHTS */
+        /* Info Icon - VERBESSERTER KONTRAST */
         .info-icon {
             position: fixed;
             bottom: clamp(25px, 6vw, 35px);
             right: clamp(20px, 5vw, 30px);
-            background: rgba(0,0,0,0.8);
+            background: rgba(28, 28, 30, 0.95);
             border: none;
             border-radius: 50%;
             color: white;
@@ -138,17 +137,17 @@
             z-index: 1000;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
         }
         
         .info-icon:active {
             transform: scale(0.92);
-            background: rgba(0,0,0,0.9);
+            background: rgba(28, 28, 30, 0.9);
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
         }
         
         .info-icon:hover {
-            background: rgba(0,0,0,0.85);
+            background: rgba(48, 48, 52, 0.95);
             transform: scale(1.05);
         }
         
@@ -164,19 +163,19 @@
             -webkit-mask-size: contain;
         }
         
-        /* Modern Settings Menu - DARK - VON UNTEN LINKS */
+        /* Modern Settings Menu - VERBESSERTER KONTRAST */
         .settings-menu {
             position: fixed;
             bottom: clamp(90px, 20vw, 110px);
             left: clamp(20px, 5vw, 30px);
-            background: rgba(0,0,0,0.95);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 24px;
             padding: 8px;
             min-width: 220px;
             max-width: 280px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.25);
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             z-index: 999;
             opacity: 0;
@@ -206,7 +205,7 @@
         }
         
         .settings-menu-item:hover, .settings-menu-item:active {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             transform: scale(0.98);
         }
         
@@ -306,7 +305,7 @@
         }
 
         .screen-transition.impostor {
-            background: linear-gradient(135deg, #f85032 0%, #e73827 50%, #ff6b35 100%);
+            background: #ff453a;
         }
 
         /* DARK MODE KONSEQUENT UMGESETZT */
@@ -315,12 +314,12 @@
             color: white;
         }
 
-        /* CLEAN DARK THEME FÜR ALLE SETTINGS - RICHTIG UMGESETZT */
+        /* CLEAN DARK THEME FÜR ALLE SETTINGS - VERBESSERTER KONTRAST */
         
-        /* IMPOSTOR SETTINGS SCREEN - CLEAN DARK */
+        /* IMPOSTOR SETTINGS SCREEN - VERBESSERTER KONTRAST */
         .settings-container {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(28, 28, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .setting-label {
@@ -328,8 +327,13 @@
         }
 
         .counter-btn {
-            background: rgba(255,255,255,0.2);
+            background: rgba(44, 44, 48, 0.95);
             color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .counter-btn:hover {
+            background: rgba(58, 58, 64, 0.95);
         }
 
         .counter-value {
@@ -337,18 +341,24 @@
         }
 
         .toggle-switch {
-            background: rgba(255,255,255,0.25);
+            background: rgba(44, 44, 48, 0.95);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .dropdown-button {
-            background: rgba(255,255,255,0.2);
+            background: rgba(44, 44, 48, 0.95);
             color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .dropdown-button:hover {
+            background: rgba(58, 58, 64, 0.95);
         }
 
         .dropdown-menu {
-            background: rgba(0,0,0,0.95) !important;
+            background: rgba(28, 28, 30, 0.95) !important;
             color: white !important;
-            border: 1px solid rgba(255,255,255,0.2) !important;
+            border: 1px solid rgba(255,255,255,0.25) !important;
         }
 
         .dropdown-item {
@@ -356,7 +366,7 @@
         }
 
         .dropdown-item:hover, .dropdown-item:active {
-            background: rgba(255,255,255,0.1) !important;
+            background: rgba(255,255,255,0.15) !important;
         }
 
         /* GAME SCREEN - CLEAN DARK */
@@ -370,8 +380,8 @@
 
         /* GAME STARTED SCREEN - CLEAN DARK */
         .goal-box {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(28, 28, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .goal-title {
@@ -388,8 +398,8 @@
 
         /* ROLES SCREEN - CLEAN DARK */
         .role-item {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(28, 28, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.2);
             color: white;
         }
 
@@ -402,34 +412,37 @@
         }
 
         .timer-display {
-            background: rgba(255,255,255,0.1);
+            background: rgba(28, 28, 30, 0.95);
             color: white;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* MODAL - CLEAN DARK */
+        /* MODAL - VERBESSERTER KONTRAST */
         .modal {
-            background: rgba(0,0,0,0.95);
+            background: rgba(28, 28, 30, 0.95);
             color: white;
-            border: 2px solid rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
         }
 
         .modal-close {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             color: white;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .modal-close:hover, .modal-close:active {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
         }
 
         .modal-title {
             color: white;
         }
 
-        /* STATS - CLEAN DARK */
+        /* STATS - VERBESSERTER KONTRAST */
         .stat-item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(44, 44, 48, 0.95);
             color: white;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .stat-value {
@@ -440,18 +453,19 @@
             color: rgba(255,255,255,0.8);
         }
 
-        /* HISTORY & ACHIEVEMENTS - CLEAN DARK */
+        /* HISTORY & ACHIEVEMENTS - VERBESSERTER KONTRAST */
         .history-item, 
         .achievement-item {
-            background: rgba(255,255,255,0.08);
-            border: 2px solid rgba(255,255,255,0.12);
+            background: rgba(44, 44, 48, 0.95);
+            border: 2px solid rgba(255,255,255,0.15);
             color: white;
         }
 
         .achievement-item.unlocked {
-            background: rgba(76, 175, 80, 0.2);
-            border-color: rgba(76, 175, 80, 0.4);
+            background: rgba(76, 175, 80, 0.3);
+            border-color: rgba(76, 175, 80, 0.5);
         }
+        
         body.light-theme {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
@@ -647,7 +661,7 @@
         }
         
         .impostor-card {
-            background: linear-gradient(135deg, rgba(248, 80, 50, 0.9) 0%, rgba(231, 56, 39, 0.9) 100%);
+            background: #ff453a;
             color: white;
             border: 2px solid rgba(255,255,255,0.2);
         }
@@ -665,10 +679,10 @@
         }
         
         .coming-soon-card {
-            background: linear-gradient(135deg, rgba(100, 100, 100, 0.8) 0%, rgba(150, 150, 150, 0.8) 100%);
+            background: rgba(28, 28, 30, 0.95);
             color: white;
             opacity: 0.7;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.15);
         }
         
         .game-card-emoji {
@@ -741,30 +755,32 @@
             transform: scale(1.1);
         }
 
-        /* MODAL - DARK THEME ÜBERSCHREIBT ALLES */
+        /* MODAL - VERBESSERTER KONTRAST */
         .modal {
-            background: rgba(0,0,0,0.95) !important;
+            background: rgba(28, 28, 30, 0.95) !important;
             color: white !important;
-            border: 2px solid rgba(255,255,255,0.15) !important;
+            border: 2px solid rgba(255,255,255,0.2) !important;
         }
 
         .modal-close {
-            background: rgba(255,255,255,0.1) !important;
+            background: rgba(255,255,255,0.15) !important;
             color: white !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
         }
 
         .modal-close:hover, .modal-close:active {
-            background: rgba(255,255,255,0.2) !important;
+            background: rgba(255,255,255,0.25) !important;
         }
 
         .modal-title {
             color: white !important;
         }
 
-        /* STATS - DARK THEME ÜBERSCHREIBT */
+        /* STATS - VERBESSERTER KONTRAST */
         .stat-item {
-            background: rgba(255,255,255,0.1) !important;
+            background: rgba(44, 44, 48, 0.95) !important;
             color: white !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
         }
 
         .stat-value {
@@ -775,17 +791,17 @@
             color: rgba(255,255,255,0.8) !important;
         }
 
-        /* HISTORY & ACHIEVEMENTS - DARK THEME ÜBERSCHREIBT */
+        /* HISTORY & ACHIEVEMENTS - VERBESSERTER KONTRAST */
         .history-item, 
         .achievement-item {
-            background: rgba(255,255,255,0.08) !important;
-            border: 2px solid rgba(255,255,255,0.12) !important;
+            background: rgba(44, 44, 48, 0.95) !important;
+            border: 2px solid rgba(255,255,255,0.15) !important;
             color: white !important;
         }
 
         .achievement-item.unlocked {
-            background: rgba(76, 175, 80, 0.2) !important;
-            border-color: rgba(76, 175, 80, 0.4) !important;
+            background: rgba(76, 175, 80, 0.3) !important;
+            border-color: rgba(76, 175, 80, 0.5) !important;
         }
         .credits {
             position: fixed;
@@ -799,12 +815,12 @@
             font-weight: 500;
         }
         
-        /* Back Button */
+        /* Back Button - VERBESSERTER KONTRAST */
         .back-button {
             position: absolute;
             top: clamp(20px, 5vw, 30px);
             left: clamp(20px, 5vw, 30px);
-            background: rgba(0,0,0,0.3);
+            background: rgba(28, 28, 30, 0.95);
             border: none;
             border-radius: 20px;
             color: white;
@@ -818,16 +834,17 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .back-button:active {
             transform: scale(0.9);
-            background: rgba(0,0,0,0.5);
+            background: rgba(48, 48, 52, 0.95);
         }
         
-        /* Settings Container */
+        /* Settings Container - VERBESSERTER KONTRAST */
         .settings-container {
-            background: rgba(0,0,0,0.2);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 28px;
             padding: clamp(28px, 6vw, 36px);
             margin: 20px 0;
@@ -835,7 +852,7 @@
             max-width: min(440px, 90vw);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 16px 40px rgba(0,0,0,0.1);
         }
         
@@ -865,7 +882,36 @@
             text-align: center;
         }
         
-        /* Counter Controls */
+        /* NEW: Players row with names button */
+        .players-controls {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 2vw, 12px);
+        }
+        
+        .names-button {
+            background: rgba(44, 44, 48, 0.95);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: clamp(14px, 3.5vw, 16px);
+            padding: clamp(8px, 2vw, 10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(36px, 9vw, 40px);
+            height: clamp(36px, 9vw, 40px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        
+        .names-button:active {
+            background: rgba(58, 58, 64, 0.95);
+            transform: scale(0.95);
+        }
+        
+        /* Counter Controls - VERBESSERTER KONTRAST */
         .counter-controls {
             display: flex;
             align-items: center;
@@ -876,7 +922,7 @@
             width: clamp(42px, 10vw, 48px);
             height: clamp(42px, 10vw, 48px);
             border-radius: 50%;
-            background: rgba(255,255,255,0.25);
+            background: rgba(44, 44, 48, 0.95);
             border: none;
             color: white;
             font-size: clamp(20px, 5vw, 24px);
@@ -888,11 +934,12 @@
             justify-content: center;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
         }
         
         .counter-btn:active {
             transform: scale(0.9);
-            background: rgba(255,255,255,0.4);
+            background: rgba(58, 58, 64, 0.95);
         }
         
         .counter-value {
@@ -902,20 +949,22 @@
             text-align: center;
         }
         
-        /* Toggle Switch */
+        /* Toggle Switch - VERBESSERTER KONTRAST */
         .toggle-switch {
             width: clamp(56px, 14vw, 62px);
             height: clamp(32px, 8vw, 36px);
-            background: rgba(255,255,255,0.3);
+            background: rgba(44, 44, 48, 0.95);
             border-radius: 18px;
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
         }
         
         .toggle-switch.active {
             background: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.4);
         }
         
         .toggle-switch::after {
@@ -936,13 +985,13 @@
             left: calc(100% - clamp(28px, 7vw, 32px) - 2px);
         }
         
-        /* Dropdown */
+        /* Dropdown - VERBESSERTER KONTRAST */
         .dropdown {
             position: relative;
         }
         
         .dropdown-button {
-            background: rgba(255,255,255,0.25);
+            background: rgba(44, 44, 48, 0.95);
             border: none;
             border-radius: 18px;
             color: white;
@@ -954,10 +1003,11 @@
             text-align: center;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.15);
         }
         
         .dropdown-button:active {
-            background: rgba(255,255,255,0.4);
+            background: rgba(58, 58, 64, 0.95);
             transform: scale(0.98);
         }
         
@@ -965,13 +1015,13 @@
             position: absolute;
             top: 100%;
             right: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 16px;
             margin-top: 8px;
             min-width: 140px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.25);
             box-shadow: 0 16px 40px rgba(0,0,0,0.15);
             z-index: 10000;
             overflow: hidden;
@@ -988,15 +1038,15 @@
         }
         
         .dropdown-item:hover, .dropdown-item:active {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
         }
         
-        /* Buttons - OHNE KONTUR */
+        /* Buttons - VERBESSERTER KONTRAST */
         .button {
-            background: rgba(0,0,0,0.3);
+            background: rgba(44, 44, 48, 0.95) !important;
             border: none;
             border-radius: 24px;
-            color: white;
+            color: white !important;
             font-size: clamp(16px, 4.2vw, 20px);
             font-weight: 700;
             padding: clamp(18px, 4.5vw, 24px) clamp(32px, 8vw, 42px);
@@ -1018,13 +1068,36 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
             z-index: 50;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.15) !important;
         }
         
         .button:active, .button:hover {
             transform: scale(0.96);
-            background: rgba(0,0,0,0.5);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+            background: rgba(58, 58, 64, 0.95) !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+        }
+        
+        /* IMPROVED: Next Button - WEITER NACH UNTEN FÜR ALLE BILDSCHIRMGRÖSSN */
+        .next-button {
+            background: rgba(44, 44, 48, 0.95) !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: fixed !important;
+            bottom: clamp(80px, 14vh, 120px) !important; /* WEITER NACH UNTEN */
+            left: 50% !important;
+            transform: translateX(-50%) translateY(20px) !important;
+            z-index: 500 !important;
+            min-height: clamp(54px, 12vh, 64px) !important;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+        }
+        
+        .next-button.visible {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: translateX(-50%) translateY(0) !important;
         }
         
         /* Player Card */
@@ -1040,7 +1113,7 @@
             border: 3px solid rgba(255,255,255,0.3);
             transition: all 0.4s ease;
             position: relative;
-            z-index: 1000;
+            z-index: 10000;
         }
         
         .player-card.flipping {
@@ -1100,15 +1173,15 @@
             background: rgba(255,255,255,0.35);
         }
         
-        /* Revealed Content */
+        /* IMPROVED: Revealed Content - Larger hints box */
         .revealed-content {
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             border-radius: 28px;
-            padding: clamp(20px, 5vw, 24px);
+            padding: clamp(24px, 6vw, 32px);
             margin-top: 20px;
             text-align: center;
             opacity: 0;
@@ -1119,6 +1192,7 @@
             backdrop-filter: blur(20px);
             max-width: 100%;
             box-sizing: border-box;
+            min-height: clamp(140px, 20vh, 180px);
         }
         
         .revealed-content.visible {
@@ -1158,29 +1232,173 @@
         .word-display {
             background: rgba(255,255,255,0.95);
             border-radius: 20px;
-            padding: clamp(16px, 4vw, 20px);
-            font-size: clamp(24px, 6vw, 28px);
+            padding: clamp(20px, 5vw, 28px);
+            font-size: clamp(26px, 6.5vw, 32px);
             font-weight: 700;
             color: #333;
             backdrop-filter: blur(10px);
+            margin-bottom: 8px;
         }
         
+        /* IMPROVED: Larger hint display */
         .hint-display {
             background: rgba(255,255,255,0.95);
             border-radius: 20px;
-            padding: clamp(12px, 3vw, 14px);
-            font-size: clamp(14px, 3.5vw, 16px);
+            padding: clamp(18px, 4.5vw, 24px);
+            font-size: clamp(18px, 4.5vw, 22px);
             color: #666;
             backdrop-filter: blur(10px);
+            margin-bottom: 8px;
+            min-height: clamp(60px, 12vh, 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        /* Timer Display */
+        /* Names Management Modal - VERBESSERTER KONTRAST */
+        .names-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .names-modal.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .names-modal-content {
+            background: rgba(28, 28, 30, 0.95);
+            border-radius: 32px;
+            padding: 32px;
+            width: 92%;
+            max-width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: white;
+            position: relative;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .names-modal.visible .names-modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .names-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .names-modal-close:hover, .names-modal-close:active {
+            background: rgba(255,255,255,0.25);
+            transform: scale(0.9);
+        }
+        
+        .names-modal-title {
+            font-size: clamp(26px, 6.5vw, 34px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: white;
+        }
+        
+        .names-list {
+            max-height: 60vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .name-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .name-item:hover, .name-item:active {
+            background: rgba(255,255,255,0.2);
+            transform: scale(0.98);
+        }
+        
+        .name-item.editing {
+            background: rgba(255,255,255,0.25);
+        }
+        
+        .name-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: 600;
+            outline: none;
+            width: 100%;
+            padding: 0;
+        }
+        
+        .name-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .name-display {
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .name-number {
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-size: clamp(12px, 3vw, 14px);
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* Timer Display - VERBESSERTER KONTRAST */
         .timer-display {
             position: absolute;
             top: clamp(20px, 5vw, 30px);
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.3);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 24px;
             padding: clamp(12px, 3vw, 14px) clamp(20px, 5vw, 24px);
             color: white;
@@ -1188,6 +1406,7 @@
             font-weight: 700;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         /* Starter Text */
@@ -1211,9 +1430,9 @@
             50% { opacity: 0.8; transform: scale(1.05); }
         }
         
-        /* Goal Box */
+        /* Goal Box - VERBESSERTER KONTRAST */
         .goal-box {
-            background: rgba(0,0,0,0.25);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 24px;
             padding: clamp(20px, 5vw, 24px);
             margin: 20px 0;
@@ -1222,7 +1441,7 @@
             text-align: left;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .goal-title {
@@ -1259,14 +1478,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.3);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 20px;
             padding: clamp(16px, 4vw, 20px);
             margin: 12px 0;
             color: white;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .role-player {
@@ -1368,18 +1587,18 @@
         }
         
         .modal {
-            background: rgba(255,255,255,0.95);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 32px;
             padding: 32px;
             width: 92%;
             max-width: 480px;
             max-height: 85vh;
             overflow-y: auto;
-            color: #333;
+            color: white;
             position: relative;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
             box-shadow: 0 32px 80px rgba(0,0,0,0.25);
             transform: scale(0.9) translateY(20px);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -1393,9 +1612,9 @@
             position: absolute;
             top: 20px;
             right: 24px;
-            background: rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.15);
             border: none;
-            color: #666;
+            color: white;
             font-size: 28px;
             cursor: pointer;
             width: 36px;
@@ -1405,10 +1624,11 @@
             justify-content: center;
             border-radius: 50%;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .modal-close:hover, .modal-close:active {
-            background: rgba(0,0,0,0.15);
+            background: rgba(255,255,255,0.25);
             transform: scale(0.9);
         }
         
@@ -1417,7 +1637,7 @@
             font-weight: 700;
             margin-bottom: 24px;
             text-align: center;
-            color: #333;
+            color: white;
         }
         
         /* STATS GRID - ÜBERARBEITET */
@@ -1429,13 +1649,14 @@
         }
         
         .stat-item {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: rgba(44, 44, 48, 0.95);
             border-radius: 20px;
             padding: 20px;
             text-align: center;
             color: white;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .stat-value {
@@ -1451,9 +1672,9 @@
             font-weight: 500;
         }
         
-        /* SHARE BUTTON */
+        /* SHARE BUTTON - VERBESSERTER KONTRAST */
         .share-button {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: rgba(44, 44, 48, 0.95);
             border: none;
             border-radius: 16px;
             color: white;
@@ -1468,34 +1689,35 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
         }
         
         .share-button:active {
             transform: scale(0.98);
-            background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+            background: rgba(58, 58, 64, 0.95);
         }
         
         /* HISTORY UND ACHIEVEMENT ITEMS REDESIGN */
         .history-item, .achievement-item {
-            background: rgba(0,0,0,0.05);
+            background: rgba(44, 44, 48, 0.95);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 2px solid rgba(0,0,0,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
             transition: all 0.3s ease;
         }
         
         .history-item:active, .achievement-item:active {
             transform: scale(0.98);
-            background: rgba(0,0,0,0.08);
+            background: rgba(58, 58, 64, 0.95);
         }
         
         .achievement-item.unlocked {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(56, 142, 60, 0.15) 100%);
-            border-color: rgba(76, 175, 80, 0.3);
+            background: rgba(76, 175, 80, 0.3);
+            border-color: rgba(76, 175, 80, 0.5);
         }
         
         .achievement-icon {
@@ -1503,7 +1725,7 @@
             margin-right: 16px;
         }
         
-        /* Small Screen Optimizations - ERWEITERT */
+        /* OPTIMIERTE SYMMETRIE UND ABSTÄNDE FÜR ALLE BILDSCHIRMGROSSN */
         @media screen and (max-height: 600px) {
             .screen {
                 padding: 12px;
@@ -1526,7 +1748,21 @@
             }
             
             .player-card + div {
-                height: clamp(100px, 18vh, 140px) !important;
+                height: clamp(100px, 16vh, 140px) !important;
+            }
+            
+            .next-button {
+                bottom: clamp(60px, 12vh, 80px) !important; /* WEITER NACH UNTEN */
+            }
+            
+            #instructionText {
+                bottom: clamp(20px, 6vh, 30px) !important; /* WEITER NACH UNTEN */
+                position: fixed !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                max-width: 90% !important;
+                text-align: center !important;
+                font-size: clamp(12px, 3vw, 14px) !important;
             }
             
             .settings-icon, .info-icon {
@@ -1557,7 +1793,7 @@
             }
         }
         
-        /* Very Small Screens - NEUE OPTIMIERUNG */
+        /* Very Small Screens - OPTIMIERTE SYMMETRIE */
         @media screen and (max-width: 280px) {
             .title {
                 font-size: clamp(18px, 5.5vw, 24px);
@@ -1640,7 +1876,23 @@
             }
             
             .player-card + div {
-                height: clamp(80px, 12vh, 120px) !important;
+                height: clamp(80px, 14vh, 120px) !important;
+            }
+            
+            .next-button {
+                bottom: clamp(50px, 10vh, 70px) !important; /* WEITER NACH UNTEN */
+                min-width: calc(100vw - 60px) !important;
+            }
+            
+            #instructionText {
+                bottom: clamp(15px, 4vh, 25px) !important; /* WEITER NACH UNTEN */
+                position: fixed !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                max-width: 90% !important;
+                font-size: clamp(11px, 2.8vw, 13px) !important;
+                text-align: center !important;
+                line-height: 1.3 !important;
             }
             
             .revealed-content {
@@ -1670,7 +1922,7 @@
             }
         }
         
-        /* Landscape Orientation */
+        /* Landscape Orientation - VERBESSERTE SYMMETRIE */
         @media screen and (orientation: landscape) and (max-height: 500px) {
             .screen {
                 flex-direction: row;
@@ -1693,8 +1945,16 @@
             
             /* Landscape-spezifische Anpassungen für Player Card */
             .player-card + div {
-                height: 80px !important;
+                height: 60px !important;
                 width: 100%;
+            }
+            
+            .next-button {
+                bottom: clamp(40px, 10vh, 60px) !important; /* WEITER NACH UNTEN */
+            }
+            
+            #instructionText {
+                bottom: clamp(10px, 4vh, 20px) !important; /* WEITER NACH UNTEN */
             }
             
             .button {
@@ -1778,7 +2038,10 @@
         <div class="games-container" id="gamesContainer">
             <div class="game-card impostor-card" onclick="showImpostorSettings()">
                 <div class="game-card-emoji">🎭</div>
-                <div class="game-card-title">FINDET DEN<br>IMPOSTOR</div>
+                <div class="game-card-title">
+                    <div style="font-size: clamp(14px, 3.5vw, 18px); font-weight: 600; margin-bottom: 4px;">FINDET DEN</div>
+                    <div style="font-size: clamp(28px, 7vw, 36px); font-weight: 800;">IMPOSTOR</div>
+                </div>
                 <div class="game-card-desc">Finde heraus, wer der Verräter in eurer Gruppe ist!</div>
                 <div class="game-card-players">👥 3-20</div>
             </div>
@@ -1810,10 +2073,15 @@
                     <span class="setting-icon">👥</span>
                     Spieler
                 </div>
-                <div class="counter-controls">
-                    <button class="counter-btn" onclick="changePlayerCount(-1)">−</button>
-                    <span class="counter-value" id="playersCount">4</span>
-                    <button class="counter-btn" onclick="changePlayerCount(1)">+</button>
+                <div class="players-controls">
+                    <div class="counter-controls">
+                        <button class="counter-btn" onclick="changePlayerCount(-1)">−</button>
+                        <span class="counter-value" id="playersCount">4</span>
+                        <button class="counter-btn" onclick="changePlayerCount(1)">+</button>
+                    </div>
+                    <button class="names-button" onclick="showNamesModal()" title="Namen bearbeiten">
+                        ✏️
+                    </button>
                 </div>
             </div>
             
@@ -1888,6 +2156,7 @@
         <div class="player-card" id="playerCard">
             <div class="player-title" id="playerTitle">Spieler 1</div>
             <div class="player-emoji" id="playerEmoji">👤</div>
+            
             <button class="reveal-button" 
                     onmousedown="showRole()" onmouseup="hideRole()" onmouseleave="hideRole()"
                     ontouchstart="showRole()" ontouchend="hideRole()">
@@ -1902,14 +2171,14 @@
             </div>
         </div>
         
-        <div style="height: clamp(180px, 25vh, 240px);"></div> <!-- VERGRÖSSERTER RESPONSIVE SPACER -->
+        <div style="height: clamp(100px, 16vh, 140px);"></div> <!-- OPTIMIERTER RESPONSIVE SPACER -->
         
-        <button class="button" onclick="handleNextPlayer()" id="nextButton">
+        <button class="button next-button" onclick="handleNextPlayer()" id="nextButton">
             Weitergeben
         </button>
         
-        <p id="instructionText" style="color: rgba(255,255,255,0.8); font-size: clamp(14px, 3.5vw, 16px); text-align: center; margin-top: 14px; transition: all 0.3s ease; opacity: 1; visibility: visible;">
-            Gerät an den nächsten Spieler weitergeben
+        <p id="instructionText" style="color: rgba(255,255,255,0.8); font-size: clamp(14px, 3.5vw, 16px); text-align: center; margin-top: 14px; transition: all 0.3s ease; opacity: 1; visibility: visible; position: fixed; bottom: clamp(30px, 8vh, 50px); left: 50%; transform: translateX(-50%); max-width: 90%; line-height: 1.4;">
+            Ziehe deine Karte nach oben, um das Wort zu sehen. Achte darauf, dass niemand es sieht.
         </p>
     </div>
 
@@ -1962,6 +2231,17 @@
         </button>
     </div>
 
+    <!-- Names Management Modal -->
+    <div class="names-modal" id="namesModal">
+        <div class="names-modal-content">
+            <button class="names-modal-close" onclick="closeNamesModal()">×</button>
+            <h2 class="names-modal-title">Spieler Namen</h2>
+            <div class="names-list" id="namesList">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Overlay -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="modalContent">
@@ -1990,11 +2270,13 @@
             gameHint: '',
             impostorPlayers: [],
             playerEmojis: [],
-            startingPlayer: 1,
+            playerNames: [], // NEW: Player names array
+            startingPlayer: null, // Will be set randomly later
             timer: null,
             timeLeft: 0,
             gameStartTime: null,
-            roundDuration: 0
+            roundDuration: 0,
+            hasRevealed: false // NEW: Track if player has revealed their card
         };
 
         // Settings
@@ -2114,6 +2396,80 @@
 
         // Audio Context for Sound Effects
         let audioContext;
+
+        // Initialize player names array
+        function initializePlayerNames() {
+            gameState.playerNames = [];
+            for (let i = 1; i <= gameState.totalPlayers; i++) {
+                gameState.playerNames.push(`Spieler ${i}`);
+            }
+        }
+
+        // Names Management Functions
+        function showNamesModal() {
+            // Ensure we have enough names for current player count
+            while (gameState.playerNames.length < gameState.totalPlayers) {
+                gameState.playerNames.push(`Spieler ${gameState.playerNames.length + 1}`);
+            }
+            
+            updateNamesDisplay();
+            document.getElementById('namesModal').classList.add('visible');
+            playSound('tap');
+        }
+
+        function closeNamesModal() {
+            document.getElementById('namesModal').classList.remove('visible');
+            playSound('tap');
+        }
+
+        function updateNamesDisplay() {
+            const namesList = document.getElementById('namesList');
+            namesList.innerHTML = '';
+            
+            for (let i = 0; i < gameState.totalPlayers; i++) {
+                const nameItem = document.createElement('div');
+                nameItem.className = 'name-item';
+                nameItem.onclick = () => editPlayerName(i);
+                
+                nameItem.innerHTML = `
+                    <div class="name-display" id="nameDisplay${i}">${gameState.playerNames[i] || `Spieler ${i + 1}`}</div>
+                    <div class="name-number">${i + 1}</div>
+                `;
+                
+                namesList.appendChild(nameItem);
+            }
+        }
+
+        function editPlayerName(playerIndex) {
+            const nameItem = document.querySelector(`.name-item:nth-child(${playerIndex + 1})`);
+            const nameDisplay = document.getElementById(`nameDisplay${playerIndex}`);
+            
+            nameItem.classList.add('editing');
+            
+            const currentName = gameState.playerNames[playerIndex] || `Spieler ${playerIndex + 1}`;
+            
+            nameDisplay.innerHTML = `<input type="text" class="name-input" id="nameInput${playerIndex}" value="${currentName}" maxlength="20">`;
+            
+            const input = document.getElementById(`nameInput${playerIndex}`);
+            input.focus();
+            input.select();
+            
+            const saveEdit = () => {
+                const newName = input.value.trim() || `Spieler ${playerIndex + 1}`;
+                gameState.playerNames[playerIndex] = newName;
+                nameDisplay.textContent = newName;
+                nameItem.classList.remove('editing');
+                playSound('tap');
+            };
+            
+            input.addEventListener('blur', saveEdit);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveEdit();
+                }
+            });
+        }
 
         // Easter Egg Function
         function handleEasterEggClick() {
@@ -2345,7 +2701,7 @@
             let content = `
                 <div style="text-align: center; margin-bottom: 24px;">
                     <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
-                    <p style="color: #666; font-size: 16px; line-height: 1.5;">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5;">
                         Installiere Party Games als App auf deinem Gerät für die beste Erfahrung!
                     </p>
                 </div>
@@ -2353,9 +2709,9 @@
             
             if (isIOS) {
                 content += `
-                    <div style="background: #f8f9fa; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
-                        <h3 style="margin-bottom: 16px; color: #333;">📱 iOS Installation:</h3>
-                        <ol style="color: #666; line-height: 1.6; padding-left: 20px;">
+                    <div style="background: #1c1c1e; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
+                        <h3 style="margin-bottom: 16px; color: white;">📱 iOS Installation:</h3>
+                        <ol style="color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 20px;">
                             <li>Tippe auf das <strong>Teilen-Symbol</strong> 📤 in Safari</li>
                             <li>Scrolle nach unten und wähle <strong>"Zum Home-Bildschirm"</strong></li>
                             <li>Tippe auf <strong>"Hinzufügen"</strong> in der oberen rechten Ecke</li>
@@ -2365,9 +2721,9 @@
                 `;
             } else if (isAndroid) {
                 content += `
-                    <div style="background: #f8f9fa; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
-                        <h3 style="margin-bottom: 16px; color: #333;">🤖 Android Installation:</h3>
-                        <ol style="color: #666; line-height: 1.6; padding-left: 20px;">
+                    <div style="background: #1c1c1e; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
+                        <h3 style="margin-bottom: 16px; color: white;">🤖 Android Installation:</h3>
+                        <ol style="color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 20px;">
                             <li>Tippe auf das <strong>Menü-Symbol</strong> ⋮ in Chrome</li>
                             <li>Wähle <strong>"App installieren"</strong> oder <strong>"Zum Startbildschirm hinzufügen"</strong></li>
                             <li>Bestätige mit <strong>"Installieren"</strong></li>
@@ -2377,9 +2733,9 @@
                 `;
             } else {
                 content += `
-                    <div style="background: #f8f9fa; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
-                        <h3 style="margin-bottom: 16px; color: #333;">💻 Desktop Installation:</h3>
-                        <ol style="color: #666; line-height: 1.6; padding-left: 20px;">
+                    <div style="background: #1c1c1e; border-radius: 16px; padding: 20px; margin-bottom: 16px;">
+                        <h3 style="margin-bottom: 16px; color: white;">💻 Desktop Installation:</h3>
+                        <ol style="color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 20px;">
                             <li>Klicke auf das <strong>Install-Symbol</strong> in der Adressleiste</li>
                             <li>Oder: Menü → <strong>"Party Games installieren"</strong></li>
                             <li>Bestätige die Installation</li>
@@ -2390,7 +2746,7 @@
             }
             
             content += `
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 16px; color: white; text-align: center;">
+                <div style="background: #1c1c1e; border-radius: 16px; padding: 16px; color: white; text-align: center;">
                     <strong>✨ Vorteile der App:</strong><br>
                     🚀 Schnellerer Start • 📱 Vollbild-Modus • 🔔 Keine Browser-Leiste
                 </div>
@@ -2405,13 +2761,13 @@
             const content = `
                 <div style="text-align: center; margin-bottom: 24px;">
                     <div style="font-size: 48px; margin-bottom: 16px;">🚀</div>
-                    <p style="color: #666; font-size: 16px; line-height: 1.5;">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5;">
                         Kommende Features für Party Games - Sei gespannt!
                     </p>
                 </div>
                 
                 <div style="margin-bottom: 20px;">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 16px; margin-bottom: 12px; color: white;">
+                    <div style="background: #1c1c1e; border-radius: 16px; padding: 16px; margin-bottom: 12px; color: white;">
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                             <span style="font-size: 24px;">🎯</span>
                             <strong style="font-size: 16px;">Neue Spiele</strong>
@@ -2424,7 +2780,7 @@
                         </div>
                     </div>
                     
-                    <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); border-radius: 16px; padding: 16px; margin-bottom: 12px; color: white;">
+                    <div style="background: #1c1c1e; border-radius: 16px; padding: 16px; margin-bottom: 12px; color: white;">
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                             <span style="font-size: 24px;">⚡</span>
                             <strong style="font-size: 16px;">Neue Features</strong>
@@ -2437,7 +2793,7 @@
                         </div>
                     </div>
                     
-                    <div style="background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%); border-radius: 16px; padding: 16px; color: white;">
+                    <div style="background: #1c1c1e; border-radius: 16px; padding: 16px; color: white;">
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                             <span style="font-size: 24px;">🎨</span>
                             <strong style="font-size: 16px;">Verbesserungen</strong>
@@ -2451,11 +2807,11 @@
                     </div>
                 </div>
                 
-                <div style="background: #f8f9fa; border-radius: 16px; padding: 16px; text-align: center;">
-                    <div style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                <div style="background: #1c1c1e; border-radius: 16px; padding: 16px; text-align: center;">
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">
                         💡 <strong>Hast du Ideen?</strong>
                     </div>
-                    <div style="font-size: 13px; color: #888;">
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.6);">
                         Lass uns wissen, welche Features du dir wünschst!
                     </div>
                 </div>
@@ -2604,7 +2960,7 @@
                         <div class="history-item">
                             <div>
                                 <strong style="font-size: 16px;">${game.word}</strong><br>
-                                <small style="color: #666; font-size: 13px;">${date} ${timeOfDay} • ${game.players} Spieler • ${game.duration}</small>
+                                <small style="color: rgba(255,255,255,0.6); font-size: 13px;">${date} ${timeOfDay} • ${game.players} Spieler • ${game.duration}</small>
                             </div>
                             <div style="font-size: 24px;">🎭</div>
                         </div>
@@ -2655,7 +3011,7 @@
                             <span class="achievement-icon">${achievement.icon}</span>
                             <div>
                                 <strong style="font-size: 16px;">${achievement.name}</strong><br>
-                                <small style="color: #666; font-size: 13px;">${achievement.description}</small>
+                                <small style="color: rgba(255,255,255,0.6); font-size: 13px;">${achievement.description}</small>
                             </div>
                         </div>
                         <div style="font-size: 20px;">${unlocked ? '✅' : '❌'}</div>
@@ -2733,7 +3089,7 @@
                 position: fixed;
                 top: 100px;
                 right: 20px;
-                background: rgba(0,0,0,0.9);
+                background: #1c1c1e;
                 color: white;
                 padding: 16px 20px;
                 border-radius: 20px;
@@ -2829,8 +3185,8 @@
                         position: fixed;
                         top: 100px;
                         right: 20px;
-                        background: linear-gradient(135deg, #FFD700, #FFA500);
-                        color: #333;
+                        background: #1c1c1e;
+                        color: white;
                         padding: 16px 20px;
                         border-radius: 20px;
                         font-weight: 600;
@@ -2839,6 +3195,7 @@
                         max-width: 300px;
                         box-shadow: 0 16px 40px rgba(0,0,0,0.2);
                         backdrop-filter: blur(10px);
+                        border: 2px solid #4CAF50;
                     `;
                     
                     notification.innerHTML = `
@@ -2891,13 +3248,13 @@
             const content = `
                 <div style="text-align: center; margin-bottom: 28px;">
                     <div style="font-size: 48px; margin-bottom: 16px;">🎮</div>
-                    <p style="color: #666; font-size: 16px; line-height: 1.5;">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5;">
                         Die ultimative Party-App für unvergessliche Momente mit deinen Freunden!
                     </p>
                 </div>
                 
                 <div style="margin-bottom: 24px;">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 20px; margin-bottom: 16px; color: white;">
+                    <div style="background: #1c1c1e; border-radius: 20px; padding: 20px; margin-bottom: 16px; color: white;">
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                             <span style="font-size: 24px;">⚡</span>
                             <strong style="font-size: 17px;">Features</strong>
@@ -2910,7 +3267,7 @@
                         </div>
                     </div>
                     
-                    <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); border-radius: 20px; padding: 20px; color: white;">
+                    <div style="background: #1c1c1e; border-radius: 20px; padding: 20px; color: white;">
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                             <span style="font-size: 24px;">🎯</span>
                             <strong style="font-size: 17px;">So einfach geht's</strong>
@@ -2924,11 +3281,11 @@
                     </div>
                 </div>
                 
-                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 16px; padding: 18px; text-align: center; border: 1px solid rgba(0,0,0,0.08);">
-                    <div style="font-size: 15px; color: #495057; font-weight: 600;">
+                <div style="background: #1c1c1e; border-radius: 16px; padding: 18px; text-align: center; border: 1px solid rgba(255,255,255,0.08);">
+                    <div style="font-size: 15px; color: white; font-weight: 600;">
                         Version ${APP_VERSION}
                     </div>
-                    <div style="font-size: 13px; color: #6c757d; margin-top: 4px;">
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px;">
                         Regelmäßige Updates mit neuen Spielen
                     </div>
                 </div>
@@ -3056,6 +3413,15 @@
             if (gameState.impostors >= Math.floor(gameState.totalPlayers / 2)) {
                 gameState.impostors = Math.max(1, Math.floor(gameState.totalPlayers / 2) - 1);
             }
+            
+            // Update player names array to match new player count
+            while (gameState.playerNames.length < gameState.totalPlayers) {
+                gameState.playerNames.push(`Spieler ${gameState.playerNames.length + 1}`);
+            }
+            if (gameState.playerNames.length > gameState.totalPlayers) {
+                gameState.playerNames = gameState.playerNames.slice(0, gameState.totalPlayers);
+            }
+            
             updateGameSettingsDisplay();
             playSound('card-flip');
         }
@@ -3142,17 +3508,22 @@
                 }
             }
             
-            // Generate player emojis
+            // Generate player emojis - KEEP ORDER CONSISTENT WITH NAMES
             gameState.playerEmojis = [];
-            const shuffledEmojis = [...coolEmojis].sort(() => Math.random() - 0.5);
             for (let i = 0; i < gameState.totalPlayers; i++) {
-                gameState.playerEmojis.push(shuffledEmojis[i] || coolEmojis[Math.floor(Math.random() * coolEmojis.length)]);
+                gameState.playerEmojis.push(coolEmojis[i % coolEmojis.length]);
             }
         }
 
         function startGame() {
+            // Initialize player names if not already set
+            if (gameState.playerNames.length === 0) {
+                initializePlayerNames();
+            }
+            
             generateGame();
-            gameState.currentPlayer = 1;
+            // FIXED: Zufälliger Startspieler wird erst bei showGameStarted() gesetzt
+            gameState.currentPlayer = 1; // Trotzdem bei Spieler 1 beginnen für die Kartenverteilung
             gameState.gameStartTime = Date.now();
             showScreen('gameScreen');
             updateGameDisplay();
@@ -3161,7 +3532,8 @@
         }
 
         function updateGameDisplay() {
-            document.getElementById('playerTitle').textContent = `Spieler ${gameState.currentPlayer}`;
+            const playerName = gameState.playerNames[gameState.currentPlayer - 1] || `Spieler ${gameState.currentPlayer}`;
+            document.getElementById('playerTitle').textContent = playerName;
             document.getElementById('playerEmoji').textContent = gameState.playerEmojis[gameState.currentPlayer - 1] || '👤';
             
             if (gameState.currentPlayer < gameState.totalPlayers) {
@@ -3170,9 +3542,22 @@
                 document.getElementById('nextButton').textContent = 'Spiel starten';
             }
             
-            hideRole();
+            // WICHTIG: Button muss versteckt bleiben bis erste Aufdeckung erfolgt ist
+            const nextButton = document.getElementById('nextButton');
+            nextButton.classList.remove('visible');
+            
+            // Reset hasRevealed for new player
+            gameState.hasRevealed = false;
+            
+            // Reset instruction text to initial state
+            const instructionText = document.getElementById('instructionText');
+            if (instructionText) {
+                instructionText.style.opacity = '1';
+                instructionText.textContent = 'Ziehe deine Karte nach oben, um das Wort zu sehen. Achte darauf, dass niemand es sieht.';
+            }
         }
 
+        // IMPROVED: Show role with hold-to-reveal functionality
         function showRole() {
             const isImpostor = gameState.impostorPlayers.includes(gameState.currentPlayer);
             const roleIcon = document.getElementById('roleIcon');
@@ -3195,51 +3580,42 @@
                 wordOrHint.innerHTML = `<div class="word-display">${gameState.gameWord}</div>`;
             }
             
-            // ROBUSTE Methode zum Verstecken der Elemente
-            setTimeout(() => {
-                const nextButton = document.querySelector('#nextButton');
-                const instructionText = document.querySelector('#instructionText');
-                
-                console.log('SHOW - Button gefunden:', !!nextButton);
-                console.log('SHOW - Text gefunden:', !!instructionText);
-                
-                if (nextButton) {
-                    nextButton.style.setProperty('opacity', '0', 'important');
-                    nextButton.style.setProperty('pointer-events', 'none', 'important');
-                }
-                if (instructionText) {
-                    instructionText.style.setProperty('opacity', '0', 'important');
-                    instructionText.style.setProperty('transform', 'translateY(-10px)', 'important');
-                }
-            }, 50);
-            
+            // Show the revealed content
             document.getElementById('revealedContent').classList.add('visible');
             document.getElementById('playerCard').classList.add('lifted');
+            
+            // Hide instruction text while revealing
+            const instructionText = document.getElementById('instructionText');
+            if (instructionText) {
+                instructionText.style.opacity = '0';
+            }
+            
             playSound('tap');
             vibrate([30]);
         }
 
         function hideRole() {
-            // ROBUSTE Methode zum Zeigen der Elemente
-            setTimeout(() => {
-                const nextButton = document.querySelector('#nextButton');
-                const instructionText = document.querySelector('#instructionText');
-                
-                console.log('HIDE - Button gefunden:', !!nextButton);
-                console.log('HIDE - Text gefunden:', !!instructionText);
-                
-                if (nextButton) {
-                    nextButton.style.setProperty('opacity', '1', 'important');
-                    nextButton.style.setProperty('pointer-events', 'auto', 'important');
-                }
-                if (instructionText) {
-                    instructionText.style.setProperty('opacity', '1', 'important');
-                    instructionText.style.setProperty('transform', 'translateY(0px)', 'important');
-                }
-            }, 50);
-            
+            // Hide role content first
             document.getElementById('revealedContent').classList.remove('visible');
             document.getElementById('playerCard').classList.remove('lifted');
+            
+            // Mark that this player has revealed their card
+            gameState.hasRevealed = true;
+            
+            // Show instruction text again and update to next step
+            const instructionText = document.getElementById('instructionText');
+            if (instructionText) {
+                instructionText.style.opacity = '1';
+                instructionText.textContent = 'Gerät an den nächsten Spieler weitergeben';
+            }
+            
+            // Show next button ONLY after first reveal and 400ms delay when card is completely closed
+            setTimeout(() => {
+                if (gameState.hasRevealed) {
+                    const nextButton = document.getElementById('nextButton');
+                    nextButton.classList.add('visible');
+                }
+            }, 400);
         }
 
         function handleNextPlayer() {
@@ -3256,6 +3632,9 @@
                 playSound('card-flip');
                 vibrate([50]);
                 
+                // Hide button during transition
+                nextButton.classList.remove('visible');
+                
                 setTimeout(() => {
                     gameState.currentPlayer++;
                     updateGameDisplay();
@@ -3268,9 +3647,9 @@
                 
                 setTimeout(() => {
                     nextButton.style.transform = 'scale(1)';
-                    gameState.startingPlayer = Math.floor(Math.random() * gameState.totalPlayers) + 1;
                     showGameStarted();
                     nextButton.textContent = 'Spiel starten';
+                    nextButton.classList.remove('visible');
                     playSound('success');
                     vibrate([100, 50, 100]);
                 }, 800);
@@ -3278,8 +3657,12 @@
         }
 
         function updateGameStartedDisplay() {
+            // FIXED: Zufälliger Startspieler wird HIER gesetzt, nicht beim Start
+            gameState.startingPlayer = Math.floor(Math.random() * gameState.totalPlayers) + 1;
+            
+            const starterName = gameState.playerNames[gameState.startingPlayer - 1] || `Spieler ${gameState.startingPlayer}`;
             const starterText = document.getElementById('starterText');
-            starterText.textContent = `Spieler ${gameState.startingPlayer} beginnt`;
+            starterText.textContent = `${starterName} beginnt`;
             starterText.classList.remove('shrunk');
             
             // Show timer if enabled
@@ -3371,6 +3754,7 @@
             for (let i = 1; i <= gameState.totalPlayers; i++) {
                 const isImpostor = gameState.impostorPlayers.includes(i);
                 const playerEmoji = gameState.playerEmojis[i-1] || '👤';
+                const playerName = gameState.playerNames[i-1] || `Spieler ${i}`;
                 
                 const roleItem = document.createElement('div');
                 roleItem.className = 'role-item';
@@ -3383,7 +3767,7 @@
                 roleIcon.textContent = isImpostor ? '✕' : '✓';
                 
                 const playerText = document.createElement('span');
-                playerText.textContent = `${playerEmoji} Spieler ${i}`;
+                playerText.textContent = `${playerEmoji} ${playerName}`;
                 
                 rolePlayer.appendChild(roleIcon);
                 rolePlayer.appendChild(playerText);
@@ -3422,7 +3806,7 @@
         });
 
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.dropdown') && !event.target.closest('.settings-menu') && !event.target.closest('.settings-icon')) {
+            if (!event.target.closest('.dropdown') && !event.target.closest('.settings-menu') && !event.target.closest('.settings-icon') && !event.target.closest('.names-modal')) {
                 const dropdown = document.getElementById('categoryDropdown');
                 const settingsMenu = document.getElementById('settingsMenu');
                 if (dropdown) dropdown.classList.add('hidden');
@@ -3436,6 +3820,9 @@
 
         // Initialize with scroll listener for indicators
         function initialize() {
+            // Initialize player names
+            initializePlayerNames();
+            
             updateGameSettingsDisplay();
             updateSettingsDisplay();
             
