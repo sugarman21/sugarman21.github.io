@@ -209,6 +209,17 @@
             transform: scale(0.98);
         }
         
+        .settings-menu-item.version {
+            color: rgba(255,255,255,0.4);
+            cursor: default;
+            pointer-events: none;
+        }
+        
+        .settings-menu-item.version:hover, .settings-menu-item.version:active {
+            background: transparent;
+            transform: none;
+        }
+        
         .settings-menu-item:last-child {
             margin-bottom: 0;
         }
@@ -910,6 +921,29 @@
             background: rgba(58, 58, 64, 0.95);
             transform: scale(0.95);
         }
+
+        /* NEW: Categories button - same style as names */
+        .categories-button {
+            background: rgba(44, 44, 48, 0.95);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: clamp(14px, 3.5vw, 16px);
+            padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 20px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            min-width: clamp(100px, 25vw, 120px);
+        }
+        
+        .categories-button:active {
+            background: rgba(58, 58, 64, 0.95);
+            transform: scale(0.95);
+        }
         
         /* Counter Controls - VERBESSERTER KONTRAST */
         .counter-controls {
@@ -983,62 +1017,6 @@
         
         .toggle-switch.active::after {
             left: calc(100% - clamp(28px, 7vw, 32px) - 2px);
-        }
-        
-        /* Dropdown - VERBESSERTER KONTRAST */
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-button {
-            background: rgba(44, 44, 48, 0.95);
-            border: none;
-            border-radius: 18px;
-            color: white;
-            padding: clamp(10px, 2.5vw, 12px) clamp(18px, 4.5vw, 20px);
-            font-size: clamp(14px, 3.5vw, 16px);
-            font-weight: 500;
-            cursor: pointer;
-            min-width: clamp(90px, 22vw, 100px);
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-        
-        .dropdown-button:active {
-            background: rgba(58, 58, 64, 0.95);
-            transform: scale(0.98);
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(28, 28, 30, 0.95);
-            border-radius: 16px;
-            margin-top: 8px;
-            min-width: 140px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.15);
-            z-index: 10000;
-            overflow: hidden;
-            color: white;
-        }
-        
-        .dropdown-item {
-            padding: clamp(12px, 3vw, 14px) clamp(18px, 4.5vw, 20px);
-            color: white;
-            cursor: pointer;
-            font-size: clamp(14px, 3.5vw, 16px);
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        .dropdown-item:hover, .dropdown-item:active {
-            background: rgba(255,255,255,0.15);
         }
         
         /* Buttons - VERBESSERTER KONTRAST */
@@ -1384,6 +1362,136 @@
         }
         
         .name-number {
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-size: clamp(12px, 3vw, 14px);
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* NEW: Categories Modal - same style as names modal */
+        .categories-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .categories-modal.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .categories-modal-content {
+            background: rgba(28, 28, 30, 0.95);
+            border-radius: 32px;
+            padding: 32px;
+            width: 92%;
+            max-width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: white;
+            position: relative;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .categories-modal.visible .categories-modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .categories-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .categories-modal-close:hover, .categories-modal-close:active {
+            background: rgba(255,255,255,0.25);
+            transform: scale(0.9);
+        }
+        
+        .categories-modal-title {
+            font-size: clamp(26px, 6.5vw, 34px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: white;
+        }
+        
+        .categories-list {
+            max-height: 60vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .category-item:hover, .category-item:active {
+            background: rgba(255,255,255,0.2);
+            transform: scale(0.98);
+        }
+        
+        .category-item.selected {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: rgba(76, 175, 80, 0.5);
+        }
+        
+        .category-display {
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: 600;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .category-emoji {
+            font-size: clamp(20px, 5vw, 24px);
+        }
+        
+        .category-count {
             background: rgba(255,255,255,0.2);
             border-radius: 12px;
             padding: 8px 12px;
@@ -2065,7 +2173,7 @@
     <div id="impostorScreen" class="screen impostor-bg hidden">
         <button class="back-button" onclick="showModeSelect()">←</button>
         
-        <h1 class="title" style="font-size: clamp(28px, 7vw, 36px); margin-bottom: 28px;">Impostor</h1>
+        <h1 class="title" style="font-size: clamp(28px, 7vw, 36px); margin-bottom: 28px;">Impostor Game</h1>
         
         <div class="settings-container">
             <div class="setting-row">
@@ -2122,15 +2230,10 @@
                     <span class="setting-icon">🏷️</span>
                     Kategorien
                 </div>
-                <div class="dropdown">
-                    <button class="dropdown-button" id="categoryButton" onclick="toggleCategoryDropdown()">Alle ▼</button>
-                    <div class="dropdown-menu hidden" id="categoryDropdown">
-                        <div class="dropdown-item" onclick="selectCategory('alle')">Alle</div>
-                        <div class="dropdown-item" onclick="selectCategory('food')">Essen</div>
-                        <div class="dropdown-item" onclick="selectCategory('animals')">Tiere</div>
-                        <div class="dropdown-item" onclick="selectCategory('objects')">Objekte</div>
-                    </div>
-                </div>
+                <button class="categories-button" id="categoryButton" onclick="showCategoriesModal()">
+                    <span id="categoryEmoji">🎯</span>
+                    <span id="categoryText">Alle</span>
+                </button>
             </div>
             
             <div class="setting-row">
@@ -2151,7 +2254,7 @@
     <div id="gameScreen" class="screen impostor-bg hidden">
         <button class="back-button" onclick="showImpostorSettings()">←</button>
         
-        <h2 style="color: white; font-size: clamp(18px, 4.5vw, 24px); margin-bottom: 28px; font-weight: 600;">Impostor</h2>
+        <h2 style="color: white; font-size: clamp(14px, 3.5vw, 18px); margin-bottom: 0; font-weight: 600; position: absolute; top: clamp(20px, 5vw, 30px); left: 50%; transform: translateX(-50%); z-index: 10;">Impostor Game</h2>
         
         <div class="player-card" id="playerCard">
             <div class="player-title" id="playerTitle">Spieler 1</div>
@@ -2166,7 +2269,7 @@
             
             <div class="revealed-content" id="revealedContent">
                 <div class="role-icon" id="roleIcon">✓</div>
-                <div class="role-text" id="roleText">Du bist Impostor!</div>
+                <div class="role-text" id="roleText"></div>
                 <div id="wordOrHint"></div>
             </div>
         </div>
@@ -2242,6 +2345,17 @@
         </div>
     </div>
 
+    <!-- Categories Management Modal -->
+    <div class="categories-modal" id="categoriesModal">
+        <div class="categories-modal-content">
+            <button class="categories-modal-close" onclick="closeCategoriesModal()">×</button>
+            <h2 class="categories-modal-title">Kategorien auswählen</h2>
+            <div class="categories-list" id="categoriesList">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Overlay -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="modalContent">
@@ -2255,7 +2369,7 @@
 
     <script>
         // App Version
-        const APP_VERSION = '1.2.0';
+        const APP_VERSION = '1.3.0';
 
         // Game State
         let gameState = {
@@ -2264,7 +2378,7 @@
             timerEnabled: false,
             timerMinutes: 2,
             hintsEnabled: true,
-            category: 'alle',
+            selectedCategories: ['alle'], // Changed to array for multiple categories
             currentPlayer: 1,
             gameWord: '',
             gameHint: '',
@@ -2301,84 +2415,310 @@
         let easterEggClicks = 0;
         let easterEggTimer = null;
 
-        // Word categories
+        // EXPANDED Word categories with new categories from the image
         const WORD_CATEGORIES = {
-            food: [
-                { word: "Sushi", hint: "japanisch" },
-                { word: "Croissant", hint: "französisch" },
-                { word: "Tacos", hint: "mexikanisch" },
-                { word: "Pasta", hint: "al dente" },
-                { word: "Curry", hint: "scharf" },
-                { word: "Döner", hint: "türkisch" },
-                { word: "Ramen", hint: "Nudeln" },
-                { word: "Burger", hint: "amerikanisch" },
-                { word: "Spaghetti", hint: "lang" },
-                { word: "Popcorn", hint: "knallt" },
-                { word: "Wasabi", hint: "brennt" },
-                { word: "Mozzarella", hint: "cremig" },
-                { word: "Pizza", hint: "italienisch" },
-                { word: "Bratwurst", hint: "deutsch" },
-                { word: "Kimchi", hint: "koreanisch" },
-                { word: "Bolognese", hint: "Soße" }
+            // 🌍 Rund um die Welt
+            travel: [
+                { word: "Eiffelturm", hint: "Paris" },
+                { word: "Big Ben", hint: "London" },
+                { word: "Kolosseum", hint: "Rom" },
+                { word: "Pyramiden", hint: "Ägypten" },
+                { word: "Taj Mahal", hint: "Indien" },
+                { word: "Machu Picchu", hint: "Peru" },
+                { word: "Neuschwanstein", hint: "Bayern" },
+                { word: "Sagrada Familia", hint: "Barcelona" },
+                { word: "Mount Rushmore", hint: "Amerika" },
+                { word: "Brandenburger Tor", hint: "Berlin" },
+                { word: "Statue of Liberty", hint: "New York" },
+                { word: "Stonehenge", hint: "England" },
+                { word: "Gondel", hint: "Venedig" },
+                { word: "Safari", hint: "Afrika" },
+                { word: "Sushi", hint: "Japan" },
+                { word: "Oktoberfest", hint: "München" },
+                { word: "Tulpen", hint: "Holland" },
+                { word: "Tango", hint: "Argentinien" },
+                { word: "Backpacking", hint: "Reisen" },
+                { word: "Flughafen", hint: "Terminal" }
             ],
-            
+
+            // 🎬 Unterhaltung
+            entertainment: [
+                { word: "Netflix", hint: "Streaming" },
+                { word: "Popcorn", hint: "Kino" },
+                { word: "Blockbuster", hint: "Erfolg" },
+                { word: "Oscar", hint: "Preis" },
+                { word: "Cliffhanger", hint: "Spannung" },
+                { word: "Soundtrack", hint: "Musik" },
+                { word: "Plot Twist", hint: "Wendung" },
+                { word: "Spoiler", hint: "Verrat" },
+                { word: "Binge-watching", hint: "Marathon" },
+                { word: "Red Carpet", hint: "Premiere" },
+                { word: "Standing Ovation", hint: "Applaus" },
+                { word: "Box Office", hint: "Kasse" },
+                { word: "Behind the Scenes", hint: "Kulissen" },
+                { word: "Director's Cut", hint: "Version" },
+                { word: "Cameo", hint: "Auftritt" },
+                { word: "Easter Egg", hint: "Versteckt" },
+                { word: "Trailer", hint: "Vorschau" },
+                { word: "Sequel", hint: "Fortsetzung" },
+                { word: "Remake", hint: "Neuauflage" },
+                { word: "Premiere", hint: "Erstaufführung" }
+            ],
+
+            // 🏠 Alltag  
+            everyday: [
+                { word: "Morgenmuffel", hint: "Müde" },
+                { word: "Kaffeesucht", hint: "Abhängig" },
+                { word: "Wecker", hint: "Aufstehen" },
+                { word: "Pendeln", hint: "Arbeitsweg" },
+                { word: "Feierabend", hint: "Entspannung" },
+                { word: "Hausputz", hint: "Sauber" },
+                { word: "Einkaufsliste", hint: "Vergessen" },
+                { word: "Stau", hint: "Warten" },
+                { word: "Parkplatzsuche", hint: "Stress" },
+                { word: "WG-Leben", hint: "Teilen" },
+                { word: "Abwasch", hint: "Spülen" },
+                { word: "Nachbar", hint: "Nebenan" },
+                { word: "Paketbote", hint: "Lieferung" },
+                { word: "Warteschlange", hint: "Geduld" },
+                { word: "Hausschlüssel", hint: "Vergessen" },
+                { word: "Mülltonnen", hint: "Rausräumen" },
+                { word: "Mittagspause", hint: "Erholung" },
+                { word: "Wäsche", hint: "Waschen" },
+                { word: "Supermarkt", hint: "Einkaufen" },
+                { word: "Mitbewohner", hint: "Zusammenleben" }
+            ],
+
+            // 🐾 Tiere & Natur
             animals: [
-                { word: "Flamingo", hint: "rosa" },
-                { word: "Pinguin", hint: "watschelt" },
-                { word: "Koala", hint: "australisch" },
+                { word: "Flamingo", hint: "Rosa" },
+                { word: "Pinguin", hint: "Watschelt" },
+                { word: "Koala", hint: "Australisch" },
                 { word: "Giraffe", hint: "Hals" },
-                { word: "Delfin", hint: "intelligent" },
-                { word: "Faultier", hint: "langsam" },
-                { word: "Chamäleon", hint: "wechselt" },
-                { word: "Känguru", hint: "hüpft" },
-                { word: "Oktopus", hint: "acht" },
-                { word: "Seepferdchen", hint: "maritim" },
-                { word: "Erdmännchen", hint: "wacht" },
-                { word: "Alpaka", hint: "flauschig" },
+                { word: "Delfin", hint: "Intelligent" },
+                { word: "Faultier", hint: "Langsam" },
+                { word: "Chamäleon", hint: "Wechselt" },
+                { word: "Känguru", hint: "Hüpft" },
+                { word: "Oktopus", hint: "Acht" },
+                { word: "Seepferdchen", hint: "Maritim" },
+                { word: "Erdmännchen", hint: "Wacht" },
+                { word: "Alpaka", hint: "Flauschig" },
                 { word: "Elefant", hint: "Rüssel" },
-                { word: "Tiger", hint: "gestreift" },
-                { word: "Eule", hint: "nachts" }
+                { word: "Tiger", hint: "Gestreift" },
+                { word: "Eule", hint: "Nachts" },
+                { word: "Kolibri", hint: "Winzig" },
+                { word: "Regenwurm", hint: "Boden" },
+                { word: "Spinne", hint: "Netz" },
+                { word: "Biene", hint: "Honig" },
+                { word: "Schmetterling", hint: "Verwandlung" },
+                { word: "Igel", hint: "Stachelig" },
+                { word: "Eichhörnchen", hint: "Nüsse" },
+                { word: "Waschbär", hint: "Maskiert" },
+                { word: "Biber", hint: "Damm" },
+                { word: "Lama", hint: "Spuckt" }
+            ],
+
+            // ⚽ Sport & Freizeit
+            sports: [
+                { word: "Overtime", hint: "Verlängerung" },
+                { word: "Fair Play", hint: "Anstand" },
+                { word: "Weltrekord", hint: "Bestzeit" },
+                { word: "Mannschaftssport", hint: "Gemeinsam" },
+                { word: "Einzelkämpfer", hint: "Solo" },
+                { word: "Heimvorteil", hint: "Zuhause" },
+                { word: "Underdog", hint: "Außenseiter" },
+                { word: "Derby", hint: "Rivalität" },
+                { word: "Playoffs", hint: "Entscheidung" },
+                { word: "Meisterschaft", hint: "Titel" },
+                { word: "Olympia", hint: "Ringe" },
+                { word: "Doping", hint: "Betrug" },
+                { word: "Schiedsrichter", hint: "Pfeife" },
+                { word: "Fangesang", hint: "Supporters" },
+                { word: "Vereinswechsel", hint: "Transfer" },
+                { word: "Verletzungspause", hint: "Auszeit" },
+                { word: "Comeback", hint: "Rückkehr" },
+                { word: "Rookie", hint: "Neuling" },
+                { word: "Veteran", hint: "Erfahren" },
+                { word: "Sportgeist", hint: "Fairness" }
+            ],
+
+            // 📚 Wissen & Schule
+            education: [
+                { word: "Klassenarbeit", hint: "Stress" },
+                { word: "Pausenhof", hint: "Pause" },
+                { word: "Schulbrot", hint: "Verpflegung" },
+                { word: "Hausaufgaben", hint: "Vergessen" },
+                { word: "Lehrbuch", hint: "Schwer" },
+                { word: "Schulranzen", hint: "Rücken" },
+                { word: "Klassenkamerad", hint: "Freund" },
+                { word: "Vertretungslehrer", hint: "Überraschung" },
+                { word: "Zeugnis", hint: "Noten" },
+                { word: "Abitur", hint: "Abschluss" },
+                { word: "Studienbeginn", hint: "Universität" },
+                { word: "Vorlesung", hint: "Hören" },
+                { word: "Klausur", hint: "Prüfung" },
+                { word: "Semester", hint: "Halbjahr" },
+                { word: "Bachelor", hint: "Abschluss" },
+                { word: "Praktikum", hint: "Erfahrung" },
+                { word: "Bibliothek", hint: "Bücher" },
+                { word: "Mensaessen", hint: "Günstig" },
+                { word: "Campus", hint: "Gelände" },
+                { word: "Diplomarbeit", hint: "Thesis" }
+            ],
+
+            // 🎉 Feste & Feiern
+            celebrations: [
+                { word: "Geburtstagstorte", hint: "Kerzen" },
+                { word: "Konfetti", hint: "Bunt" },
+                { word: "Überraschungsparty", hint: "Geheim" },
+                { word: "Silvesterfeuer", hint: "Neujahr" },
+                { word: "Weihnachtsmarkt", hint: "Glühwein" },
+                { word: "Ostereiersuche", hint: "Versteckt" },
+                { word: "Karnevalsumzug", hint: "Kostüme" },
+                { word: "Hochzeitstorte", hint: "Süß" },
+                { word: "Jubiläum", hint: "Jahrestag" },
+                { word: "Familientreffen", hint: "Verwandtschaft" },
+                { word: "Schulabschluss", hint: "Zeugnis" },
+                { word: "Einschulung", hint: "Schultüte" },
+                { word: "Junggesellenabschied", hint: "Letztes Mal" },
+                { word: "Taufe", hint: "Wasser" },
+                { word: "Kommunion", hint: "Kirche" },
+                { word: "Firmenfeier", hint: "Kollegen" },
+                { word: "Abschlussball", hint: "Elegant" },
+                { word: "Gartenparty", hint: "Draußen" },
+                { word: "Grillabend", hint: "Würstchen" },
+                { word: "Geburtstagsständchen", hint: "Singen" }
+            ],
+
+            // 🇩🇪 Deutsche Begriffe
+            german: [
+                { word: "Verschlimmbessern", hint: "Schlimmer" },
+                { word: "Fernweh", hint: "Sehnsucht" },
+                { word: "Gemütlichkeit", hint: "Wohlfühlen" },
+                { word: "Schadenfreude", hint: "Bosheit" },
+                { word: "Wanderlust", hint: "Reisen" },
+                { word: "Zeitgeist", hint: "Epoche" },
+                { word: "Doppelgänger", hint: "Zwilling" },
+                { word: "Kindergarten", hint: "Spielen" },
+                { word: "Gesundheit", hint: "Niesen" },
+                { word: "Weltschmerz", hint: "Traurigkeit" },
+                { word: "Fingerspitzengefühl", hint: "Feinfühlig" },
+                { word: "Ohrwurm", hint: "Melodie" },
+                { word: "Kopfkino", hint: "Vorstellung" },
+                { word: "Fremdschämen", hint: "Peinlich" },
+                { word: "Verschlimmbessern", hint: "Kaputt" },
+                { word: "Erklärungsnot", hint: "Rechtfertigung" },
+                { word: "Stehaufmännchen", hint: "Widerstand" },
+                { word: "Backpfeifengesicht", hint: "Unsympathisch" },
+                { word: "Kuddelmuddel", hint: "Chaos" },
+                { word: "Torschlusspanik", hint: "Angst" }
+            ],
+
+            // ⭐ Stars & Promis
+            celebrities: [
+                { word: "Paparazzi", hint: "Fotografen" },
+                { word: "Roter Teppich", hint: "Glamour" },
+                { word: "Autogramm", hint: "Unterschrift" },
+                { word: "Fanclub", hint: "Verehrung" },
+                { word: "Skandal", hint: "Aufregung" },
+                { word: "Comeback", hint: "Rückkehr" },
+                { word: "Plattenvertrag", hint: "Musik" },
+                { word: "Welttournee", hint: "Konzerte" },
+                { word: "Box Office", hint: "Kino" },
+                { word: "Casting", hint: "Auswahl" },
+                { word: "Bodyguard", hint: "Schutz" },
+                { word: "Privatsphäre", hint: "Geheim" },
+                { word: "Charity", hint: "Spenden" },
+                { word: "Shitstorm", hint: "Kritik" },
+                { word: "Influencer", hint: "Einfluss" },
+                { word: "Viral", hint: "Verbreitung" },
+                { word: "Trending", hint: "Aktuell" },
+                { word: "Shitstorm", hint: "Empörung" },
+                { word: "Award Show", hint: "Preisverleihung" },
+                { word: "Lifestyle", hint: "Lebensart" }
+            ],
+
+            // Legacy categories with more words
+            food: [
+                { word: "Sushi", hint: "Japanisch" },
+                { word: "Croissant", hint: "Französisch" },
+                { word: "Tacos", hint: "Mexikanisch" },
+                { word: "Pasta", hint: "Al dente" },
+                { word: "Curry", hint: "Scharf" },
+                { word: "Döner", hint: "Türkisch" },
+                { word: "Ramen", hint: "Nudeln" },
+                { word: "Burger", hint: "Amerikanisch" },
+                { word: "Spaghetti", hint: "Lang" },
+                { word: "Popcorn", hint: "Knallt" },
+                { word: "Wasabi", hint: "Brennt" },
+                { word: "Mozzarella", hint: "Cremig" },
+                { word: "Pizza", hint: "Italienisch" },
+                { word: "Bratwurst", hint: "Deutsch" },
+                { word: "Kimchi", hint: "Koreanisch" },
+                { word: "Bolognese", hint: "Soße" },
+                { word: "Tiramisu", hint: "Dessert" },
+                { word: "Paella", hint: "Spanisch" },
+                { word: "Guacamole", hint: "Avocado" },
+                { word: "Baguette", hint: "Stange" },
+                { word: "Churros", hint: "Süß" },
+                { word: "Gazpacho", hint: "Kalt" },
+                { word: "Maultaschen", hint: "Schwäbisch" },
+                { word: "Schnitzel", hint: "Paniert" },
+                { word: "Kaiserschmarren", hint: "Österreich" }
             ],
             
             objects: [
-                { word: "Regenschirm", hint: "schützt" },
+                { word: "Regenschirm", hint: "Schützt" },
                 { word: "AirPods", hint: "Musik" },
-                { word: "Skateboard", hint: "rollt" },
+                { word: "Skateboard", hint: "Rollt" },
                 { word: "Fernbedienung", hint: "TV" },
-                { word: "Sonnenbrille", hint: "cool" },
-                { word: "Rucksack", hint: "trägt" },
+                { word: "Sonnenbrille", hint: "Cool" },
+                { word: "Rucksack", hint: "Trägt" },
                 { word: "Wasserflasche", hint: "Durst" },
-                { word: "Powerbank", hint: "strom" },
-                { word: "Latte", hint: "Heiß" },
-                { word: "Bluetooth-Box", hint: "drahtlos" },
+                { word: "Powerbank", hint: "Strom" },
+                { word: "Laptop", hint: "Aufklappen" },
+                { word: "Bluetooth-Box", hint: "Drahtlos" },
                 { word: "Smartwatch", hint: "Handgelenk" },
-                { word: "Gaming-Stuhl", hint: "zocken" },
+                { word: "Gaming-Stuhl", hint: "Zocken" },
                 { word: "Kamera", hint: "Aufnahme" },
-                { word: "Schreibtisch", hint: "arbeiten" },
-                { word: "Kühlschrank", hint: "abkühlen" },
+                { word: "Schreibtisch", hint: "Arbeiten" },
+                { word: "Kühlschrank", hint: "Abkühlen" },
                 { word: "Hoodie", hint: "Kapuze" },
-                { word: "Bob Marley", hint: "Jamaika" },
-                { word: "Herausforderung", hint: "Anstrengend" },
-                { word: "Laptop", hint: "aufklappen" },
                 { word: "Monitor", hint: "Bild" },
-                { word: "Paket", hint: "pappe" },
-                { word: "DHL", hint: "Bestellen" },
-                { word: "Cappie", hint: "Kopfbedeckung" },
-                { word: "Links", hint: "seite" },
-                { word: "Rechts", hint: "politisch" },
-                { word: "Spotify", hint: "Playlist" },
-                { word: "LED", hint: "leuchtet" },
-                { word: "Filter", hint: "verschönt" },
-                { word: "Zoomen", hint: "näher" },
-                { word: "Snackautomat", hint: "klemmt" },
-                { word: "Influencer", hint: "Story" },
+                { word: "Spiegel", hint: "Reflex" },
+                { word: "Timer", hint: "Zeit" },
+                { word: "Snackautomat", hint: "Klemmt" },
                 { word: "Escape Room", hint: "Rätsel" },
-                { word: "Timer", hint: "tick" },
-                { word: "Spiegel", hint: "selber" },
-                { word: "U8", hint: "vercraked" },
-                { word: "1%", hint: "wenig" }
+                { word: "Smartphone", hint: "Immer dabei" },
+                { word: "Kopfhörer", hint: "Privat hören" },
+                { word: "Tablet", hint: "Touchscreen" },
+                { word: "Drohne", hint: "Fliegt" }
             ]
         };
+
+        // Category metadata - emoji and names
+        const CATEGORY_INFO = {
+            alle: { emoji: "🎯", name: "Alle Kategorien", count: 0 },
+            travel: { emoji: "🌍", name: "Rund um die Welt", count: 20 },
+            entertainment: { emoji: "🎬", name: "Unterhaltung", count: 20 },
+            everyday: { emoji: "🏠", name: "Alltag", count: 20 },
+            animals: { emoji: "🐾", name: "Tiere & Natur", count: 25 },
+            sports: { emoji: "⚽", name: "Sport & Freizeit", count: 20 },
+            education: { emoji: "📚", name: "Wissen & Schule", count: 20 },
+            celebrations: { emoji: "🎉", name: "Feste & Feiern", count: 20 },
+            german: { emoji: "🇩🇪", name: "Deutsche Begriffe", count: 20 },
+            celebrities: { emoji: "⭐", name: "Stars & Promis", count: 20 },
+            food: { emoji: "🍕", name: "Essen & Trinken", count: 25 },
+            objects: { emoji: "📱", name: "Objekte & Technik", count: 25 }
+        };
+
+        // Calculate total count for "alle"
+        CATEGORY_INFO.alle.count = Object.keys(WORD_CATEGORIES).reduce((total, key) => {
+            if (key !== 'alle') {
+                return total + WORD_CATEGORIES[key].length;
+            }
+            return total;
+        }, 0);
 
         const coolEmojis = ['😎', '🤩', '🔥', '⚡', '🎯', '💀', '💎', '👾', '🪼', '🎊', '🎉', '🦄', '🐉', '👑', '🏆'];
 
@@ -2469,6 +2809,89 @@
                     saveEdit();
                 }
             });
+        }
+
+        // NEW: Categories Management Functions
+        function showCategoriesModal() {
+            updateCategoriesDisplay();
+            document.getElementById('categoriesModal').classList.add('visible');
+            playSound('tap');
+        }
+
+        function closeCategoriesModal() {
+            document.getElementById('categoriesModal').classList.remove('visible');
+            updateCategoryButton();
+            playSound('tap');
+        }
+
+        function updateCategoriesDisplay() {
+            const categoriesList = document.getElementById('categoriesList');
+            categoriesList.innerHTML = '';
+            
+            Object.keys(CATEGORY_INFO).forEach(categoryKey => {
+                const category = CATEGORY_INFO[categoryKey];
+                const isSelected = gameState.selectedCategories.includes(categoryKey);
+                
+                const categoryItem = document.createElement('div');
+                categoryItem.className = `category-item ${isSelected ? 'selected' : ''}`;
+                categoryItem.onclick = () => toggleCategory(categoryKey);
+                
+                categoryItem.innerHTML = `
+                    <div class="category-display">
+                        <span class="category-emoji">${category.emoji}</span>
+                        <span>${category.name}</span>
+                    </div>
+                    <div class="category-count">${category.count}</div>
+                `;
+                
+                categoriesList.appendChild(categoryItem);
+            });
+        }
+
+        function toggleCategory(categoryKey) {
+            if (categoryKey === 'alle') {
+                // If "alle" is selected, select only "alle"
+                gameState.selectedCategories = ['alle'];
+            } else {
+                // Remove "alle" if other categories are selected
+                if (gameState.selectedCategories.includes('alle')) {
+                    gameState.selectedCategories = [];
+                }
+                
+                // Toggle the category
+                const index = gameState.selectedCategories.indexOf(categoryKey);
+                if (index > -1) {
+                    gameState.selectedCategories.splice(index, 1);
+                } else {
+                    gameState.selectedCategories.push(categoryKey);
+                }
+                
+                // If no categories selected, select "alle"
+                if (gameState.selectedCategories.length === 0) {
+                    gameState.selectedCategories = ['alle'];
+                }
+            }
+            
+            updateCategoriesDisplay();
+            playSound('tap');
+        }
+
+        function updateCategoryButton() {
+            const categoryButton = document.getElementById('categoryButton');
+            const categoryEmoji = document.getElementById('categoryEmoji');
+            const categoryText = document.getElementById('categoryText');
+            
+            if (gameState.selectedCategories.includes('alle') || gameState.selectedCategories.length === 0) {
+                categoryEmoji.textContent = CATEGORY_INFO.alle.emoji;
+                categoryText.textContent = CATEGORY_INFO.alle.name;
+            } else if (gameState.selectedCategories.length === 1) {
+                const category = CATEGORY_INFO[gameState.selectedCategories[0]];
+                categoryEmoji.textContent = category.emoji;
+                categoryText.textContent = category.name;
+            } else {
+                categoryEmoji.textContent = '🎯';
+                categoryText.textContent = `${gameState.selectedCategories.length} Kategorien`;
+            }
         }
 
         // Easter Egg Function
@@ -2898,25 +3321,22 @@
         }
 
         function getPlayedCategories() {
-            if (gameHistory.length === 0) return '0/3';
+            if (gameHistory.length === 0) return '0/' + Object.keys(CATEGORY_INFO).length;
             
             const categories = new Set();
             gameHistory.forEach(game => {
-                const word = game.word.toLowerCase();
-                
-                const foodWords = ['sushi', 'pizza', 'pasta', 'burger', 'curry', 'döner', 'ramen', 'croissant', 'tacos', 'popcorn', 'wasabi', 'mozzarella', 'bratwurst', 'kimchi', 'bolognese'];
-                const animalWords = ['flamingo', 'pinguin', 'koala', 'giraffe', 'delfin', 'tiger', 'elefant', 'faultier', 'chamäleon', 'känguru', 'oktopus', 'seepferdchen', 'erdmännchen', 'alpaka', 'eule'];
-                
-                if (foodWords.some(f => word.includes(f.toLowerCase()))) {
-                    categories.add('Essen');
-                } else if (animalWords.some(a => word.includes(a.toLowerCase()))) {
-                    categories.add('Tiere');
-                } else {
-                    categories.add('Objekte');
-                }
+                // Determine category based on game word
+                Object.keys(WORD_CATEGORIES).forEach(categoryKey => {
+                    if (categoryKey !== 'alle') {
+                        const wordsInCategory = WORD_CATEGORIES[categoryKey];
+                        if (wordsInCategory.some(wordObj => wordObj.word.toLowerCase() === game.word.toLowerCase())) {
+                            categories.add(categoryKey);
+                        }
+                    }
+                });
             });
             
-            return `${categories.size}/3`;
+            return `${categories.size}/${Object.keys(CATEGORY_INFO).length - 1}`; // -1 because "alle" doesn't count
         }
 
         function shareStats() {
@@ -3160,8 +3580,10 @@
                 newAchievements.push(ACHIEVEMENTS.social);
             }
             
-            // Explorer - alle 3 Kategorien gespielt
-            if (!achievements.explorer && getPlayedCategories() === '3/3') {
+            // Explorer - alle Kategorien gespielt
+            const totalCategories = Object.keys(CATEGORY_INFO).length - 1; // -1 for "alle"
+            const playedCategoriesCount = parseInt(getPlayedCategories().split('/')[0]);
+            if (!achievements.explorer && playedCategoriesCount >= totalCategories) {
                 achievements.explorer = true;
                 newAchievements.push(ACHIEVEMENTS.explorer);
             }
@@ -3263,7 +3685,8 @@
                             • Komplett offline spielbar<br>
                             • Responsive für alle Geräte<br>
                             • Keine Registrierung erforderlich<br>
-                            • Kostenlos & werbefrei
+                            • Kostenlos & werbefrei<br>
+                            • Über ${CATEGORY_INFO.alle.count} Wörter in ${Object.keys(CATEGORY_INFO).length - 1} Kategorien
                         </div>
                     </div>
                     
@@ -3454,25 +3877,6 @@
             playSound('card-flip');
         }
 
-        function toggleCategoryDropdown() {
-            const dropdown = document.getElementById('categoryDropdown');
-            dropdown.classList.toggle('hidden');
-        }
-
-        function selectCategory(category) {
-            gameState.category = category;
-            const categoryNames = {
-                'alle': 'Alle',
-                'food': 'Essen',
-                'animals': 'Tiere', 
-                'objects': 'Objekte'
-            };
-            
-            document.getElementById('categoryButton').textContent = (categoryNames[category] || category) + ' ▼';
-            document.getElementById('categoryDropdown').classList.add('hidden');
-            playSound('tap');
-        }
-
         function updateGameSettingsDisplay() {
             document.getElementById('playersCount').textContent = gameState.totalPlayers;
             document.getElementById('impostorsCount').textContent = gameState.impostors;
@@ -3483,16 +3887,30 @@
             const minutesRow = document.getElementById('timerMinutesRow');
             timerToggle.classList.toggle('active', gameState.timerEnabled);
             minutesRow.style.display = gameState.timerEnabled ? 'flex' : 'none';
+            
+            // Update category button
+            updateCategoryButton();
         }
 
         // Game Logic
         function generateGame() {
-            // Select words based on category
+            // Select words based on selected categories
             let selectedWords = [];
-            if (gameState.category === 'alle') {
-                selectedWords = [...WORD_CATEGORIES.food, ...WORD_CATEGORIES.animals, ...WORD_CATEGORIES.objects];
+            
+            if (gameState.selectedCategories.includes('alle') || gameState.selectedCategories.length === 0) {
+                // Use all categories
+                Object.keys(WORD_CATEGORIES).forEach(categoryKey => {
+                    if (categoryKey !== 'alle') {
+                        selectedWords = selectedWords.concat(WORD_CATEGORIES[categoryKey]);
+                    }
+                });
             } else {
-                selectedWords = WORD_CATEGORIES[gameState.category] || WORD_CATEGORIES.food;
+                // Use only selected categories
+                gameState.selectedCategories.forEach(categoryKey => {
+                    if (WORD_CATEGORIES[categoryKey]) {
+                        selectedWords = selectedWords.concat(WORD_CATEGORIES[categoryKey]);
+                    }
+                });
             }
             
             const selectedWord = selectedWords[Math.floor(Math.random() * selectedWords.length)];
@@ -3567,11 +3985,11 @@
             if (isImpostor) {
                 roleIcon.textContent = '✕';
                 roleIcon.className = 'role-icon impostor';
-                roleText.textContent = 'Du bist Impostor!';
+                roleText.textContent = ''; // REMOVED: "Du bist Impostor!" text
                 if (gameState.hintsEnabled) {
                     wordOrHint.innerHTML = `<div class="hint-display">Tipp: ${gameState.gameHint}</div>`;
                 } else {
-                    wordOrHint.innerHTML = '';
+                    wordOrHint.innerHTML = '<div class="hint-display">Kein Tipp verfügbar</div>';
                 }
             } else {
                 roleIcon.textContent = '✓';
@@ -3806,10 +4224,12 @@
         });
 
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.dropdown') && !event.target.closest('.settings-menu') && !event.target.closest('.settings-icon') && !event.target.closest('.names-modal')) {
-                const dropdown = document.getElementById('categoryDropdown');
+            if (!event.target.closest('.dropdown') && 
+                !event.target.closest('.settings-menu') && 
+                !event.target.closest('.settings-icon') && 
+                !event.target.closest('.names-modal') &&
+                !event.target.closest('.categories-modal')) {
                 const settingsMenu = document.getElementById('settingsMenu');
-                if (dropdown) dropdown.classList.add('hidden');
                 if (settingsMenu) settingsMenu.classList.remove('visible');
             }
         });
@@ -3822,6 +4242,9 @@
         function initialize() {
             // Initialize player names
             initializePlayerNames();
+            
+            // Initialize categories
+            gameState.selectedCategories = ['alle'];
             
             updateGameSettingsDisplay();
             updateSettingsDisplay();
