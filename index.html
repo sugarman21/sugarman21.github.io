@@ -8,10 +8,31 @@
     <meta name="apple-mobile-web-app-title" content="Party Games">
     <title>Party Games - Impostor & Wer würde eher</title>
     
-    <!-- PWA Icons -->
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==">
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlBhcnR5IEdhbWVzIiwKICAic2hvcnRfbmFtZSI6ICJQYXJ0eUdhbWVzIiwKICAiZGVzY3JpcHRpb24iOiAiRGllIHVsdGltYXRpdmUgUGFydHktQXBwIGbDvHIgdW52ZXJnZXNzbGljaGUgTW9tZW50ZSBtaXQgZGVpbmVuIEZyZXVuZGVuISIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzAwMDAwMCIsCiAgInRoZW1lX2NvbG9yIjogIiNmZjQ1M2EiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJpY29uLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29uLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+    
+    <!-- PWA Icons - Fixed to use icon.png from repository -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="./icon.png">
+    
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icon.png">
+    <link rel="shortcut icon" href="./icon.png">
+    
+    <!-- Meta for Android Chrome -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Party Games">
     <meta name="theme-color" content="#ff453a">
+    <meta name="msapplication-TileColor" content="#ff453a">
+    <meta name="msapplication-TileImage" content="./icon.png">
     
     <style>
         * {
@@ -359,6 +380,24 @@
         }
         
         .impostor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+            border-radius: 32px;
+        }
+        
+        .mystery-card {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .mystery-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -989,7 +1028,7 @@
             🚀 Coming Soon
         </div>
         <div class="settings-menu-item version">
-            💻 made by C at School
+            🍙 made by C.
         </div>
     </div>
 
@@ -1011,14 +1050,25 @@
                 <div class="game-card-players">👥 3-20</div>
             </div>
             
-            <div class="game-card wer-wuerde-card" onclick="showWerWuerdeSettings()">
-                <div class="game-card-emoji">🧠</div>
-                <div class="game-card-title">
-                    <div style="font-size: clamp(14px, 3.5vw, 18px); font-weight: 600; margin-bottom: 4px;">WER WÜRDE</div>
-                    <div style="font-size: clamp(28px, 7vw, 36px); font-weight: 800;">EHER...?</div>
+            <div class="game-card mystery-card" onclick="revealWerWuerdeCard()" id="werWuerdeHomeCard">
+                <!-- Covered state -->
+                <div id="werWuerdeCovered" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; position: relative;">
+                    <div style="font-size: clamp(120px, 30vw, 150px); margin-bottom: 20px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));">❓</div>
+                    <div style="font-size: clamp(18px, 4.5vw, 22px); font-weight: 700; text-align: center; margin-bottom: 12px;">NEUES SPIEL</div>
+                    <div style="font-size: clamp(14px, 3.5vw, 16px); text-align: center; opacity: 0.9; margin-bottom: 20px;">Tippen zum Aufdecken</div>
+                    <div style="background: rgba(0,0,0,0.25); border-radius: 20px; padding: 10px 16px; font-size: clamp(12px, 3vw, 14px); font-weight: 600; backdrop-filter: blur(10px);">🎉 Überraschung</div>
                 </div>
-                <div class="game-card-desc">Lustige Fragen über eure Freunde - wer würde was eher machen?</div>
-                <div class="game-card-players">👥 2-99</div>
+                
+                <!-- Revealed state -->
+                <div id="werWuerdeRevealed" style="display: none; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; padding: 28px;">
+                    <div class="game-card-emoji">🧠</div>
+                    <div class="game-card-title">
+                        <div style="font-size: clamp(14px, 3.5vw, 18px); font-weight: 600; margin-bottom: 4px;">WER WÜRDE</div>
+                        <div style="font-size: clamp(28px, 7vw, 36px); font-weight: 800;">EHER...?</div>
+                    </div>
+                    <div class="game-card-desc">Lustige Fragen über eure Freunde - wer würde was eher machen?</div>
+                    <div class="game-card-players">👥 2-99</div>
+                </div>
             </div>
             
             <div class="game-card coming-soon-card" onclick="handleEasterEggClick()">
@@ -1063,7 +1113,7 @@
             
             <div class="setting-row">
                 <div class="setting-label">
-                    <span class="setting-icon">🎭</span>
+                    <span class="setting-icon" onclick="showSecretSettings()" style="cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">🎭</span>
                     Impostor
                 </div>
                 <div class="counter-controls">
@@ -1255,6 +1305,34 @@
         </button>
     </div>
 
+    <!-- Secret Settings Modal -->
+    <div class="categories-modal" id="secretModal">
+        <div class="categories-modal-content" style="max-width: 400px;">
+            <button class="categories-modal-close" onclick="closeSecretModal()">×</button>
+            <h2 class="categories-modal-title">🤫 Secret Mode</h2>
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🎭</div>
+                <p style="color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5;">
+                    Du hast das versteckte Feature gefunden!
+                </p>
+            </div>
+            
+            <div class="category-item" onclick="toggleChaosMode()" id="chaosModeItem">
+                <div class="category-display">
+                    <span class="category-emoji">😈</span>
+                    <span>Chaos Mode: Alle sind Impostors</span>
+                </div>
+                <div class="category-count" id="chaosModeStatus">Aus</div>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; margin-top: 20px; text-align: center;">
+                <div style="font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.4;">
+                    💡 Im Chaos Mode sind alle Spieler Impostors und bekommen nur Hinweise!
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Names Management Modal -->
     <div class="categories-modal" id="namesModal">
         <div class="categories-modal-content">
@@ -1319,7 +1397,8 @@
             timeLeft: 0,
             gameStartTime: null,
             roundDuration: 0,
-            hasRevealed: false
+            hasRevealed: false,
+            chaosMode: false
         };
 
         // Game State für Wer Würde Eher
@@ -1966,6 +2045,25 @@
             playSound('tap');
         }
 
+        function revealWerWuerdeCard() {
+            const card = document.getElementById('werWuerdeHomeCard');
+            const covered = document.getElementById('werWuerdeCovered');
+            const revealed = document.getElementById('werWuerdeRevealed');
+            
+            // Simple reveal - just hide covered and show revealed
+            covered.style.display = 'none';
+            revealed.style.display = 'flex';
+            
+            // Change card styling to normal wer-wuerde card
+            card.className = 'game-card wer-wuerde-card';
+            
+            // Change onclick to go to settings after reveal
+            card.onclick = () => showWerWuerdeSettings();
+            
+            playSound('card-flip');
+            vibrate([50]);
+        }
+
         // Impostor Game Functions
         function changePlayerCount(delta) {
             gameState.totalPlayers = Math.max(3, Math.min(20, gameState.totalPlayers + delta));
@@ -1986,6 +2084,13 @@
         }
 
         function changeImpostorCount(delta) {
+            // Disable impostor count changes in chaos mode
+            if (gameState.chaosMode) {
+                playSound('tap');
+                vibrate([20]);
+                return;
+            }
+            
             gameState.impostors = Math.max(1, Math.min(Math.floor(gameState.totalPlayers / 2), gameState.impostors + delta));
             updateGameSettingsDisplay();
             playSound('card-flip');
@@ -2019,7 +2124,16 @@
 
         function updateGameSettingsDisplay() {
             document.getElementById('playersCount').textContent = gameState.totalPlayers;
-            document.getElementById('impostorsCount').textContent = gameState.impostors;
+            
+            // Special display for chaos mode
+            if (gameState.chaosMode) {
+                document.getElementById('impostorsCount').textContent = '😈';
+                document.getElementById('impostorsCount').style.color = '#ff453a';
+            } else {
+                document.getElementById('impostorsCount').textContent = gameState.impostors;
+                document.getElementById('impostorsCount').style.color = 'white';
+            }
+            
             document.getElementById('timerMinutesCount').textContent = gameState.timerMinutes;
             
             const timerToggle = document.getElementById('timerToggle');
@@ -2048,7 +2162,70 @@
             }
         }
 
-        // Names Management Functions
+        // Secret Settings Functions
+        function showSecretSettings() {
+            updateSecretSettingsDisplay();
+            document.getElementById('secretModal').classList.add('visible');
+            playSound('tap');
+            vibrate([30, 30, 30]);
+        }
+
+        function closeSecretModal() {
+            document.getElementById('secretModal').classList.remove('visible');
+            playSound('tap');
+        }
+
+        function updateSecretSettingsDisplay() {
+            const chaosModeItem = document.getElementById('chaosModeItem');
+            const chaosModeStatus = document.getElementById('chaosModeStatus');
+            
+            if (gameState.chaosMode) {
+                chaosModeItem.classList.add('selected');
+                chaosModeStatus.textContent = 'An';
+                chaosModeStatus.style.background = 'rgba(76, 175, 80, 0.3)';
+            } else {
+                chaosModeItem.classList.remove('selected');
+                chaosModeStatus.textContent = 'Aus';
+                chaosModeStatus.style.background = 'rgba(255,255,255,0.2)';
+            }
+        }
+
+        function toggleChaosMode() {
+            gameState.chaosMode = !gameState.chaosMode;
+            updateSecretSettingsDisplay();
+            updateGameSettingsDisplay();
+            playSound('card-flip');
+            vibrate([50]);
+            
+            if (gameState.chaosMode) {
+                // Show a little notification
+                setTimeout(() => {
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 100px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #ff453a;
+                        color: white;
+                        padding: 12px 20px;
+                        border-radius: 20px;
+                        font-weight: 600;
+                        z-index: 10000;
+                        font-size: 14px;
+                        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+                    `;
+                    notification.textContent = '😈 Chaos Mode aktiviert!';
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 2000);
+                }, 100);
+            }
+        }
         function showNamesModal() {
             while (gameState.playerNames.length < gameState.totalPlayers) {
                 gameState.playerNames.push(`Spieler ${gameState.playerNames.length + 1}`);
@@ -2306,10 +2483,19 @@
             gameState.gameHint = selectedWord.hint;
             
             gameState.impostorPlayers = [];
-            while (gameState.impostorPlayers.length < gameState.impostors) {
-                const randomPlayer = Math.floor(Math.random() * gameState.totalPlayers) + 1;
-                if (!gameState.impostorPlayers.includes(randomPlayer)) {
-                    gameState.impostorPlayers.push(randomPlayer);
+            
+            if (gameState.chaosMode) {
+                // In chaos mode, ALL players are impostors
+                for (let i = 1; i <= gameState.totalPlayers; i++) {
+                    gameState.impostorPlayers.push(i);
+                }
+            } else {
+                // Normal mode
+                while (gameState.impostorPlayers.length < gameState.impostors) {
+                    const randomPlayer = Math.floor(Math.random() * gameState.totalPlayers) + 1;
+                    if (!gameState.impostorPlayers.includes(randomPlayer)) {
+                        gameState.impostorPlayers.push(randomPlayer);
+                    }
                 }
             }
             
@@ -3028,7 +3214,8 @@
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.settings-menu') && 
                 !event.target.closest('.settings-icon') && 
-                !event.target.closest('.categories-modal')) {
+                !event.target.closest('.categories-modal') &&
+                !event.target.closest('.setting-icon')) {
                 const settingsMenu = document.getElementById('settingsMenu');
                 if (settingsMenu) settingsMenu.classList.remove('visible');
             }
