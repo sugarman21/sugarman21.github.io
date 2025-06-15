@@ -1031,62 +1031,6 @@
             🍙 made by C.
         </div>
     </div>
-
-    <!-- Mode Select Screen -->
-    <div id="modeSelectScreen" class="screen home-bg">
-        <div class="header-container">
-            <h1 class="title">Party-games<span class="title-suffix">.me</span></h1>
-            <div class="controller-emoji">🎮</div>
-        </div>
-        
-        <div class="games-container" id="gamesContainer">
-            <div class="game-card impostor-card" onclick="showImpostorSettings()">
-                <div class="game-card-emoji">🎭</div>
-                <div class="game-card-title">
-                    <div style="font-size: clamp(14px, 3.5vw, 18px); font-weight: 600; margin-bottom: 4px;">FINDET DEN</div>
-                    <div style="font-size: clamp(28px, 7vw, 36px); font-weight: 800;">IMPOSTOR</div>
-                </div>
-                <div class="game-card-desc">Finde heraus, wer der Verräter in eurer Gruppe ist!</div>
-                <div class="game-card-players">👥 3-20</div>
-            </div>
-            
-            <div class="game-card mystery-card" onclick="revealWerWuerdeCard()" id="werWuerdeHomeCard">
-                <!-- Covered state -->
-                <div id="werWuerdeCovered" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; position: relative;">
-                    <div style="font-size: clamp(120px, 30vw, 150px); margin-bottom: 20px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));">🎉</div>
-                    <div style="font-size: clamp(18px, 4.5vw, 22px); font-weight: 700; text-align: center; margin-bottom: 12px;">NEUES SPIEL</div>
-                    <div style="font-size: clamp(14px, 3.5vw, 16px); text-align: center; opacity: 0.9; margin-bottom: 20px;">Tippen zum Aufdecken</div>
-                    <div style="background: rgba(0,0,0,0.25); border-radius: 20px; padding: 10px 16px; font-size: clamp(12px, 3vw, 14px); font-weight: 600; backdrop-filter: blur(10px);">🎉 Überraschung</div>
-                </div>
-                
-                <!-- Revealed state -->
-                <div id="werWuerdeRevealed" style="display: none; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; padding: 28px;">
-                    <div class="game-card-emoji">🧿</div>
-                    <div class="game-card-title">
-                        <div style="font-size: clamp(14px, 3.5vw, 18px); font-weight: 600; margin-bottom: 4px;">WER WÜRDE</div>
-                        <div style="font-size: clamp(28px, 7vw, 36px); font-weight: 800;">EHER...?</div>
-                    </div>
-                    <div class="game-card-desc">Lustige Fragen über eure Freunde - wer würde was eher machen?</div>
-                    <div class="game-card-players">👥 2-99+</div>
-                </div>
-            </div>
-            
-            <div class="game-card coming-soon-card" onclick="handleEasterEggClick()">
-                <div class="game-card-emoji">🎯</div>
-                <div class="game-card-title">MEHR SPIELE</div>
-                <div class="game-card-desc">Weitere Party-Spiele kommen bald!</div>
-                <div class="game-card-players">Bald verfügbar</div>
-            </div>
-        </div>
-        
-        <!-- Snap Indicators -->
-        <div class="snap-indicators">
-            <div class="snap-dot active" id="dot1" onclick="scrollToCard(0)"></div>
-            <div class="snap-dot" id="dot2" onclick="scrollToCard(1)"></div>
-            <div class="snap-dot" id="dot3" onclick="scrollToCard(2)"></div>
-        </div>
-    </div>
-
     <!-- Impostor Settings Screen -->
     <div id="impostorScreen" class="screen impostor-bg hidden">
         <button class="back-button" onclick="navigateToHome()">←</button>
