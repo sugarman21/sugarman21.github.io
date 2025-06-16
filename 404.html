@@ -90,8 +90,7 @@
     <div class="container">
         <h1>404</h1>
         <p>Diese Seite existiert leider nicht.</p>
-        <p><a href="/">Zurück zur Startseite</a></p>
-        <p id="countdown">Weiterleitung in 5 Sekunden...</p>
+        <p><a href="/">Zurück zur Startseite</a></p
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
@@ -104,8 +103,7 @@
 
             const interval = setInterval(() => {
                 countdown--;
-                el.textContent = `Weiterleitung in ${countdown} Sekunden...`;
-                
+            
 
                 if (countdown < 0) {
                     clearInterval(interval);
