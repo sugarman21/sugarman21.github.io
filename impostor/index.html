@@ -92,71 +92,7 @@
             background: #ff453a;
         }
 
-        .wer-wuerde-bg {
-            background: #63e6e2;
-        }
-        
-        /* Settings Menu */
-        .settings-menu {
-            position: fixed;
-            bottom: clamp(90px, 20vw, 110px);
-            left: clamp(20px, 5vw, 30px);
-            background: rgba(28, 28, 30, 0.95);
-            border-radius: 24px;
-            padding: 8px;
-            min-width: 220px;
-            max-width: 280px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            z-index: 999;
-            opacity: 0;
-            transform: translateY(10px) scale(0.95);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: none;
-        }
-        
-        .settings-menu.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
-        
-        .settings-menu-item {
-            padding: 16px 20px;
-            color: white;
-            cursor: pointer;
-            border-radius: 16px;
-            margin-bottom: 4px;
-            font-size: clamp(15px, 3.5vw, 17px);
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .settings-menu-item:hover, .settings-menu-item:active {
-            background: rgba(255,255,255,0.15);
-            transform: scale(0.98);
-        }
-        
-        .settings-menu-item.version {
-            color: rgba(255,255,255,0.4);
-            cursor: default;
-            pointer-events: none;
-        }
-        
-        .settings-menu-item.version:hover, .settings-menu-item.version:active {
-            background: transparent;
-            transform: none;
-        }
-        
-        .settings-menu-item:last-child {
-            margin-bottom: 0;
-        }
-        
+       
         /* Header Container */
         .header-container {
             display: flex;
