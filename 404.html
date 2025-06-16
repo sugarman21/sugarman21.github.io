@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>404</title>
     <style>
         body {
@@ -19,10 +19,17 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+        // Timer, der nach 5 Sekunden zur Startseite weiterleitet
+        setTimeout(function() {
+            window.location.href = "/";
+        }, 5000); // 5000 Millisekunden = 5 Sekunden
+    </script>
 </head>
 <body>
     <h1>404</h1>
-    <p>Unfortunately, the page you wanted to call up does not exist.</p>
-    <p><a href="/">Back to home Page</a></p>
+    <p>Leider existiert die Seite, die Sie aufrufen wollten, nicht.</p>
+    <p><a href="/">Zurück zur Startseite</a></p>
+    <p>Sie werden in 5 Sekunden automatisch weitergeleitet.</p>
 </body>
 </html>
