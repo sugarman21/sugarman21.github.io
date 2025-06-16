@@ -2482,78 +2482,8 @@
             }
         }
 
-        function showRoles() {
-            showScreen('endScreen');
-            displayRoles();
-            playSound('success');
-            vibrate([200, 100, 200]);
-        }
 
-        function displayRoles() {
-            const rolesList = document.getElementById('rolesList');
-            rolesList.innerHTML = '';
-            
-            gameState.roundDuration = Math.round((Date.now() - gameState.gameStartTime) / 1000);
-            
-            playerStats.gamesPlayed++;
-            playerStats.totalPlayTime += gameState.roundDuration;
-            
-            if (!playerStats.fastestGame || gameState.roundDuration < parseInt(playerStats.fastestGame)) {
-                playerStats.fastestGame = gameState.roundDuration + 's';
-            }
-            if (!playerStats.longestGame || gameState.roundDuration > parseInt(playerStats.longestGame)) {
-                playerStats.longestGame = gameState.roundDuration + 's';
-            }
-            
-            gameHistory.push({
-                date: Date.now(),
-                word: gameState.gameWord,
-                players: gameState.totalPlayers,
-                duration: gameState.roundDuration + 's'
-            });
-            
-            if (gameHistory.length > 50) {
-                gameHistory.shift();
-            }
-            
-            checkAchievements();
-            
-            for (let i = 1; i <= gameState.totalPlayers; i++) {
-                const isImpostor = gameState.impostorPlayers.includes(i);
-                const playerEmoji = gameState.playerEmojis[i-1] || '👤';
-                const playerName = gameState.playerNames[i-1] || `Spieler ${i}`;
-                
-                const roleItem = document.createElement('div');
-                roleItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(28, 28, 30, 0.95); border-radius: 20px; padding: clamp(16px, 4vw, 20px); margin: 12px 0; color: white; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2);';
-                
-                const rolePlayer = document.createElement('div');
-                rolePlayer.style.cssText = 'display: flex; align-items: center; font-size: clamp(16px, 4vw, 18px); font-weight: 600; flex: 1;';
-                
-                const roleIcon = document.createElement('div');
-                roleIcon.style.cssText = `width: 32px; height: 32px; font-size: 16px; margin-right: 14px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: ${isImpostor ? '#f44336' : '#4CAF50'}; color: white; font-weight: bold;`;
-                roleIcon.textContent = isImpostor ? '✕' : '✓';
-                
-                const playerText = document.createElement('span');
-                playerText.textContent = `${playerEmoji} ${playerName}`;
-                
-                rolePlayer.appendChild(roleIcon);
-                rolePlayer.appendChild(playerText);
-                
-                const roleResult = document.createElement('div');
-                roleResult.style.cssText = 'font-size: clamp(14px, 3.5vw, 16px); text-align: right; margin-left: 14px; color: white;';
-                
-                if (isImpostor) {
-                    roleResult.innerHTML = `<strong>Impostor</strong>` + 
-                        (gameState.hintsEnabled && gameState.gameHint ? `<br><small>Tipp: ${gameState.gameHint}</small>` : '');
-                } else {
-                    roleResult.innerHTML = `<strong>${gameState.gameWord}</strong>`;
-                }
-                
-                roleItem.appendChild(rolePlayer);
-                roleItem.appendChild(roleResult);
-                rolesList.appendChild(roleItem);
-            }
-        }
+        
 
         // Scroll to specific card and update indicators
         function scrollToCard(cardIndex) {
