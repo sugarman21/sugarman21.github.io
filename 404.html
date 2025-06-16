@@ -1,43 +1,84 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Weiterleitung</title>
+    <meta charset="UTF-8" />
+    <title>404 - Seite nicht gefunden</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
+
+        h1 {
+            font-size: 10rem;
+            margin: 0;
+            color: #ff0066;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 red, -2px 0 blue; }
+            20% { text-shadow: -2px 0 red, 2px 0 blue; }
+            40% { text-shadow: 2px 2px red, -2px -2px blue; }
+            60% { text-shadow: -2px 2px red, 2px -2px blue; }
+            80% { text-shadow: 2px -2px red, -2px 2px blue; }
+            100% { text-shadow: 0 0 red, 0 0 blue; }
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin: 1rem 0;
+        }
+
+        a {
+            color: #00ffcc;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
         #countdown {
-            font-size: 24px;
-            color: #333;
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
         }
     </style>
+    <script>
+        let countdown = 5;
+        const countdownElement = document.addEventListener("DOMContentLoaded", function () {
+            const el = document.getElementById("countdown");
+
+            const interval = setInterval(() => {
+                el.textContent = `Weiterleitung in ${countdown} Sekunden...`;
+                countdown--;
+
+                if (countdown < 0) {
+                    clearInterval(interval);
+                    window.location.href = "/";
+                }
+            }, 1000);
+        });
+    </script>
 </head>
 <body>
-
-    <p id="countdown">Weiterleitung in 5 Sekunden...</p>
-
-    <script>
-        // Countdown in Sekunden
-        let countdown = 5;
-
-        // Element für die Anzeige des Countdowns
-        const countdownElement = document.getElementById("countdown");
-
-        // Intervall, das jede Sekunde den Countdown aktualisiert
-        const interval = setInterval(() => {
-            countdownElement.textContent = `Weiterleitung in ${countdown} Sekunden...`;
-            countdown--;
-
-            // Wenn Countdown 0 erreicht, weiterleiten
-            if (countdown < 0) {
-                clearInterval(interval);
-                window.location.href = "/";
-            }
-        }, 1000);
-    </script>
-
+    <div class="container">
+        <h1>404</h1>
+        <p>Die angeforderte Seite wurde nicht gefunden.</p>
+        <p><a href="/">Zurück zur Startseite</a></p>
+        <p id="countdown">Weiterleitung in 5 Sekunden...</p>
+    </div>
 </body>
 </html>
