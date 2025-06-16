@@ -107,7 +107,7 @@
                 el.textContent = `Weiterleitung in ${countdown} Sekunden...`;
                 
 
-                if (countdown < 0) {
+                if (countdown <= 0) {
                     clearInterval(interval);
                     window.location.href = "/";
                     return;
