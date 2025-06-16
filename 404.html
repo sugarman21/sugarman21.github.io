@@ -110,6 +110,7 @@
                 if (countdown < 0) {
                     clearInterval(interval);
                     window.location.href = "/";
+                    return;
                 }
             }, 1000);
         });
