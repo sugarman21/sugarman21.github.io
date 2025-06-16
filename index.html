@@ -1040,7 +1040,7 @@
         </div>
         
         <div class="games-container" id="gamesContainer">
-            <div class="game-card impostor-card" onclick="window.location.href = "impostor";
+            <div class="game-card impostor-card" onclick="showImpostorScreen()";
 ">
                 <div class="game-card-emoji">🎭</div>
                 <div class="game-card-title">
@@ -2035,6 +2035,7 @@
         }
 
         function showImpostorSettings() {
+            window.location.href = "impostor/";
             showScreen('impostorScreen');
             updateGameSettingsDisplay();
             playSound('tap');
