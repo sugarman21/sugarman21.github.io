@@ -4,61 +4,102 @@
     <meta charset="UTF-8" />
     <title>404 - Seite nicht gefunden</title>
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
+            background-color: #0d0d0d;
+            color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #f2f2f2;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem;
         }
 
         h1 {
-            font-size: 10rem;
+            font-size: 12rem;
+            color: #ff0033;
             margin: 0;
-            color: #ff0066;
-            animation: glitch 1s infinite;
+            position: relative;
+            animation: glitch 1s infinite, flicker 3s infinite;
         }
 
         @keyframes glitch {
             0% { text-shadow: 2px 0 red, -2px 0 blue; }
-            20% { text-shadow: -2px 0 red, 2px 0 blue; }
-            40% { text-shadow: 2px 2px red, -2px -2px blue; }
-            60% { text-shadow: -2px 2px red, 2px -2px blue; }
-            80% { text-shadow: 2px -2px red, -2px 2px blue; }
+            25% { text-shadow: -3px -2px red, 3px 2px blue; }
+            50% { text-shadow: 2px -3px red, -2px 3px blue; }
+            75% { text-shadow: -1px 2px red, 1px -2px blue; }
             100% { text-shadow: 0 0 red, 0 0 blue; }
         }
 
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.3;
+            }
+        }
+
         p {
-            font-size: 1.3rem;
-            margin: 1rem 0;
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
         }
 
         a {
             color: #00ffcc;
             text-decoration: underline;
             font-weight: bold;
+            font-size: 1.2rem;
         }
 
         #countdown {
-            margin-top: 1rem;
-            font-size: 1rem;
-            color: #888;
+            font-size: 1.1rem;
+            color: #bbb;
+            margin-top: 1.5rem;
         }
 
-        .container {
-            text-align: center;
-            padding: 2rem;
+        .progress-bar {
+            width: 300px;
+            height: 8px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem auto 0 auto;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #00ffcc, #0077ff);
+            animation: shrink 5s linear forwards;
+        }
+
+        @keyframes shrink {
+            from { width: 100%; }
+            to { width: 0%; }
         }
     </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>Diese Seite existiert leider nicht.</p>
+        <p><a href="/">Zurück zur Startseite</a></p>
+        <p id="countdown">Weiterleitung in 5 Sekunden...</p>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
     <script>
-        let countdown = 5;
-        const countdownElement = document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
+            let countdown = 5;
             const el = document.getElementById("countdown");
 
             const interval = setInterval(() => {
@@ -72,13 +113,5 @@
             }, 1000);
         });
     </script>
-</head>
-<body>
-    <div class="container">
-        <h1>404</h1>
-        <p>Die angeforderte Seite wurde nicht gefunden.</p>
-        <p><a href="/">Zurück zur Startseite</a></p>
-        <p id="countdown">Weiterleitung in 5 Sekunden...</p>
-    </div>
 </body>
 </html>
