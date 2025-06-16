@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>User Parameter</title>
+    <script>
+        // Funktion, um URL-Parameter auszulesen
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return params;
+        }
+
+        window.onload = function() {
+            const params = getQueryParams();
+
+            // Überprüfen, ob ?jari oder ?curt vorhanden ist
+            if (params.has('jari')) {
+                document.getElementById('message').textContent = "Parameter 'jari' wurde erkannt!";
+            } else if (params.has('curt')) {
+                document.getElementById('message').textContent = "Parameter 'curt' wurde erkannt!";
+            } else {
+                document.getElementById('message').textContent = "Kein gültiger Parameter gefunden. Bitte '?jari' oder '?curt' verwenden.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Parameter-Check</h1>
+    <p id="message"></p>
+</body>
+</html>
