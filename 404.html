@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <title>404</title>
+    <meta charset="UTF-8">
+    <title>Weiterleitung</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 5rem;
-            background-color: #1a1a1a;
-            color: white;
+            margin-top: 100px;
         }
-        h1 {
-            font-size: 7rem;
-        }
-        a {
-            color: #00ffcc;
-            text-decoration: underline;
+        #countdown {
+            font-size: 24px;
+            color: #333;
         }
     </style>
-    <script>
-        // Timer, der nach 5 Sekunden zur Startseite weiterleitet
-        setTimeout(function() {
-            window.location.href = "/";
-        }, 5000); // 5000 Millisekunden = 5 Sekunden
-    </script>
 </head>
 <body>
-    <h1>404</h1>
-    <p>Leider existiert die Seite, die Sie aufrufen wollten, nicht.</p>
-    <p><a href="/">Zurück zur Startseite</a></p>
-    <p>Sie werden in 5 Sekunden automatisch weitergeleitet.</p>
+
+    <p id="countdown">Weiterleitung in 5 Sekunden...</p>
+
+    <script>
+        // Countdown in Sekunden
+        let countdown = 5;
+
+        // Element für die Anzeige des Countdowns
+        const countdownElement = document.getElementById("countdown");
+
+        // Intervall, das jede Sekunde den Countdown aktualisiert
+        const interval = setInterval(() => {
+            countdownElement.textContent = `Weiterleitung in ${countdown} Sekunden...`;
+            countdown--;
+
+            // Wenn Countdown 0 erreicht, weiterleiten
+            if (countdown < 0) {
+                clearInterval(interval);
+                window.location.href = "/";
+            }
+        }, 1000);
+    </script>
+
 </body>
 </html>
