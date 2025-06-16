@@ -1403,7 +1403,7 @@
         };
 
         // Game State für Wer Würde Eher
-        let werWuerdeState = {
+        let State = {
             selectedCategories: ['klassisch'],
             usedQuestions: []
         };
@@ -1817,19 +1817,8 @@
         }
 
         function revealWerWuerdeCard() {
-            const card = document.getElementById('werWuerdeHomeCard');
-            const covered = document.getElementById('werWuerdeCovered');
-            const revealed = document.getElementById('werWuerdeRevealed');
-            
-            // Simple reveal - just hide covered and show revealed
-            covered.style.display = 'none';
-            revealed.style.display = 'flex';
-            
-            // Change card styling to normal wer-wuerde card
-            card.className = 'game-card wer-wuerde-card';
-            
-            // Change onclick to go to settings after reveal
-            card.onclick = () => showWerWuerdeSettings();
+            window.location.href = "../";
+
             
             playSound('card-flip');
             vibrate([50]);
