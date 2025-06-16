@@ -1,2 +1,0 @@
-# Impostor
-Find the impostor!
