@@ -103,8 +103,9 @@
             const el = document.getElementById("countdown");
 
             const interval = setInterval(() => {
-                el.textContent = `Weiterleitung in ${countdown} Sekunden...`;
                 countdown--;
+                el.textContent = `Weiterleitung in ${countdown} Sekunden...`;
+                
 
                 if (countdown < 0) {
                     clearInterval(interval);
