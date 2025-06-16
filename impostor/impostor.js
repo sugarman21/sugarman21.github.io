@@ -450,7 +450,7 @@
         }
 
         function navigateToHome() {
-            showScreen('modeSelectScreen');
+                window.location.href = "/../";
             playSound('tap');
         }
 
