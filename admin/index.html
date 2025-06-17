@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Passwortgeschützt (mit SHA-256)</title>
+</head>
+<body>
+    <h2>Bitte Passwort eingeben</h2>
+    <input type="password" id="passwordInput" placeholder="Passwort">
+    <button onclick="checkPassword()">Einloggen</button>
+
+    <p id="message"></p>
+
+    <div id="protectedContent" style="display: none;">
+        <h3>Willkommen im geschützten Bereich!</h3>
+        <p>Nur sichtbar nach korrektem Login.</p>
+    </div>
+
+    <script>
+        // SHA-256 von "admin1234"
+        const storedHash = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+
+        async function hashPassword(text) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hashBuffer))
+                        .map(b => b.toString(16).padStart(2, '0'))
+                        .join('');
+        }
+
+        async function checkPassword() {
+            const input = document.getElementById("passwordInput").value;
+            const message = document.getElementById("message");
+            const protectedContent = document.getElementById("protectedContent");
+
+            const inputHash = await hashPassword(input);
+
+            if (inputHash === storedHash) {
+                message.textContent = "Zugang erlaubt.";
+                protectedContent.style.display = "block";
+            } else {
+                message.textContent = "Falsches Passwort!";
+                protectedContent.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
 
