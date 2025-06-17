@@ -282,46 +282,7 @@
                 gameState.playerNames.push(`Spieler ${i}`);
             }
         }
-
-        // Easter Egg Function
-        function handleEasterEggClick() {
-            easterEggClicks++;
-            playSound('tap');
             
-            if (easterEggTimer) {
-                clearTimeout(easterEggTimer);
-            }
-            
-            easterEggTimer = setTimeout(() => {
-                easterEggClicks = 0;
-            }, 3000);
-            
-            if (easterEggClicks >= 5) {
-                easterEggClicks = 0;
-                clearTimeout(easterEggTimer);
-                
-                if (!achievements.curious) {
-                    achievements.curious = true;
-                    showAchievementNotification([ACHIEVEMENTS.curious]);
-                }
-                
-                setTimeout(() => {
-                    showComingSoonModal();
-                }, 1000);
-                
-                return;
-            }
-            
-            const card = event.target.closest('.coming-soon-card');
-            if (card) {
-                card.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    card.style.transform = 'scale(1)';
-                }, 100);
-                
-                vibrate([20]);
-            }
-        }
         
         // Sound Effects
         function playSound(type) {
@@ -425,12 +386,6 @@
             playSound('tap');
         }
 
-        function showImpostorSettings() {
-            window.location.href = "impostor/";
-            showScreen('impostorScreen');
-            updateGameSettingsDisplay();
-            playSound('tap');
-        }
 
         function showWerWuerdeSettings() {
             showScreen('werWuerdeScreen');
@@ -471,20 +426,6 @@
                 gameState.playerNames = gameState.playerNames.slice(0, gameState.totalPlayers);
             }
             
-            updateGameSettingsDisplay();
-            playSound('card-flip');
-            vibrate([30]);
-        }
-
-        function changeImpostorCount(delta) {
-            // Disable impostor count changes in chaos mode
-            if (gameState.chaosMode) {
-                playSound('tap');
-                vibrate([20]);
-                return;
-            }
-            
-            gameState.impostors = Math.max(1, Math.min(Math.floor(gameState.totalPlayers / 2), gameState.impostors + delta));
             updateGameSettingsDisplay();
             playSound('card-flip');
             vibrate([30]);
