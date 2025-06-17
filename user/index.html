@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8" />
     <title>User Parameter</title>
-    <script>
-        // Funktion, um URL-Parameter auszulesen
-        function getQueryParams() {
-            const params = new URLSearchParams(window.location.search);
-            return params;
-        }
-
-        window.onload = function() {
-            const params = getQueryParams();
-
-            // Überprüfen, ob ?jari oder ?curt vorhanden ist
-            if (params.has('jari')) {
-                document.getElementById('message').textContent = "Parameter 'jari' wurde erkannt!";
-            } else if (params.has('curt')) {
-                document.getElementById('message').textContent = "Parameter 'curt' wurde erkannt!";
-            } else {
-                document.getElementById('message').textContent = "Kein gültiger Parameter gefunden.";
-            }
-        }
-    </script>
+   
 </head>
+    <script>
+    // Funktion, um URL-Parameter auszulesen
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        return params;
+    }
+
+    window.onload = function() {
+        const params = getQueryParams();
+        const messageElement = document.getElementById('message');
+
+        // Wenn keine Parameter vorhanden sind
+        if ([...params].length === 0) {
+            messageElement.textContent = "Kein Parameter gefunden.";
+        } else {
+            // Nimmt den ersten Parameter (key = name, value = wert)
+            const [key, value] = [...params.entries()][0];
+            messageElement.textContent = `Parameter erkannt: '${key}' = '${value}'`;
+        }
+    }
+</script>
+
 <body>
     <h1>Parameter-Check</h1>
     <p id="message"></p>
