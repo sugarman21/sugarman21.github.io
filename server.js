@@ -7,7 +7,16 @@ const port = process.env.PORT || 3000;
 // Passwort konfigurieren
 const CORRECT_PASSWORD = 'admin1234';
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname, {
+  // blockiere direkte Anfrage an admin.html
+  index: false,
+  setHeaders: (res, path) => {
+    if (path.endsWith('admin.html')) {
+      res.status(403).end('Forbidden');
+    }
+  }
+}));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
