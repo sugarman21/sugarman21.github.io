@@ -1,1 +1,10 @@
+<!-- nur ein Beispiel-Login-Button -->
+<button onclick="login()">Einloggen</button>
+
+<script>
+  function login() {
+    localStorage.setItem("loggedIn", "true");
+    window.location.href = "/index.html"; // oder wohin du willst
+  }
+</script>
 
