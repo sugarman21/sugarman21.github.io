@@ -450,7 +450,7 @@
         }
 
         function navigateToHome() {
-        window.location.href = "../";
+        window.location.href = "../../";
             playSound('tap');
         }
 

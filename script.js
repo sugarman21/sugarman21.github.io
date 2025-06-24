@@ -225,17 +225,17 @@
         }
 
         function showImpostorSettings() {
-            window.location.href = "impostor/";
+            window.location.href = "games/impostor/";
             playSound('tap');
         }
 
         function showWerWuerdeSettings() {
-            window.location.href = "WerEher\";
+            window.location.href = "games/wereher/";
             playSound('tap');
         }
 
         function revealWerWuerdeCard() {
-            window.location.href = "WerEher\";
+            window.location.href = "games/wereher/";
             playSound('card-flip');
             vibrate([50]);
         }
