@@ -226,22 +226,16 @@
 
         function showImpostorSettings() {
             window.location.href = "impostor/";
-            showScreen('impostorScreen');
-            updateGameSettingsDisplay();
             playSound('tap');
         }
 
         function showWerWuerdeSettings() {
-            window.location.href = "WerEher";
-            showScreen('werWuerdeScreen');
-            updateWerWuerdeSettingsDisplay();
+            window.location.href = "WerEher\";
             playSound('tap');
         }
 
         function revealWerWuerdeCard() {
-            window.location.href = "WerEher";
-
-            
+            window.location.href = "WerEher\";
             playSound('card-flip');
             vibrate([50]);
         }
