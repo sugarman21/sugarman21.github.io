@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Weiterleitung...</title>
-    <script>
-      // Funktion zur Weiterleitung je nach Login-Status
-      window.onload = function () {
-        const loggedIn = localStorage.getItem("loggedIn");
-
-        if (loggedIn === "true") {
-          // Angemeldet → weiter zur Startseite
-          window.location.href = "../";
-        } else {
-          // Nicht angemeldet → weiter zur Login-Seite
-          window.location.href = "login/";
-        }
-      };
-    </script>
-  </head>
-  <body>
-    <p>Du wirst weitergeleitet...</p>
-  </body>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weiterleitung</title>
+</head>
+<body>
+  <script>
+    (async () => {
+      const res = await fetch('/check-login', { credentials: 'include' });
+      if (res.ok) {
+        window.location.href = '../';
+      } else {
+        window.location.href = 'login/';
+      }
+    })();
+  </script>
+</body>
 </html>
