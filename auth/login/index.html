@@ -1,10 +1,36 @@
-<!-- nur ein Beispiel-Login-Button -->
-<button onclick="login()">Einloggen</button>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Benutzername" required />
+    <input type="password" id="password" placeholder="Passwort" required />
+    <button type="submit">Einloggen</button>
+  </form>
 
-<script>
-  function login() {
-    localStorage.setItem("loggedIn", "true");
-    window.location.href = "/index.html"; // oder wohin du willst
-  }
-</script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value
+        })
+      });
 
+      if (res.ok) {
+        window.location.href = '../../';
+      } else {
+        alert('Login fehlgeschlagen!');
+      }
+    });
+  </script>
+</body>
+</html>
