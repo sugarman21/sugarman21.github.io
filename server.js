@@ -4,35 +4,45 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Passwort konfigurieren
+// 🔐 Passwort-Konfiguration
 const CORRECT_PASSWORD = 'admin1234';
 
-app.use(express.static(__dirname));
+// 📁 Pfad zum Frontend-Ordner (z. B. public/)
+const publicPath = path.join(__dirname, 'public');
 
+// 📦 Middleware
+app.use(express.static(publicPath)); // Static-Dateien (HTML, CSS, JS)
+app.use(express.urlencoded({ extended: true })); // Formulardaten
+app.use(cookieParser()); // Cookies lesen/schreiben
 
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-// Login-Formular verarbeiten
+// 🔐 Login-Formular POST
 app.post('/login', (req, res) => {
   const password = req.body.password;
+
   if (password === CORRECT_PASSWORD) {
     res.cookie('authenticated', 'true', { httpOnly: true });
     res.redirect('/admin.html');
   } else {
-    res.send('<h3>Falsches Passwort. <a href="/system.html">Zurück</a></h3>');
+    res.send('<h3>❌ Falsches Passwort. <a href="/system.html">Zurück</a></h3>');
   }
 });
 
-// Zugriffsschutz für admin.html
+// 🔒 Zugriffsschutz für admin.html
 app.get('/admin.html', (req, res, next) => {
   if (req.cookies.authenticated === 'true') {
-    next();
+    res.sendFile(path.join(publicPath, 'admin.html'));
   } else {
     res.redirect('/system.html');
   }
 });
 
+// 🔓 Logout (optional)
+app.get('/logout', (req, res) => {
+  res.clearCookie('authenticated');
+  res.redirect('/system.html');
+});
+
+// 🚀 Server starten
 app.listen(port, () => {
-  console.log(`Server läuft auf http://localhost:${port}`);
+  console.log(`✅ Server läuft auf http://localhost:${port}`);
 });
