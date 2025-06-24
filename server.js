@@ -1,48 +1,72 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
-const cookieParser = require('cookie-parser');
+const users = require('./users');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-// 🔐 Passwort-Konfiguration
-const CORRECT_PASSWORD = 'admin1234';
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// 📁 Pfad zum Frontend-Ordner (z. B. public/)
-const publicPath = path.join(__dirname, 'public');
+// Cookies & Sessions
+app.use(session({
+  secret: 'dein-geheimer-session-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { httpOnly: true }
+}));
 
-// 📦 Middleware
-app.use(express.static(publicPath)); // Static-Dateien (HTML, CSS, JS)
-app.use(express.urlencoded({ extended: true })); // Formulardaten
-app.use(cookieParser()); // Cookies lesen/schreiben
+// Statische Dateien aus aktuellem Verzeichnis
+app.use(express.static(__dirname));
 
-// 🔐 Login-Formular POST
+// Login-Route (POST)
 app.post('/login', (req, res) => {
-  const password = req.body.password;
+  const { username, password } = req.body;
+  const user = users.find(u => u.username === username && u.password === password);
 
-  if (password === CORRECT_PASSWORD) {
-    res.cookie('authenticated', 'true', { httpOnly: true });
-    res.redirect('/admin.html');
+  if (user) {
+    req.session.user = user.username;
+    res.json({ success: true });
   } else {
-    res.send('<h3>❌ Falsches Passwort. <a href="/system.html">Zurück</a></h3>');
+    res.status(401).json({ success: false, message: 'Ungültige Zugangsdaten' });
   }
 });
 
-// 🔒 Zugriffsschutz für admin.html
-app.get('/admin.html', (req, res, next) => {
-  if (req.cookies.authenticated === 'true') {
-    res.sendFile(path.join(publicPath, 'admin.html'));
+// Login-Status prüfen
+app.get('/check-login', (req, res) => {
+  if (req.session.user) {
+    res.json({ loggedIn: true, user: req.session.user });
   } else {
-    res.redirect('/system.html');
+    res.status(401).json({ loggedIn: false });
   }
 });
 
-// 🔓 Logout (optional)
-app.get('/logout', (req, res) => {
-  res.clearCookie('authenticated');
-  res.redirect('/system.html');
+// Logout (POST)
+app.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ success: true });
+  });
 });
 
-// 🚀 Server starten
+// Zugriffsschutz für index.html (GET)
+app.get('/index.html', (req, res) => {
+  if (req.session.user) {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  } else {
+    res.redirect('/login.html');
+  }
+});
+
+// Zugriffsschutz für aout.html (GET)
+app.get('/aout.html', (req, res) => {
+  if (req.session.user) {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  } else {
+    res.redirect('/login.html');
+  }
+});
+
 app.listen(port, () => {
-  console.log(`✅ Server läuft auf http://localhost:${port}`);
+  console.log(`Server läuft auf http://localhost:${port}`);
 });
