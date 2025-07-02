@@ -1,5 +1,4 @@
-// App Version
-        const APP_VERSION = '2.1.0';
+const APP_VERSION = '2.1.0';
 
         // Game State für Impostor
         let gameState = {
@@ -1084,9 +1083,3 @@
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initialize);
-        } else {
-            initialize();
-        }
