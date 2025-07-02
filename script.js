@@ -239,12 +239,6 @@ const APP_VERSION = '2.1.0';
             vibrate([50]);
         }
 
-      
-        
-
-      playSound('tap');
-        }
-
         function updateNamesDisplay() {
             const namesList = document.getElementById('namesList');
             namesList.innerHTML = '';
