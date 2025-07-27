@@ -1,4 +1,13 @@
 const APP_VERSION = '2.1.0';
+        window.onerror = function(message, source, lineno, colno, error) {
+  alert(
+    "Fehler:\n" +
+    message + "\n\n" +
+    "Datei: " + source + "\n" +
+    "Zeile: " + lineno + ", Spalte: " + colno + "\n\n" +
+    "Stacktrace: " + (error && error.stack ? error.stack : "nicht verfügbar")
+  );
+};
 
         // Game State für Impostor
         let gameState = {
